@@ -5,3 +5,10 @@ E:\2019\Peibankongjian\SkyCommon\bin\Release\Microsoft.ApplicationBlocks.Data.dl
 E:\2019\Peibankongjian\SkyCommon\obj\Release\SkyCommon.csprojResolveAssemblyReference.cache
 E:\2019\Peibankongjian\SkyCommon\obj\Release\SkyCommon.dll
 E:\2019\Peibankongjian\SkyCommon\obj\Release\SkyCommon.pdb
+D:\MyPro\2019\Peibankongjian\SkyCommon\bin\Release\SkyCommon.dll
+D:\MyPro\2019\Peibankongjian\SkyCommon\bin\Release\SkyCommon.pdb
+D:\MyPro\2019\Peibankongjian\SkyCommon\bin\Release\ChnCharInfo.dll
+D:\MyPro\2019\Peibankongjian\SkyCommon\bin\Release\Microsoft.ApplicationBlocks.Data.dll
+D:\MyPro\2019\Peibankongjian\SkyCommon\obj\Release\SkyCommon.csprojResolveAssemblyReference.cache
+D:\MyPro\2019\Peibankongjian\SkyCommon\obj\Release\SkyCommon.dll
+D:\MyPro\2019\Peibankongjian\SkyCommon\obj\Release\SkyCommon.pdb

@@ -2100,6 +2100,10 @@
     <Content Include="plugins\下拉刷新\www.jq22.com.txt" />
     <Content Include="Resource\css\PbspaceWap.css" />
     <Content Include="Resource\css\SkyWeb.css" />
+    <Content Include="Resource\img\1.jpg" />
+    <Content Include="Resource\img\2.jpg" />
+    <Content Include="Resource\img\3.jpg" />
+    <Content Include="Resource\img\4.jpg" />
     <Content Include="Resource\img\avatarno.jpg" />
     <Content Include="Resource\img\hesu - 副本.jpg" />
     <Content Include="Resource\img\hesu.jpg" />
