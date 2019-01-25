@@ -1,0 +1,85 @@
+﻿/*自定义组件*/
+/*右上角的红色角标，表示未读消息，放在父元素里面如<span>消息<i></i></span>*/
+msg-tip {
+    display:block;
+    background:#f00;
+    border-radius:50%;
+    width:0.4em;
+    height:0.4em;
+    top:0em;
+    right:0.5em;
+    position:absolute;
+}
+li-i {
+    border-radius:50%;
+    height:15px;
+    width:15px;
+    background-color:#e4e0e0;
+    color:#fff;
+}
+
+/*# 以下部分是自定义的五等分内容 */
+
+
+.col-xs-1-5,.col-sm-1-5,.col-md-1-5,.col-lg-1-5 {
+width: 20%;
+float: left;
+min-height: 1px;
+padding-left: 15px;
+padding-right: 15px;
+position: relative;
+}
+.col-xs-1-5 {
+width: 20%;
+float: left;
+}
+@media (min-width: 768px) {
+.col-sm-1-5 {
+width: 20%;
+float: left;
+}
+}
+
+@media (min-width: 992px) {
+.col-md-1-5 {
+width: 20%;
+float: left;
+}
+}
+
+@media (min-width: 1200px) {
+.col-lg-1-5 {
+width: 20%;
+float: left;
+}
+}
+
+/*# //增加圆形按钮 */
+
+
+.btn-circle.btn-sm {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+.btn-circle.btn-md {
+  width: 50px;
+  height: 50px;
+  padding: 10px 10px;
+  font-size: 12px;
+  line-height: 1.33;
+  border-radius: 25px;
+
+}
+.btn-circle.btn-lg {
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  font-size: 24px;
+  line-height: 1.33;
+  border-radius: 35px;
+}

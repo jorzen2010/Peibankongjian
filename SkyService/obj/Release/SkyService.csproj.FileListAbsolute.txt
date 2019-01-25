@@ -1,0 +1,15 @@
+E:\2019\Peibankongjian\SkyService\bin\Release\SkyService.dll
+E:\2019\Peibankongjian\SkyService\bin\Release\SkyService.pdb
+E:\2019\Peibankongjian\SkyService\bin\Release\SkyDal.dll
+E:\2019\Peibankongjian\SkyService\bin\Release\SkyEntity.dll
+E:\2019\Peibankongjian\SkyService\bin\Release\EntityFramework.dll
+E:\2019\Peibankongjian\SkyService\bin\Release\SkyCommon.dll
+E:\2019\Peibankongjian\SkyService\bin\Release\Microsoft.ApplicationBlocks.Data.dll
+E:\2019\Peibankongjian\SkyService\bin\Release\ChnCharInfo.dll
+E:\2019\Peibankongjian\SkyService\bin\Release\SkyDal.pdb
+E:\2019\Peibankongjian\SkyService\bin\Release\SkyEntity.pdb
+E:\2019\Peibankongjian\SkyService\bin\Release\EntityFramework.xml
+E:\2019\Peibankongjian\SkyService\bin\Release\SkyCommon.pdb
+E:\2019\Peibankongjian\SkyService\obj\Release\SkyService.csprojResolveAssemblyReference.cache
+E:\2019\Peibankongjian\SkyService\obj\Release\SkyService.dll
+E:\2019\Peibankongjian\SkyService\obj\Release\SkyService.pdb

@@ -1,0 +1,7 @@
+E:\2018\EduGroup\SkyCommon\bin\Debug\SkyCommon.dll
+E:\2018\EduGroup\SkyCommon\bin\Debug\SkyCommon.pdb
+E:\2018\EduGroup\SkyCommon\bin\Debug\ChnCharInfo.dll
+E:\2018\EduGroup\SkyCommon\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
+E:\2018\EduGroup\SkyCommon\obj\Debug\SkyCommon.csprojResolveAssemblyReference.cache
+E:\2018\EduGroup\SkyCommon\obj\Debug\SkyCommon.dll
+E:\2018\EduGroup\SkyCommon\obj\Debug\SkyCommon.pdb
