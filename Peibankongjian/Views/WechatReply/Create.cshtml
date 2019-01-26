@@ -1,0 +1,92 @@
+﻿@model SkyEntity.WechatReply
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.title = "微信自动回复";
+}
+
+@section Topcss {
+    <link href="~/plugins/bootstrap-validator/css/bootstrapValidator.css" rel="stylesheet" type="text/css" />
+}
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            新增 @ViewBag.title
+        </h1>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <!-- Default box -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">
+                            新增 @ViewBag.title
+                        </h3>
+
+                    </div>
+                    <!-- /.box-header -->
+                    @using (Html.BeginForm("Create", "WechatReply", FormMethod.Post, new { @class = "form-horizontal", @name = "Create", @id = "Create" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <div class="box-body">
+                            <div class="col-md-12">
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ReplyKeyword, new { @class = "control-label col-md-2" })
+                                    <div class="col-sm-9">
+                                        @Html.TextBoxFor(model => model.ReplyKeyword, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.ReplyKeyword)
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Category, new { @class = "control-label col-sm-2" })
+                                    <div class="col-sm-9">
+                                        @Html.DropDownListFor(model => model.Category, ViewData["CategoryList"] as IEnumerable<SelectListItem>, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Category)
+                                    </div>
+                                </div>
+            
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ReplyContent, new { @class = "control-label col-md-2" })
+                                    <div class="col-sm-9">
+                                        @Html.TextAreaFor(model => model.ReplyContent, new { @class = "form-control", @placeholder = "回复内容" })
+                                        @Html.ValidationMessageFor(model => model.ReplyContent)
+                                    </div>
+                                </div>
+
+                              
+
+
+
+                            </div>
+
+
+                        </div>
+
+                    <!-- /.box-body -->
+                        <div class="box-footer clearfix">
+                            
+                            <button type="submit" class="btn btn-primary pull-right">保存并发布</button>
+                        </div>
+
+                    }
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+        <!-- /.box -->
+    </section>
+    <!-- /.content -->
+</div>
+
+
+@section BottomScripts {
+    <script type="text/javascript" src="~/plugins/bootbox.min.js"></script>
+    <script type="text/javascript" src="~/Resource/js/SkyWeb.js"></script>
+    <script type="text/javascript" src="~/Resource/js/SkyfileCopper.js"></script>
+    <script type="text/javascript" src="~/Resource/js/SkyInit.js"></script>
+
+}

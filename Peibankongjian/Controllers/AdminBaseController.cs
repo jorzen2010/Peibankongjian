@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using SkyDal;
 
-namespace EduGroup.Controllers
+namespace Peibankongjian.Controllers
 {
     public class AdminBaseController : Controller
     {

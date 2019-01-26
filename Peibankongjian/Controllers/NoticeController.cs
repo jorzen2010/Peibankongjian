@@ -10,7 +10,7 @@ using SkyEntity;
 using SkyService;
 using SkyCommon;
 
-namespace EduGroup.Controllers
+namespace Peibankongjian.Controllers
 {
     public class NoticeController : AdminBaseController
     {

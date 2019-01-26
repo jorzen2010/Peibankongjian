@@ -32,6 +32,8 @@ namespace SkyDal
 
         public DbSet<SysUser> SysUsers { get; set; }
 
+        public DbSet<WechatReply> WechatReplys { get; set; }
+
 
     }
 }

@@ -8,9 +8,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
-using EduGroup.Models;
+using Peibankongjian.Models;
 
-namespace EduGroup.Controllers
+namespace Peibankongjian.Controllers
 {
     [Authorize]
     public class AccountController : Controller

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace EduGroup.Models
+namespace Peibankongjian.Models
 {
     public class ExternalLoginConfirmationViewModel
     {

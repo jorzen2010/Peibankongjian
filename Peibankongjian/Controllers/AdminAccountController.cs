@@ -15,7 +15,7 @@ using SkyDal;
 using SkyEntity;
 using SkyCommon;
 
-namespace EduGroup.Controllers
+namespace Peibankongjian.Controllers
 {
      [AllowAnonymous]
     public class AdminAccountController : Controller

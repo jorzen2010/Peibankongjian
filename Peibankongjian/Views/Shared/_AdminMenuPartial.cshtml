@@ -22,6 +22,19 @@
         <li><a href="@Url.Action("Index","Guanggao")"><i class="fa fa-book"></i> <span>广告管理</span></a></li>
         <li class="treeview">
             <a href="#">
+                <i class="fa fa-wechat"></i> <span>微信功能管理</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="@Url.Action("GetWechatMenu", "WechatMenu")">菜单设置</a></li>
+                <li><a href="@Url.Action("Index", "WechatReply")">自动回复</a></li>
+            </ul>
+        </li>
+
+        <li class="treeview">
+            <a href="#">
                 <i class="fa fa-cog"></i> <span>系统管理</span>
                 <span class="pull-right-container">
                     <i class="fa fa-angle-left pull-right"></i>

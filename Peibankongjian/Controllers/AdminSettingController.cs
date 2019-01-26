@@ -10,7 +10,7 @@ using SkyDal;
 using SkyEntity;
 using SkyCommon;
 
-namespace EduGroup.Controllers
+namespace Peibankongjian.Controllers
 {
     public class AdminSettingController : AdminBaseController
     {

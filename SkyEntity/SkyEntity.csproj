@@ -40,8 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Jigou.cs" />
-    <Compile Include="Book.cs" />
+    <Compile Include="WechatEntity.cs" />
+    <Compile Include="Peiban.cs" />
     <Compile Include="Notice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setting.cs" />

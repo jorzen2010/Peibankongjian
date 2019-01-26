@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EduGroup</RootNamespace>
-    <AssemblyName>EduGroup</AssemblyName>
+    <RootNamespace>Peibankongjian</RootNamespace>
+    <AssemblyName>Peibankongjian</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -174,8 +174,10 @@
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\WechatReplyController.cs" />
     <Compile Include="Controllers\NoticeController.cs" />
     <Compile Include="Controllers\WapController.cs" />
+    <Compile Include="Controllers\WechatMenuController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -191,6 +193,9 @@
     <Compile Include="plugins\ueditor\net\App_Code\UploadHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="WechatApi.ashx.cs">
+      <DependentUpon>WechatApi.ashx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminLTE\bootstrap\css\bootstrap-theme.css" />
@@ -3062,6 +3067,14 @@
     <Content Include="Views\AdminHome\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutWap.cshtml" />
     <Content Include="Views\Wap\Index.cshtml" />
+    <Content Include="WechatApi.ashx" />
+    <Content Include="Views\WechatMenu\CreateMenu.cshtml" />
+    <Content Include="Views\WechatMenu\CreateWechatMenu.cshtml" />
+    <Content Include="Views\WechatMenu\DeleteWechatMenu.cshtml" />
+    <Content Include="Views\WechatMenu\GetWechatMenu.cshtml" />
+    <Content Include="Views\WechatReply\Edit.cshtml" />
+    <Content Include="Views\WechatReply\Index.cshtml" />
+    <Content Include="Views\WechatReply\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -3091,6 +3104,10 @@
     <ProjectReference Include="..\SkyService\SkyService.csproj">
       <Project>{cd180dc6-bfb8-42b5-932e-c8fda98d1bb5}</Project>
       <Name>SkyService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SkyWechatService\SkyWechat.csproj">
+      <Project>{819a09d8-21e2-47b4-91fc-10b1a780fa6d}</Project>
+      <Name>SkyWechat</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

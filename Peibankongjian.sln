@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyCommon", "SkyCommon\SkyC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Peibankongjian", "Peibankongjian\Peibankongjian.csproj", "{5EDC3C8D-ED00-42AC-B2E1-3A325B2CB488}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyWechat", "SkyWechatService\SkyWechat.csproj", "{819A09D8-21E2-47B4-91FC-10B1A780FA6D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{5EDC3C8D-ED00-42AC-B2E1-3A325B2CB488}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5EDC3C8D-ED00-42AC-B2E1-3A325B2CB488}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5EDC3C8D-ED00-42AC-B2E1-3A325B2CB488}.Release|Any CPU.Build.0 = Release|Any CPU
+		{819A09D8-21E2-47B4-91FC-10B1A780FA6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{819A09D8-21E2-47B4-91FC-10B1A780FA6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{819A09D8-21E2-47B4-91FC-10B1A780FA6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{819A09D8-21E2-47B4-91FC-10B1A780FA6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
