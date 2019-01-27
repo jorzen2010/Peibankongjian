@@ -12,7 +12,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>          
-            修改 @ViewBag.title
+            修改 @ViewBag.title <small>注意：关注回复，点击回复，地理位置回复，默认回复，图片回复，语音回复，小视频回复，视频回复，链接回复都是关键词</small>
         </h1>
     </section>
     <!-- Main content -->
@@ -61,6 +61,13 @@
                             </div>
                            
 
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.KeyWordInfo, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-9">
+                                    @Html.TextBoxFor(model => model.KeyWordInfo, new { @class = "form-control", @placeholder = "关键词描述" })
+                                    @Html.ValidationMessageFor(model => model.KeyWordInfo)
+                                </div>
+                            </div>
 
                         </div>
 

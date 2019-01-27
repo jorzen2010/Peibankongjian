@@ -21,6 +21,10 @@ namespace SkyEntity
         [Required(ErrorMessage = "关键词回复不能为空")]
         public string ReplyContent { get; set; }
 
+        [Display(Name = "关键词用途")]
+        [Required(ErrorMessage = "关键词用途回复不能为空")]
+        public string KeyWordInfo { get; set; }
+
 
     }
 

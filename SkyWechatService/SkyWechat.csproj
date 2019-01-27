@@ -92,6 +92,14 @@
       <Project>{f2175da4-e145-4d76-a1f1-4fbf5bf900f5}</Project>
       <Name>SkyCommon</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SkyEntity\SkyEntity.csproj">
+      <Project>{f563b21a-546b-4ec1-940f-45352b7320ee}</Project>
+      <Name>SkyEntity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SkyService\SkyService.csproj">
+      <Project>{cd180dc6-bfb8-42b5-932e-c8fda98d1bb5}</Project>
+      <Name>SkyService</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
