@@ -3080,11 +3080,11 @@
     <Content Include="Views\WebAd\Create.cshtml" />
     <Content Include="Views\WebAd\Edit.cshtml" />
     <Content Include="Views\WebAd\Index.cshtml" />
+    <Content Include="Views\Ucenter\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="plugins\sweetalert2\" />
-    <Folder Include="Views\Ucenter\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

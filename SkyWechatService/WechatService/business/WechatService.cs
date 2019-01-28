@@ -79,6 +79,7 @@ namespace SkyWechatService
                             break;
                         case "unsubscribe":
                             WechatMessageServices.ResponseSuccessMessage(FromUserName.InnerText, WechatId);
+                            //此处应该给数据库中添加一个字段帮助其判断是否关注了。
                           //  WechatMessageServices.ResponseTextMessage(FromUserName.InnerText, WechatId, "我哪里做的不好了，你居然敢离开我。");
                             break;
                         case "CLICK":

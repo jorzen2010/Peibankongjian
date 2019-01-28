@@ -1,0 +1,26 @@
+﻿@model SkyWechatService.WebchatJsUserinfo
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>个人基本信息</h2>
+        <p>
+           
+            头像: <img src="@Model.headimgurl" style="width: 100px;height: 100px;"><br>
+            昵称:  @Model.nickname <br>
+            性别： @Model.sex <br>
+            城市: @Model.city <br>
+            省份: @Model.province <br>
+            权限: @Model.privilege <br>
+            unionid: @Model.unionid <br>
+            openid @Model.openid <br>
+            
+            手机号：获取验证码注册
+            <a class="btn btn-success" href="@Url.Action("SendYanzhengma","Ucenter",new{touser=Model.openid})">发送验证码</a>
+            邀请码：
+        </p>
+    </div>
+</div>
