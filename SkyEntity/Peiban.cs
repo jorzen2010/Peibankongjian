@@ -55,10 +55,20 @@ namespace SkyEntity
         [Display(Name = "任务对象")]
         public int RenwuDuixiang { get; set; }
 
+        [Display(Name = "视频地址")]
+
+        public string VideoUrl { get; set; }
+
+        [Display(Name = "音频地址")]
+
+        public string AudioUrl { get; set; }
+
+
+
     }
 
 
-    public class RenwuList
+    public class RenwuDaka
     {
         [Key]
         public int Id { get; set; }
@@ -74,6 +84,15 @@ namespace SkyEntity
 
         [Display(Name = "执行状态")]
         public bool Status { get; set; }
+
+        [Display(Name = "打卡内容")]
+        public string DakaContent { get; set; }
+
+        [Display(Name = "打卡时间")]
+        public DateTime DakaTime { get; set; }
+
+        [Display(Name = "最后修改时间")]
+        public DateTime LastEditTime { get; set; }
 
     }
 
@@ -113,7 +132,7 @@ namespace SkyEntity
         public bool Status { get; set; }
         [Display(Name = "陪读人状态")]
         public string PeiduStatus { get; set; }
-
-
+        [Display(Name = "邀请人")]
+        public int Yaoqingren { get; set; }
     }
 }

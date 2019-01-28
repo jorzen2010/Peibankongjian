@@ -73,6 +73,21 @@ namespace SkyDal
              }
          }
 
+         private GenericRepository<Guanggao> GuanggaoReplysRepository;
+
+         public GenericRepository<Guanggao> guanggaosRepository
+         {
+             get
+             {
+
+                 if (this.GuanggaoReplysRepository == null)
+                 {
+                     this.GuanggaoReplysRepository = new GenericRepository<Guanggao>(context);
+                 }
+                 return GuanggaoReplysRepository;
+             }
+         }
+
          private GenericRepository<WechatReply> WechatReplysRepository;
 
          public GenericRepository<WechatReply> wechatReplysRepository
