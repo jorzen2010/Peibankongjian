@@ -34,6 +34,7 @@ namespace SkyDal
 
         public DbSet<WechatReply> WechatReplys { get; set; }
         public DbSet<Guanggao> Guanggaos { get; set; }
+        public DbSet<Ren> Rens { get; set; }
 
 
     }

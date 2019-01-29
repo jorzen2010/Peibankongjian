@@ -2106,6 +2106,7 @@
     <Content Include="plugins\下拉刷新\pullToRefresh.js" />
     <Content Include="plugins\下拉刷新\www.jq22.com.txt" />
     <Content Include="Resource\css\PbspaceWap.css" />
+    <Content Include="Resource\css\SkyWap.css" />
     <Content Include="Resource\css\SkyWeb.css" />
     <Content Include="Resource\img\1.jpg" />
     <Content Include="Resource\img\2.jpg" />
@@ -3032,7 +3033,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -3081,6 +3084,7 @@
     <Content Include="Views\WebAd\Edit.cshtml" />
     <Content Include="Views\WebAd\Index.cshtml" />
     <Content Include="Views\Ucenter\Register.cshtml" />
+    <Content Include="Views\Ucenter\ShengjiVIP.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

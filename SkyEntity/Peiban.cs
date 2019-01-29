@@ -100,39 +100,49 @@ namespace SkyEntity
     {
         [Key]
         public int Id { get; set; }
-        [Display(Name = "头像")]
-        public string RenAvatar { get; set; }
+      
         [Display(Name = "姓名")]
         public string RenName { get; set; }
-        [Display(Name = "性别")]
-        public string RenSex { get; set; }
+       
         [Display(Name = "生日")]
         public string RenBirthday { get; set; }
         [Display(Name = "一句话介绍")]
         public string RenYijuhua { get; set; }
         [Display(Name = "个人简介")]
         public string RenInfo { get; set; }
-        [Display(Name = "权限")]
-        public string RenQuanxian { get; set; }
+
+
         [Display(Name = "注册邮箱")]
         public string RenUserEmail { get; set; }
         [Display(Name = "密码")]
         public string RenPassword { get; set; }
+
+        [Display(Name = "头像")]
+        public string RenAvatar { get; set; }
         [Display(Name = "微信Openid")]
         public string RenOpenid { get; set; }
         [Display(Name = "微信Unionid")]
         public string RenUnionid { get; set; }
-        [Display(Name = "手机号码")]
-        public string RenPhone { get; set; }
+        [Display(Name = "性别")]
+        public string RenSex { get; set; }
+        [Display(Name = "省份")]
+        public string Province { get; set; }
+        [Display(Name = "城市")]
+        public string City { get; set; }
+        [Display(Name = "国家")]
+        public string Country { get; set; }
         [Display(Name = "昵称")]
         public string RenNickName { get; set; }
+
+
+        [Display(Name = "手机号码")]
+        public string RenPhone { get; set; }       
         [Display(Name = "注册时间")]
         public DateTime CreateTime { get; set; }
         [Display(Name = "用户状态")]
         public bool Status { get; set; }
-        [Display(Name = "陪读人状态")]
-        public string PeiduStatus { get; set; }
+       
         [Display(Name = "邀请人")]
-        public int Yaoqingren { get; set; }
+        public string Yaoqingren { get; set; }
     }
 }

@@ -1,26 +1,105 @@
-﻿@model SkyWechatService.WebchatJsUserinfo
+﻿@using SkyWechatService;
+@using SkyEntity;
+@model SkyEntity.Ren
 @{
-    ViewBag.Title = "Home Page";
+    Layout = null;
+    ViewBag.Title = "陪伴空间用户注册";
+    WebchatJsUserinfo wxUserInfo = ViewData["userInfo"] as WebchatJsUserinfo;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="/AdminLTE/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/Resource/css/SkyWap.css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <h3 class="regTitle">请输入你的手机号</h3>
+
+                <div class="box-body">
+
+                    @using (Html.BeginForm("Register", "Ucenter", FormMethod.Post, new { @class = "form-horizontal", @name = "Register", @id = "Register" }))
+                    {
+                         @Html.HiddenFor(model => model.RenOpenid, new { @Value = wxUserInfo.openid })
+                         @Html.HiddenFor(model => model.RenUnionid, new { @Value = wxUserInfo.unionid })
+                         @Html.HiddenFor(model => model.RenNickName, new { @Value = wxUserInfo.nickname })
+                         @Html.HiddenFor(model => model.RenSex, new { @Value = wxUserInfo.sex })
+                         @Html.HiddenFor(model => model.Country, new { @Value = wxUserInfo.country })
+                         @Html.HiddenFor(model => model.Province, new { @Value = wxUserInfo.province })
+                         @Html.HiddenFor(model => model.City, new { @Value = wxUserInfo.city })
+                         @Html.HiddenFor(model => model.RenAvatar, new { @Value = wxUserInfo.headimgurl })
+                         @Html.HiddenFor(model => model.RenName, new { @Value = wxUserInfo.nickname })
+                         @Html.HiddenFor(model => model.CreateTime, new { @Value = DateTime.Now })
+                         @Html.HiddenFor(model => model.RenInfo, new { @Value = "这个人很懒，什么也没有留下" })
+                         @Html.HiddenFor(model => model.RenYijuhua, new { @Value = "这个人很懒，什么也没有留下" })
+                        @Html.AntiForgeryToken()
+                        <div class="form-group">
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon regInputLable" style="border-radius:0px 0px">手机号</span>
+                                <input type="text" class="form-control regInput" name="RenPhone" id="RenPhone" style="border-radius:0px 0px" placeholder="请输入手机号">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group input-group-lg">
+                                <input type="text" class="form-control regInput" style="border-radius:0px 0px" placeholder="点击获取验证码">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-info" type="button" style="border-radius:0px 0px">获取验证码</button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon regInputLable" style="border-radius:0px 0px">设置密码</span>
+                                <input type="password" class="form-control regInput" name="RenPassword" id="RenPassword" style="border-radius:0px 0px" placeholder="请设置密码">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon regInputLable" style="border-radius:0px 0px">邀请码</span>
+                                <input type="text" class="form-control regInput" name="Yaoqingren" id="Yaoqingren" style="border-radius:0px 0px" placeholder="请输入邀请码">
+                            </div>
+                        </div>
+
+                        <button class="btn btn-success btn-block btn-lg">注册</button>
+
 }
 
 
-<div class="row">
-    <div class="col-md-12">
-        <h2>个人基本信息</h2>
-        <p>
-           
-            头像: <img src="@Model.headimgurl" style="width: 100px;height: 100px;"><br>
-            昵称:  @Model.nickname <br>
-            性别： @Model.sex <br>
-            城市: @Model.city <br>
-            省份: @Model.province <br>
-            权限: @Model.privilege <br>
-            unionid: @Model.unionid <br>
-            openid @Model.openid <br>
-            
-            手机号：获取验证码注册
-            <a class="btn btn-success" href="@Url.Action("SendYanzhengma","Ucenter",new{touser=Model.openid})">发送验证码</a>
-            邀请码：
-        </p>
+
+                </div>
+                @*<p>
+
+                        头像: <img src="@wxUserInfo.headimgurl" style="width: 100px;height: 100px;" class="img-circle"><br>
+                        昵称:  @wxUserInfo.nickname <br>
+                        性别： @wxUserInfo.sex <br>
+                        城市: @wxUserInfo.city <br>
+                        省份: @wxUserInfo.province <br>
+                        权限: @wxUserInfo.privilege <br>
+                        unionid: @wxUserInfo.unionid <br>
+                        openid @wxUserInfo.openid <br>
+
+                    </p>*@
+            </div>
+        </div>
     </div>
-</div>
+
+    <!-- jQuery 3 -->
+    <script src="/AdminLTE/jquery/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="/AdminLTE/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

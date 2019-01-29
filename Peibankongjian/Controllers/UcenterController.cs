@@ -6,12 +6,36 @@ using System.Web;
 using System.Web.Mvc;
 using SkyCommon;
 using SkyWechatService;
+using SkyDal;
+using SkyEntity;
 
 namespace Peibankongjian.Controllers
 {
     public class UcenterController : Controller
     {
-        //
+        #region 微信登录
+        public ActionResult WechatLogin()
+        {
+            // string sourceUrl = Request.UrlReferrer.ToString();
+
+            string userAgent = Request.UserAgent;
+
+            WechatConfig wechatconfig = AccessTokenService.GetWechatConfig();
+
+            string REDIRECT_URI = System.Web.HttpUtility.UrlEncode("http://peiban.zzd123.com/Ucenter/Register");
+
+            string SCOPE = "snsapi_userinfo";
+            //string STATE = sourceUrl;
+            string STATE = "statecanshu";
+
+            string url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + wechatconfig.Appid + "&redirect_uri=" + REDIRECT_URI + "&response_type=code&scope=" + SCOPE + "&state=" + STATE + "#wechat_redirect";
+
+            return Redirect(url);
+
+        }
+        #endregion
+
+        private UnitOfWork unitOfWork = new UnitOfWork();
         // GET: /Ucenter/
         public ActionResult Register()
         {
@@ -29,42 +53,39 @@ namespace Peibankongjian.Controllers
             else
             {
                 userinfo = WechatJsServices.GetUserInfo(userAgent, CODE);
+                var wxusers = unitOfWork.rensRepository.Get(filter: u => u.RenOpenid == userinfo.openid);
+                if (wxusers.Count() > 0)
+                {
+                    return RedirectToAction("ShengjiVIP");
+                }
             }
-            ViewBag.code = CODE;
-            ViewBag.userAgent = userAgent;
-            return View(userinfo);
+            ViewData["userInfo"] = userinfo;
+            return View();
         }
 
-        #region 微信登录
-        public ActionResult WechatLogin()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult Register(Ren ren)
         {
-           // string sourceUrl = Request.UrlReferrer.ToString();
+            if (ModelState.IsValid)
+            {
+                unitOfWork.rensRepository.Insert(ren);
+                unitOfWork.Save();
+                return RedirectToAction("Index", "Home");
+            }
 
-            string userAgent = Request.UserAgent;
-
-            WechatConfig wechatconfig = AccessTokenService.GetWechatConfig();
-
-            string REDIRECT_URI = System.Web.HttpUtility.UrlEncode("http://peiban.zzd123.com/Ucenter/Register");
-
-            string SCOPE = "snsapi_userinfo";
-          //string STATE = sourceUrl;
-            string STATE = "statecanshu";
-
-            string url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + wechatconfig.Appid + "&redirect_uri=" + REDIRECT_URI + "&response_type=code&scope=" + SCOPE + "&state=" + STATE + "#wechat_redirect";
-
-            return Redirect(url);
-
+            return RedirectToAction("Register", "Ucenter");
         }
-        #endregion
 
-        public void SendYanzhengma(string touser)
+
+        public ActionResult ShengjiVIP()
         {
-            Configuration config = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration("~");
-            AppSettingsSection appsection = config.GetSection("appSettings") as AppSettingsSection;
-
-            string WechatId = appsection.Settings["WechatId"].Value.ToString();
-            string code ="注册验证码为："+ CommonTools.getRandomNumber(100000, 999999);
-            WechatMessageServices.ResponseTextMessage(touser,WechatId,code);
+            return View();
         }
+
+        
+
+      
     }
 }

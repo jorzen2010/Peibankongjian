@@ -102,6 +102,21 @@ namespace SkyDal
                  return WechatReplysRepository;
              }
          }
+
+         private GenericRepository<Ren> RensRepository;
+
+         public GenericRepository<Ren> rensRepository
+         {
+             get
+             {
+
+                 if (this.RensRepository == null)
+                 {
+                     this.RensRepository = new GenericRepository<Ren>(context);
+                 }
+                 return RensRepository;
+             }
+         }
    
 
         public void Save()

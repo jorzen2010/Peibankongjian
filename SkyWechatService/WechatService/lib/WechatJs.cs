@@ -40,7 +40,6 @@ namespace SkyWechatService
         public int sex { get; set; }
 
         public string province { get; set; }
-
         public string city { get; set; }
         public string country { get; set; }
 
