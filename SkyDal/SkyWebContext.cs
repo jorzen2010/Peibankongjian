@@ -33,8 +33,18 @@ namespace SkyDal
         public DbSet<SysUser> SysUsers { get; set; }
 
         public DbSet<WechatReply> WechatReplys { get; set; }
+
         public DbSet<Guanggao> Guanggaos { get; set; }
+
         public DbSet<Ren> Rens { get; set; }
+
+        public DbSet<Book> Books { get; set; }
+
+        public DbSet<Product> Products { get; set; }
+
+        public DbSet<RenwuDaka> RenwuDakas { get; set; }
+
+        public DbSet<Renwu>  Renwus { get; set; }
 
 
     }

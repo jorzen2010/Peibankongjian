@@ -171,9 +171,11 @@
     <Compile Include="Controllers\AdminHomeController.cs" />
     <Compile Include="Controllers\AdminSettingController.cs" />
     <Compile Include="Controllers\AdminSysUserController.cs" />
+    <Compile Include="Controllers\RenwuController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\UcenterController.cs" />
     <Compile Include="Controllers\WebAdController.cs" />
     <Compile Include="Controllers\WechatReplyController.cs" />
@@ -3085,6 +3087,12 @@
     <Content Include="Views\WebAd\Index.cshtml" />
     <Content Include="Views\Ucenter\Register.cshtml" />
     <Content Include="Views\Ucenter\ShengjiVIP.cshtml" />
+    <Content Include="Views\Book\Create.cshtml" />
+    <Content Include="Views\Book\Edit.cshtml" />
+    <Content Include="Views\Book\Index.cshtml" />
+    <Content Include="Views\Renwu\Create.cshtml" />
+    <Content Include="Views\Renwu\Edit.cshtml" />
+    <Content Include="Views\Renwu\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

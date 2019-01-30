@@ -20,6 +20,20 @@
         <li><a href="@Url.Action("Index","AdminHome")"><i class="fa fa-home"></i> <span>驾驶舱</span></a></li>
         <li><a href="@Url.Action("Index","Notice")"><i class="fa fa-book"></i> <span>文章管理</span></a></li>
         <li><a href="@Url.Action("Index","WebAd")"><i class="fa fa-book"></i> <span>广告管理</span></a></li>
+
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-wechat"></i> <span>课程管理</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="@Url.Action("Index", "Book")">课程管理</a></li>
+                <li><a href="@Url.Action("Index", "Book")">打卡记录</a></li>
+            </ul>
+        </li>
+
         <li class="treeview">
             <a href="#">
                 <i class="fa fa-wechat"></i> <span>微信功能管理</span>

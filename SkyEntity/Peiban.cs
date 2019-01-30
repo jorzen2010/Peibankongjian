@@ -39,7 +39,7 @@ namespace SkyEntity
         public int Paixu { get; set; }
 
         [Display(Name = "上线")]
-        public int Shangxiang { get; set; }
+        public bool Shangxian { get; set; }
 
     }
 
@@ -52,9 +52,6 @@ namespace SkyEntity
         [Required(ErrorMessage = "任务描述")]
         public string Title { get; set; }
 
-        [Display(Name = "任务对象")]
-        public int RenwuDuixiang { get; set; }
-
         [Display(Name = "视频地址")]
 
         public string VideoUrl { get; set; }
@@ -63,7 +60,34 @@ namespace SkyEntity
 
         public string AudioUrl { get; set; }
 
+        [Display(Name = "排序")]
+        public int Paixu { get; set; }
 
+        [Display(Name = "任务对象")]
+        public int RenwuBook { get; set; }
+
+    }
+
+
+    public class Product
+    {
+        [Key]
+        public int Id { get; set; }
+
+        [Display(Name = "商品名称")]
+        public string Title { get; set; }
+
+        [Display(Name = "商品源")]
+        public int ProductBook { get; set; }
+
+        [Display(Name = "陪伴师")]
+        public int Peibanshi { get; set; }
+
+        [Display(Name = "价格")]
+        public float Price { get; set; }
+
+        [Display(Name = "上线")]
+        public bool Shangxian { get; set; }
 
     }
 
@@ -76,8 +100,14 @@ namespace SkyEntity
         [Display(Name = "任务名")]
         public int RenwuName { get; set; }
 
-        [Display(Name = "发布任务者")]
-        public int RenwuFabuzhe { get; set; }
+        [Display(Name = "商品源")]
+        public int ProductBook { get; set; }
+
+        [Display(Name = "商品源")]
+        public int ProductName { get; set; }
+
+        [Display(Name = "陪伴师")]
+        public int Peibanshi { get; set; }
 
         [Display(Name = "任务执行人")]
         public int RenwuZhixingzhe { get; set; }
@@ -141,6 +171,8 @@ namespace SkyEntity
         public DateTime CreateTime { get; set; }
         [Display(Name = "用户状态")]
         public bool Status { get; set; }
+        [Display(Name = "发送陪伴信息")]
+        public bool MsgStatus { get; set; }
        
         [Display(Name = "邀请人")]
         public string Yaoqingren { get; set; }

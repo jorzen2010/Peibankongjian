@@ -117,6 +117,67 @@ namespace SkyDal
                  return RensRepository;
              }
          }
+
+         private GenericRepository<Book> BooksRepository;
+
+         public GenericRepository<Book> booksRepository
+         {
+             get
+             {
+
+                 if (this.BooksRepository == null)
+                 {
+                     this.BooksRepository = new GenericRepository<Book>(context);
+                 }
+                 return BooksRepository;
+             }
+         }
+
+         private GenericRepository<Renwu> RenwusRepository;
+
+         public GenericRepository<Renwu> renwusRepository
+         {
+             get
+             {
+
+                 if (this.RenwusRepository == null)
+                 {
+                     this.RenwusRepository = new GenericRepository<Renwu>(context);
+                 }
+                 return RenwusRepository;
+             }
+         }
+
+         private GenericRepository<Product> ProductsRepository;
+
+         public GenericRepository<Product> productsRepository
+         {
+             get
+             {
+
+                 if (this.ProductsRepository == null)
+                 {
+                     this.ProductsRepository = new GenericRepository<Product>(context);
+                 }
+                 return ProductsRepository;
+             }
+         }
+
+         private GenericRepository<RenwuDaka> RenwuDakasRepository;
+
+         public GenericRepository<RenwuDaka> renwuDakasRepository
+         {
+             get
+             {
+
+                 if (this.RenwuDakasRepository == null)
+                 {
+                     this.RenwuDakasRepository = new GenericRepository<RenwuDaka>(context);
+                 }
+                 return RenwuDakasRepository;
+             }
+         }
+   
    
 
         public void Save()
