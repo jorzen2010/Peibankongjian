@@ -35,8 +35,9 @@ namespace Peibankongjian.Controllers
             return View(PageList);
         }
 
-        public ActionResult Create()
+        public ActionResult Create(int bid)
         {
+            ViewBag.bid = bid;
            return View();
         }
         [HttpPost]
@@ -48,10 +49,10 @@ namespace Peibankongjian.Controllers
             {
                 unitOfWork.renwusRepository.Insert(renwu);
                 unitOfWork.Save();
-                return RedirectToAction("Index", "Renwu");
+                return RedirectToAction("Index", "Renwu", new { bid=renwu.RenwuBook});
             }
-
-            return View(renwu);
+          //  return View("Create?bid=" + renwu.RenwuBook, renwu);
+            return RedirectToAction("Create", "Renwu", new { bid = renwu.RenwuBook });
         }
 
         public ActionResult Edit(int id)
@@ -75,7 +76,7 @@ namespace Peibankongjian.Controllers
             {
                 unitOfWork.renwusRepository.Update(renwu);
                 unitOfWork.Save();
-                return RedirectToAction("Index", "Renwu");
+                return RedirectToAction("Index", "Renwu", new {bid=renwu.RenwuBook });
             }
             return View(renwu);
         }

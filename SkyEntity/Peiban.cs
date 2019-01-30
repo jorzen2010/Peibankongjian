@@ -52,6 +52,10 @@ namespace SkyEntity
         [Required(ErrorMessage = "任务描述")]
         public string Title { get; set; }
 
+        [Required(ErrorMessage = "请输入任务详情")]
+        [Display(Name = "任务详情")]
+        public string Content { get; set; }
+
         [Display(Name = "视频地址")]
 
         public string VideoUrl { get; set; }
@@ -65,6 +69,12 @@ namespace SkyEntity
 
         [Display(Name = "任务对象")]
         public int RenwuBook { get; set; }
+
+        [Display(Name = "允许视频")]
+        public bool VideoOn { get; set; }
+
+        [Display(Name = "允许音频")]
+        public bool AudioOn { get; set; }
 
     }
 
@@ -88,6 +98,9 @@ namespace SkyEntity
 
         [Display(Name = "上线")]
         public bool Shangxian { get; set; }
+
+        [Display(Name = "体验课")]
+        public bool Tiyan { get; set; }
 
     }
 
