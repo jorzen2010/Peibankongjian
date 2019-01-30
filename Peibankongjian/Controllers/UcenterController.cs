@@ -14,7 +14,7 @@ namespace Peibankongjian.Controllers
     public class UcenterController : Controller
     {
         #region 微信登录
-        public ActionResult WechatLogin()
+        public ActionResult WechatLogin(string redirectUrl)
         {
             // string sourceUrl = Request.UrlReferrer.ToString();
 
@@ -22,7 +22,8 @@ namespace Peibankongjian.Controllers
 
             WechatConfig wechatconfig = AccessTokenService.GetWechatConfig();
 
-            string REDIRECT_URI = System.Web.HttpUtility.UrlEncode("http://peiban.zzd123.com/Ucenter/Register");
+           // string REDIRECT_URI = System.Web.HttpUtility.UrlEncode("http://peiban.zzd123.com/Ucenter/Register");
+            string REDIRECT_URI = System.Web.HttpUtility.UrlEncode(redirectUrl);
 
             string SCOPE = "snsapi_userinfo";
             //string STATE = sourceUrl;
@@ -48,7 +49,7 @@ namespace Peibankongjian.Controllers
 
             if (string.IsNullOrEmpty(CODE))
             {
-                return RedirectToAction("WechatLogin");
+                return RedirectToAction("WechatLogin", new { redirectUrl = "http://peiban.zzd123.com/Ucenter/Register" });
             }
             else
             {
@@ -81,7 +82,31 @@ namespace Peibankongjian.Controllers
 
         public ActionResult ShengjiVIP()
         {
-            return View();
+            string userAgent = Request.UserAgent;
+
+            string CODE = Request["code"];
+
+            string STATE = Request["state"];
+            WebchatJsUserinfo userinfo = new WebchatJsUserinfo();
+
+            if (string.IsNullOrEmpty(CODE))
+            {
+                return RedirectToAction("WechatLogin", new { redirectUrl = "http://peiban.zzd123.com/Ucenter/ShengjiVIP" });
+            }
+            else
+            {
+                userinfo = WechatJsServices.GetUserInfo(userAgent, CODE);
+                var wxusers = unitOfWork.rensRepository.Get(filter: u => u.RenOpenid == userinfo.openid);
+                if (wxusers.Count() > 0)
+                {  
+                    return View();
+                }
+                else
+                {
+
+                    return RedirectToAction("Register");
+                }
+            }
         }
 
         

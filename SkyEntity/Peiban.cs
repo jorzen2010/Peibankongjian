@@ -71,10 +71,10 @@ namespace SkyEntity
         public int RenwuBook { get; set; }
 
         [Display(Name = "允许视频")]
-        public bool VideoOn { get; set; }
+        public bool IfVideoOn { get; set; }
 
         [Display(Name = "允许音频")]
-        public bool AudioOn { get; set; }
+        public bool IfAudioOn { get; set; }
 
     }
 
@@ -189,5 +189,33 @@ namespace SkyEntity
        
         [Display(Name = "邀请人")]
         public string Yaoqingren { get; set; }
+    }
+
+    public class ChanpinOrder
+    {
+        [Key]
+        public int Id { get; set; }
+
+        [Display(Name = "姓名")]
+        public int VipUser { get; set; }
+
+        [Display(Name = "邀请人")]
+        public int Yaoqingren { get; set; }
+
+        [Display(Name = "购买产品类型")]
+        public string ProductType { get; set; }
+
+        [Display(Name = "购买产品")]
+        public int BuyChanpin { get; set; }
+
+        [Display(Name = "注册时间")]
+        public DateTime CreateTime { get; set; }
+
+        [Display(Name = "支付审核时间")]
+        public DateTime PayTime { get; set; }
+        [Display(Name = "审核状态")]
+        public bool Status { get; set; }
+        [Display(Name = "邀请人支付状态")]
+        public bool PayStatus { get; set; }
     }
 }

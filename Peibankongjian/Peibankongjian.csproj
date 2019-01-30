@@ -3093,6 +3093,9 @@
     <Content Include="Views\Renwu\Create.cshtml" />
     <Content Include="Views\Renwu\Edit.cshtml" />
     <Content Include="Views\Renwu\Index.cshtml" />
+    <Content Include="Views\Home\Shudan.cshtml" />
+    <Content Include="Views\Home\Product.cshtml" />
+    <Content Include="Views\Home\RenwuList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -16,5 +16,12 @@ namespace SkyService
             Book book = unitOfWork.booksRepository.GetByID(id);
             return book;
         }
+
+        public static Ren GetRenById(int id)
+        {
+            UnitOfWork unitOfWork = new UnitOfWork();
+            Ren ren = unitOfWork.rensRepository.GetByID(id);
+            return ren;
+        }
     }
 }

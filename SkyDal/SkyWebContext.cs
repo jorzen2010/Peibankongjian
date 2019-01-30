@@ -44,8 +44,7 @@ namespace SkyDal
 
         public DbSet<RenwuDaka> RenwuDakas { get; set; }
 
-        public DbSet<Renwu>  Renwus { get; set; }
-
+        public DbSet<Renwu> Renwus { get; set; }
 
     }
 }
