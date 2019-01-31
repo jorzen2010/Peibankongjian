@@ -80,34 +80,81 @@ namespace Peibankongjian.Controllers
         }
 
 
-        public ActionResult ShengjiVIP()
+        public ActionResult ShengjiVIP(int type)
         {
+            //购买产品类型：课程和会员两类
+            //购买产品：11代表注册会员升级，12代表升级为陪伴师，2+产品ID代表课程产品
+
             string userAgent = Request.UserAgent;
 
             string CODE = Request["code"];
 
             string STATE = Request["state"];
-            WebchatJsUserinfo userinfo = new WebchatJsUserinfo();
-
             if (string.IsNullOrEmpty(CODE))
             {
                 return RedirectToAction("WechatLogin", new { redirectUrl = "http://peiban.zzd123.com/Ucenter/ShengjiVIP" });
             }
             else
             {
-                userinfo = WechatJsServices.GetUserInfo(userAgent, CODE);
+                WebchatJsUserinfo userinfo = WechatJsServices.GetUserInfo(userAgent, CODE);
+
                 var wxusers = unitOfWork.rensRepository.Get(filter: u => u.RenOpenid == userinfo.openid);
+
                 if (wxusers.Count() > 0)
-                {  
+                {
+                    Ren ren = wxusers.First();
+                    ViewData["renuser"] = ren;
                     return View();
+
                 }
+
                 else
                 {
-
-                    return RedirectToAction("Register");
+                    //你尚未注册
+                    return RedirectToAction("Register", "Ucenter");
                 }
             }
+
+           
+
         }
+
+        public ActionResult ShengjiPeibanshi()
+        {
+            string userAgent = Request.UserAgent;
+
+            string CODE = Request["code"];
+
+            string STATE = Request["state"];
+            if (string.IsNullOrEmpty(CODE))
+            {
+                return RedirectToAction("WechatLogin", new { redirectUrl = "http://peiban.zzd123.com/Ucenter/ShengjiPeibanshi" });
+            }
+            else
+            {
+                WebchatJsUserinfo userinfo = WechatJsServices.GetUserInfo(userAgent, CODE);
+
+                var wxusers = unitOfWork.rensRepository.Get(filter: u => u.RenOpenid == userinfo.openid);
+
+                if (wxusers.Count() > 0)
+                {
+                    Ren ren = wxusers.First();
+                    ViewData["renuser"] = ren;
+                    return View();
+
+                }
+
+                else
+                {
+                    //你尚未注册
+                    return RedirectToAction("Register", "Ucenter");
+                }
+            }
+
+
+
+        }
+
 
         
 
