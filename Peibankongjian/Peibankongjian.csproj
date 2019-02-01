@@ -171,6 +171,7 @@
     <Compile Include="Controllers\AdminHomeController.cs" />
     <Compile Include="Controllers\AdminSettingController.cs" />
     <Compile Include="Controllers\AdminSysUserController.cs" />
+    <Compile Include="Controllers\ChanpinOrderController.cs" />
     <Compile Include="Controllers\RenwuController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\FileController.cs" />
@@ -3097,6 +3098,7 @@
     <Content Include="Views\Home\Product.cshtml" />
     <Content Include="Views\Home\RenwuList.cshtml" />
     <Content Include="Views\Ucenter\ShengjiPeibanshi.cshtml" />
+    <Content Include="Views\ChanpinOrder\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

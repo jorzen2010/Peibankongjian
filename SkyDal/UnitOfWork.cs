@@ -177,6 +177,21 @@ namespace SkyDal
                  return RenwuDakasRepository;
              }
          }
+
+         private GenericRepository<ChanpinOrder> ChanpinOrdersRepository;
+
+         public GenericRepository<ChanpinOrder> chanpinOrdersRepository
+         {
+             get
+             {
+
+                 if (this.ChanpinOrdersRepository == null)
+                 {
+                     this.ChanpinOrdersRepository = new GenericRepository<ChanpinOrder>(context);
+                 }
+                 return ChanpinOrdersRepository;
+             }
+         }
    
    
 

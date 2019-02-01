@@ -35,11 +35,22 @@
                     <h4>@renuser.RenNickName</h4>
                     <small>立刻购买可为当前用户开通VIP</small>
 
-                    @Html.HiddenFor(model => model.VipUser, new { @Value = renuser.Id })
-                    @Html.HiddenFor(model => model.Yaoqingren, new { @Value = renuser.Yaoqingren })
-                    <button class="btn btn-warning btn-block btn-lg">立即开通</button>
+                    @using (Html.BeginForm("ShengjiVIP", "Ucenter", FormMethod.Post, new { @class = "form-horizontal", @name = "Register", @id = "Register" }))
+                    {
+                        @Html.HiddenFor(model => model.VipUser, new { @Value = renuser.Id })
+                        @Html.HiddenFor(model => model.Yaoqingren, new { @Value = renuser.Yaoqingren })
+                        @Html.HiddenFor(model => model.ProductType, new { @Value = 1 })
+                        @Html.HiddenFor(model => model.BuyChanpin, new { @Value = 1 })
+                        @Html.HiddenFor(model => model.CreateTime, new { @Value = DateTime.Now })
+                        @Html.HiddenFor(model => model.PayStatus, new { @Value = false })
+                        @Html.HiddenFor(model => model.PayTime, new { @Value = DateTime.Now })
+                        @Html.HiddenFor(model => model.Status, new { @Value = false })
+                        @Html.AntiForgeryToken()
+                        <button class="btn btn-warning btn-block btn-lg" type="submit">立即开通</button>
+                    }
+                    
                 </div>
-               
+
             </div>
         </div>
     </div>

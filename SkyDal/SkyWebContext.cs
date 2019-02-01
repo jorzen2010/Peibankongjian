@@ -46,5 +46,7 @@ namespace SkyDal
 
         public DbSet<Renwu> Renwus { get; set; }
 
+        public DbSet<ChanpinOrder> ChanpinOrders { get; set; }
+
     }
 }

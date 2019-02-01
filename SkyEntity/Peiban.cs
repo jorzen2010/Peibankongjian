@@ -196,6 +196,9 @@ namespace SkyEntity
         [Key]
         public int Id { get; set; }
 
+        [Display(Name = "订单号")]
+        public string OrderNumber { get; set; }
+
         [Display(Name = "姓名")]
         public int VipUser { get; set; }
 
@@ -203,7 +206,7 @@ namespace SkyEntity
         public int Yaoqingren { get; set; }
 
         [Display(Name = "购买产品类型")]
-        public string ProductType { get; set; }
+        public int ProductType { get; set; }
 
         [Display(Name = "购买产品")]
         public int BuyChanpin { get; set; }

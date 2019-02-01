@@ -1,0 +1,215 @@
+﻿@model StaticPagedList<SkyEntity.ChanpinOrder>
+@using PagedList;
+@using PagedList.Mvc;
+@using SkyService;
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.title = "订单管理";
+}
+@section Topcss {
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+    <link href="~/plugins/bootstrap-switch/css/bootstrap-switch.css" rel="stylesheet" type="text/css" />
+
+
+}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            @ViewBag.title
+        </h1>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <!-- Default box -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">
+                            @ViewBag.title
+
+                        </h3>
+
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body table-responsive no-padding">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                   
+                                    <th class="col-sm-1">
+                                        订单号
+                                    </th>
+                                    <th class="col-sm-1">
+                                        用户
+                                    </th>
+                                    <th class="col-sm-1">
+                                        产品类型
+                                    </th>
+                                    <th class="col-sm-1">
+                                        产品
+                                    </th>
+                                    <th class="col-sm-1">
+                                        邀请人
+                                    </th>
+                                    
+                                    <th class="col-sm-1">
+                                        审核状态
+                                    </th>
+                                    <th class="col-sm-1">
+                                        邀请人支付状态
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                       
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Id) - @Html.DisplayFor(modelItem => item.OrderNumber)
+                                        </td>
+                                        <td>
+                                            @PeibanService.GetRenById(item.VipUser).RenNickName
+                                        </td>
+                                        <td>
+                                            @if (item.ProductType == 1)
+                                            {
+                                                @Html.Raw("会员产品")
+                                            }
+                                            else
+                                            {
+                                                @Html.Raw("课程产品")
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (item.ProductType == 1)
+                                            {
+                                                if (item.BuyChanpin == 1)
+                                                {
+                                                    @Html.Raw("普通会员")
+                                                }
+                                                else
+                                                {
+                                                    @Html.Raw("陪伴师会员")
+                                                }
+                                            }
+                                            @if (item.ProductType == 2)
+                                            {
+                                                    @Html.Raw("课程产品名称")
+                                            }
+
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.Yaoqingren)
+                                        </td>
+
+                                       
+                                        <th class="col-sm-1">
+                                            <button class="btn btn-xs btn-@(item.Status ? "success" : "danger")">@(item.Status ? "已支付" : "未支付") - @item.CreateTime</button>
+                                        </th>
+                                        
+                                        <th class="col-sm-1">
+                                            <button class="btn btn-xs btn-@(item.PayStatus ? "success" : "danger")">@(item.PayStatus ? "已支付" : "未支付")</button>
+                                        </th>
+                                    </tr>
+
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                    <div class="box-footer clearfix">
+                        <ul class="pagination pagination-sm no-margin pull-right">
+                            @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { type = Request.QueryString["type"], page = page }),
+                            new PagedListRenderOptions
+                            {
+                                LinkToPreviousPageFormat = "上一页",
+                                LinkToNextPageFormat = "下一页",
+                                DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                                DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                                DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                                DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                                MaximumPageNumbersToDisplay = 5,
+                                LinkToFirstPageFormat = "首页",
+                                LinkToLastPageFormat = "最后一页",
+                                PageCountAndCurrentLocationFormat = "第 {0}页 共 {1}页"
+                            })
+                        </ul>
+                    </div>
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+        <!-- /.box -->
+    </section>
+    <!-- /.content -->
+</div>
+
+
+
+@section BottomScripts {
+    <script type="text/javascript" src="/plugins/bootbox.min.js"></script>
+    <script type="text/javascript" src="/plugins/bootstrap-switch/js/bootstrap-switch.js"></script>
+
+    <script type="text/javascript">
+
+        function DeleteItem(id, status, url, tourl) {
+            bootbox.confirm({
+                buttons: {
+                    confirm: {
+                        label: '删除',
+                        className: 'btn-danger'
+                    },
+                    cancel: {
+                        label: '取消',
+                        className: 'btn-default'
+                    }
+                },
+                message: '你确定要删除本条信息吗？',
+                callback: function (result) {
+                    if (result) {
+                        var token = $('[name=__RequestVerificationToken]').val();
+                        var headers = {};
+                        //防伪标记放入headers
+                        //也可以将防伪标记放入data
+                        headers["__RequestVerificationToken"] = token;
+                        $.ajax({
+                            url: url,
+                            headers: headers,
+                            type: 'post',
+                            timeout: 3000,
+                            data: {
+                                id: id,
+                                __RequestVerificationToken: token,
+                                status: status,
+                            },
+                            success: function (msg) {
+                                if (msg.MessageStatus == 'true') {
+                                    //window.location.reload();
+                                    window.location.href = tourl;
+                                }
+                                else {
+                                    alertconfirm('删除失败');
+                                }
+                            },
+                            error: function (e) {
+                                alertconfirm('出现意外错误，删除失败！');
+                            }
+                        });
+                    }
+                    else {
+                        // alertconfirm('您已经取消删除了');
+                    }
+                },
+                title: "删除确认提示框",
+            });
+        }
+
+
+
+    </script>
+}

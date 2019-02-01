@@ -80,7 +80,7 @@ namespace Peibankongjian.Controllers
         }
 
 
-        public ActionResult ShengjiVIP(int type)
+        public ActionResult ShengjiVIP()
         {
             //购买产品类型：课程和会员两类
             //购买产品：11代表注册会员升级，12代表升级为陪伴师，2+产品ID代表课程产品
@@ -97,26 +97,36 @@ namespace Peibankongjian.Controllers
             else
             {
                 WebchatJsUserinfo userinfo = WechatJsServices.GetUserInfo(userAgent, CODE);
-
                 var wxusers = unitOfWork.rensRepository.Get(filter: u => u.RenOpenid == userinfo.openid);
-
                 if (wxusers.Count() > 0)
                 {
                     Ren ren = wxusers.First();
                     ViewData["renuser"] = ren;
                     return View();
-
                 }
-
                 else
                 {
                     //你尚未注册
                     return RedirectToAction("Register", "Ucenter");
                 }
             }
+        }
 
-           
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult ShengjiVIP(ChanpinOrder corder)
+        {
+            Random random = new Random();
+            if (ModelState.IsValid)
+            {
+                corder.OrderNumber = System.DateTime.Now.ToUniversalTime().Ticks.ToString() + random.Next(1000, 9999).ToString().ToString();
+                unitOfWork.chanpinOrdersRepository.Insert(corder);
+                unitOfWork.Save();
+                return RedirectToAction("Index", "Home");
+            }
 
+            return RedirectToAction("ShengjiVIP", "Ucenter");
         }
 
         public ActionResult ShengjiPeibanshi()
@@ -154,6 +164,24 @@ namespace Peibankongjian.Controllers
 
 
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult ShengjiPeibanshi(ChanpinOrder corder)
+        {
+            Random random = new Random();
+            if (ModelState.IsValid)
+            {
+                corder.OrderNumber = System.DateTime.Now.ToUniversalTime().Ticks.ToString() + random.Next(1000, 9999).ToString().ToString();
+                unitOfWork.chanpinOrdersRepository.Insert(corder);
+                unitOfWork.Save();
+                return RedirectToAction("Index", "Home");
+            }
+
+            return RedirectToAction("ShengjiVIP", "Ucenter");
+        }
+
 
 
         

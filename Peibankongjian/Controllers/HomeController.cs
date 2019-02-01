@@ -78,5 +78,10 @@ namespace Peibankongjian.Controllers
             ViewBag.product = pid;
             return View(PageList);
         }
+
+        public ActionResult CreateProduct()
+        {
+            return View();
+        }
     }
 }
