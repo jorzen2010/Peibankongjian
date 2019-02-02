@@ -11,19 +11,19 @@
             <div class="row">
 
                 @foreach (var item in Model)
-{
-    <div class="col-md-3 text-center" onclick="ToUrl(@item.Id)">
+                {
+                    <div class="col-md-3 text-center" onclick="ToUrl(@item.Id)">
 
-        <img src="@item.Cover" alt="..." class="img-thumbnail" style="width:100%">
-        <h4>@item.Title</h4>
-        <button class="btn btn-info">创造陪伴</button>
-    </div>
+                        <img src="@item.Cover" alt="..." class="img-thumbnail" style="width:100%">
+                        <h4>@item.Title</h4>
+                        <button class="btn btn-info">创造陪伴空间</button>
+                    </div>
 
-}
+                }
             </div>
             <div class="box-footer clearfix  text-center">
                 <ul class="pagination pagination-sm no-margin">
-                    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { type = Request.QueryString["type"], page = page }),
+                    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page = page }),
                             new PagedListRenderOptions
                             {
                                 LinkToPreviousPageFormat = "上一页",

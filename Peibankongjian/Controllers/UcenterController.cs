@@ -71,12 +71,27 @@ namespace Peibankongjian.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (string.IsNullOrEmpty(ren.RenNickName.ToString()))
+                {
+                    return RedirectToAction("Register", "Ucenter");
+                }
+
+                if (string.IsNullOrEmpty(ren.Yaoqingren.ToString()))
+                {
+                    ren.Yaoqingren = 10000;
+                }
+                ren.RenPassword = CommonTools.ToMd5(ren.RenPassword);
                 unitOfWork.rensRepository.Insert(ren);
                 unitOfWork.Save();
                 return RedirectToAction("Index", "Home");
             }
+            else
+            {
 
-            return RedirectToAction("Register", "Ucenter");
+                return RedirectToAction("Register", "Ucenter");
+            }
+
+            
         }
 
 

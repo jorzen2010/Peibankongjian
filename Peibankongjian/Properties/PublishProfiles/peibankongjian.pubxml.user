@@ -4549,22 +4549,22 @@
       <publishTime>01/25/2019 09:16:58</publishTime>
     </File>
     <File Include="bin/Peibankongjian.dll">
-      <publishTime>02/01/2019 14:43:00</publishTime>
+      <publishTime>02/02/2019 16:17:10</publishTime>
     </File>
     <File Include="bin/SkyCommon.dll">
       <publishTime>01/28/2019 08:07:02</publishTime>
     </File>
     <File Include="bin/SkyDal.dll">
-      <publishTime>02/01/2019 14:14:27</publishTime>
+      <publishTime>02/02/2019 14:29:53</publishTime>
     </File>
     <File Include="bin/SkyEntity.dll">
-      <publishTime>02/01/2019 13:45:01</publishTime>
+      <publishTime>02/02/2019 14:29:52</publishTime>
     </File>
     <File Include="bin/SkyService.dll">
-      <publishTime>02/01/2019 14:42:59</publishTime>
+      <publishTime>02/02/2019 14:29:53</publishTime>
     </File>
     <File Include="bin/SkyWechatService.dll">
-      <publishTime>02/01/2019 14:42:59</publishTime>
+      <publishTime>02/02/2019 14:29:53</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>01/25/2019 09:16:58</publishTime>
@@ -4658,6 +4658,12 @@
     </File>
     <File Include="Content/Site.css">
       <publishTime>01/25/2019 09:16:55</publishTime>
+    </File>
+    <File Include="Controllers/AdminBaseController.cs">
+      <publishTime>01/28/2019 08:07:02</publishTime>
+    </File>
+    <File Include="Controllers/UcenterController.cs">
+      <publishTime>02/02/2019 16:13:59</publishTime>
     </File>
     <File Include="favicon.ico">
       <publishTime>01/25/2019 09:16:56</publishTime>
@@ -8581,7 +8587,7 @@
       <publishTime>01/25/2019 09:16:55</publishTime>
     </File>
     <File Include="Resource/css/SkyWap.css">
-      <publishTime>01/29/2019 13:36:15</publishTime>
+      <publishTime>02/02/2019 14:12:05</publishTime>
     </File>
     <File Include="Resource/css/SkyWeb.css">
       <publishTime>01/25/2019 09:16:55</publishTime>
@@ -8737,7 +8743,7 @@
       <publishTime>01/25/2019 09:16:55</publishTime>
     </File>
     <File Include="Views/ChanpinOrder/Index.cshtml">
-      <publishTime>02/01/2019 14:34:20</publishTime>
+      <publishTime>02/02/2019 08:55:58</publishTime>
     </File>
     <File Include="Views/Home/About.cshtml">
       <publishTime>01/25/2019 09:16:55</publishTime>
@@ -8749,13 +8755,13 @@
       <publishTime>01/31/2019 08:16:33</publishTime>
     </File>
     <File Include="Views/Home/Product.cshtml">
-      <publishTime>01/31/2019 08:16:33</publishTime>
+      <publishTime>02/01/2019 15:46:32</publishTime>
     </File>
     <File Include="Views/Home/RenwuList.cshtml">
       <publishTime>01/31/2019 08:16:33</publishTime>
     </File>
     <File Include="Views/Home/Shudan.cshtml">
-      <publishTime>01/31/2019 08:16:33</publishTime>
+      <publishTime>02/02/2019 15:44:25</publishTime>
     </File>
     <File Include="Views/Notice/Create.cshtml">
       <publishTime>01/25/2019 09:16:55</publishTime>
@@ -8794,19 +8800,19 @@
       <publishTime>01/28/2019 15:54:08</publishTime>
     </File>
     <File Include="Views/Ucenter/Register.cshtml">
-      <publishTime>01/29/2019 15:20:50</publishTime>
+      <publishTime>02/02/2019 16:19:39</publishTime>
     </File>
     <File Include="Views/Ucenter/Register0.cshtml">
       <publishTime>01/29/2019 08:06:37</publishTime>
     </File>
     <File Include="Views/Ucenter/ShengjiPeibanshi.cshtml">
-      <publishTime>02/01/2019 14:42:40</publishTime>
+      <publishTime>02/01/2019 14:49:52</publishTime>
     </File>
     <File Include="Views/Ucenter/ShengjiVIP.cshtml">
       <publishTime>02/01/2019 14:00:24</publishTime>
     </File>
     <File Include="Views/Wap/Index.cshtml">
-      <publishTime>01/25/2019 16:03:33</publishTime>
+      <publishTime>02/02/2019 10:24:23</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>01/28/2019 08:07:02</publishTime>
@@ -8845,7 +8851,7 @@
       <publishTime>01/25/2019 09:16:55</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/01/2019 13:45:06</publishTime>
+      <publishTime>02/02/2019 08:18:37</publishTime>
     </File>
     <File Include="WechatApi.ashx">
       <publishTime>01/28/2019 08:07:02</publishTime>

@@ -8,7 +8,7 @@ using SkyWechatService;
 
 namespace Peibankongjian.Controllers
 {
-    public class WechatMenuController : Controller
+    public class WechatMenuController : AdminBaseController
     {
         //
         // GET: /Test/

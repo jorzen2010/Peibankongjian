@@ -103,7 +103,14 @@
 
                                         </td>
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.Yaoqingren)
+                                            @if (PeibanService.GetRenById(item.Yaoqingren) == null)
+                                            { 
+                                                 @Html.Raw("邀请人编号有误")
+                                            }
+                                            else
+                                            {
+                                                @PeibanService.GetRenById(item.Yaoqingren).RenNickName;
+                                            }
                                         </td>
 
                                        
@@ -124,7 +131,7 @@
                     <!-- /.box-body -->
                     <div class="box-footer clearfix">
                         <ul class="pagination pagination-sm no-margin pull-right">
-                            @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { type = Request.QueryString["type"], page = page }),
+                            @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { tid = Request.QueryString["tid"], page = page }),
                             new PagedListRenderOptions
                             {
                                 LinkToPreviousPageFormat = "上一页",
@@ -155,61 +162,5 @@
     <script type="text/javascript" src="/plugins/bootbox.min.js"></script>
     <script type="text/javascript" src="/plugins/bootstrap-switch/js/bootstrap-switch.js"></script>
 
-    <script type="text/javascript">
-
-        function DeleteItem(id, status, url, tourl) {
-            bootbox.confirm({
-                buttons: {
-                    confirm: {
-                        label: '删除',
-                        className: 'btn-danger'
-                    },
-                    cancel: {
-                        label: '取消',
-                        className: 'btn-default'
-                    }
-                },
-                message: '你确定要删除本条信息吗？',
-                callback: function (result) {
-                    if (result) {
-                        var token = $('[name=__RequestVerificationToken]').val();
-                        var headers = {};
-                        //防伪标记放入headers
-                        //也可以将防伪标记放入data
-                        headers["__RequestVerificationToken"] = token;
-                        $.ajax({
-                            url: url,
-                            headers: headers,
-                            type: 'post',
-                            timeout: 3000,
-                            data: {
-                                id: id,
-                                __RequestVerificationToken: token,
-                                status: status,
-                            },
-                            success: function (msg) {
-                                if (msg.MessageStatus == 'true') {
-                                    //window.location.reload();
-                                    window.location.href = tourl;
-                                }
-                                else {
-                                    alertconfirm('删除失败');
-                                }
-                            },
-                            error: function (e) {
-                                alertconfirm('出现意外错误，删除失败！');
-                            }
-                        });
-                    }
-                    else {
-                        // alertconfirm('您已经取消删除了');
-                    }
-                },
-                title: "删除确认提示框",
-            });
-        }
-
-
-
-    </script>
+    
 }

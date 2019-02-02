@@ -157,8 +157,7 @@ namespace SkyEntity
 
         [Display(Name = "注册邮箱")]
         public string RenUserEmail { get; set; }
-        [Display(Name = "密码")]
-        public string RenPassword { get; set; }
+       
 
         [Display(Name = "头像")]
         public string RenAvatar { get; set; }
@@ -177,18 +176,24 @@ namespace SkyEntity
         [Display(Name = "昵称")]
         public string RenNickName { get; set; }
 
-
-        [Display(Name = "手机号码")]
-        public string RenPhone { get; set; }       
+            
         [Display(Name = "注册时间")]
         public DateTime CreateTime { get; set; }
         [Display(Name = "用户状态")]
         public bool Status { get; set; }
         [Display(Name = "发送陪伴信息")]
         public bool MsgStatus { get; set; }
-       
-        [Display(Name = "邀请人")]
-        public string Yaoqingren { get; set; }
+
+
+       [Required(ErrorMessage = "请输入邀请码")]
+        [Display(Name = "邀请码")]
+        public int Yaoqingren { get; set; }
+       [Required(ErrorMessage = "请输入密码")]
+       [Display(Name = "密码")]
+       public string RenPassword { get; set; }
+       [Required(ErrorMessage = "请输入手机号")]
+       [Display(Name = "手机号码")]
+       public string RenPhone { get; set; }  
     }
 
     public class ChanpinOrder
@@ -210,6 +215,9 @@ namespace SkyEntity
 
         [Display(Name = "购买产品")]
         public int BuyChanpin { get; set; }
+
+        [Display(Name = "订单备注")]
+        public string Beizhu { get; set; }
 
         [Display(Name = "注册时间")]
         public DateTime CreateTime { get; set; }
