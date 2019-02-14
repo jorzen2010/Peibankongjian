@@ -167,6 +167,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminAccountController.cs" />
+    <Compile Include="Controllers\UBaseController.cs" />
+    <Compile Include="Controllers\RenAccountController.cs" />
+    <Compile Include="Controllers\UHomeController.cs" />
     <Compile Include="Controllers\WapBaseController.cs" />
     <Compile Include="Controllers\AdminBaseController.cs" />
     <Compile Include="Controllers\AdminHomeController.cs" />
@@ -3100,7 +3103,10 @@
     <Content Include="Views\Home\RenwuList.cshtml" />
     <Content Include="Views\Ucenter\ShengjiPeibanshi.cshtml" />
     <Content Include="Views\ChanpinOrder\Index.cshtml" />
-    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\RenAccount\Login.cshtml" />
+    <Content Include="Views\UHome\CreateProduct.cshtml" />
+    <Content Include="Views\UHome\Index.cshtml" />
+    <Content Include="Views\UHome\_PartialUserInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

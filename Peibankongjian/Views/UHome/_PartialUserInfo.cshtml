@@ -1,0 +1,36 @@
+﻿@{
+    Layout = null;
+}
+@if (Session["renname"] != "" && Session["renname"] != null)
+{
+    <div class="row text-center">
+        <div class="col-md-12">
+            <img src="/Resource/img/zz.jpg" alt="..." class="img-thumbnail img-circle" style="width:50%">
+            <h3>赵征</h3>
+            <span style="height:50px;line-height:30px">会写代码的心理咨询师</span>
+            <table class="table">
+                <tr>
+                    <td><h4>79</h4><span>打卡</span></td>
+                    <td style="border-right: 2px solid #eeeeee; border-left: 2px solid #eeeeee"><h4>79</h4><span>粉丝</span></td>
+                    <td><h4>79</h4><span>关注</span></td>
+                </tr>
+            </table>
+            <div class="uc-jieshao">
+                会写代码的心理咨询师会写代码的心理咨询师会写代码的心理咨询师会写代码的心理咨询师会写代码的心理咨询师会写代码的心理咨询师会写代码的心理咨询师
+            </div>
+            <div class="uc-menu">
+                <button class="btn btn-block btn-lg btn-info">我参加的读书营</button>
+                <button class="btn btn-block btn-lg btn-warning">我的读书成长故事</button>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row text-center">
+        <div class="col-md-12" style="margin-bottom:30px;">
+            <img src="/Resource/img/avatarno.jpg" alt="..." class="img-thumbnail img-circle" style="width:50%">
+        </div>
+        <a class="btn btn-success" href="@Url.Action("Login","RenAccount")">&nbsp;&nbsp;&nbsp;点击登录&nbsp;&nbsp;&nbsp;</a>
+    </div>
+}

@@ -1,0 +1,68 @@
+﻿@model StaticPagedList<SkyEntity.Product>
+@using PagedList;
+@using PagedList.Mvc;
+@using SkyService;
+
+
+<div class="container" style="margin-top:20px">
+
+    <div class="row">
+        <div class="col-md-8">
+            <h3>陪伴空间</h3>
+            <div class="row">
+
+                @foreach (var item in Model)
+                {
+                    <div class="col-xs-3" onclick="ToUrl(@item.Id,@item.ProductBook)">
+
+                        <img src="@PeibanService.GetBookById(item.ProductBook).Cover" alt="..." class="img-thumbnail" style="width:100%">
+                        <h4>@item.Title</h4>
+                        <span>陪伴项目：@PeibanService.GetBookById(item.ProductBook).Title <br>陪伴师： @PeibanService.GetRenById(item.Peibanshi).RenNickName</span>
+                    </div>
+
+                }
+            </div>
+            <div class="box-footer clearfix  text-center">
+                <ul class="pagination pagination-sm no-margin">
+                    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { type = Request.QueryString["type"], page = page }),
+                            new PagedListRenderOptions
+                            {
+                                LinkToPreviousPageFormat = "上一页",
+                                LinkToNextPageFormat = "下一页",
+                                DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded,
+                                DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded,
+                                DisplayLinkToPreviousPage = PagedListDisplayMode.IfNeeded,
+                                DisplayLinkToNextPage = PagedListDisplayMode.IfNeeded,
+                                MaximumPageNumbersToDisplay = 5,
+                                LinkToFirstPageFormat = "首页",
+                                LinkToLastPageFormat = "最后一页",
+                                PageCountAndCurrentLocationFormat = "第 {0}页 共 {1}页"
+                            })
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4">
+
+            @Html.Action("UserInfo", "UHome")
+
+        </div>
+    </div>
+
+</div>
+
+
+@section BottomScripts {
+    <script type="text/javascript">
+        $('.shudan').on("mouseover", function () {
+            $(this).addClass("shudan-active");
+            // alert("asdf");
+        }).on("mouseout", function () {
+            $(this).removeClass("shudan-active");
+
+        });
+        function ToUrl(pid,bid) {
+            var tourl = "/Home/RenwuList?bid=" + bid+"&pid="+pid;
+            window.location.href = tourl;
+        }
+    </script>
+}

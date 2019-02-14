@@ -33,59 +33,8 @@ namespace Peibankongjian.Controllers
             return View();
         }
 
-        public ActionResult Login()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Login(FormCollection fc)
-        {
-            System.Web.HttpContext.Current.Session["uname"] = "";
-            string username = fc["UserName"];
-            string password = CommonTools.ToMd5(fc["Password"].ToString());
-
-            var rens = unitOfwork.rensRepository.Get(filter: u => u.RenPhone == username && u.RenPassword == password);
-
-           
-            if (rens.Count() > 0)
-            {
-                if (rens.First().Status)
-                {
-                    HttpCookie cookie = new HttpCookie("uname");
-                    cookie.Value = username;
-                    System.Web.HttpContext.Current.Response.Cookies.Add(cookie);
-
-                    HttpCookie cookieid = new HttpCookie("uid");
-                    cookieid.Value = rens.First().Id.ToString();
-                    System.Web.HttpContext.Current.Response.Cookies.Add(cookieid);
-
-                    System.Web.HttpContext.Current.Session["uid"] = rens.First().Id.ToString();
-                    System.Web.HttpContext.Current.Session["uname"] = username;
-
-                    return RedirectToAction("Index", "Home");
-
-                }
-
-                else
-                {
-                    ViewBag.msg = "此已经被禁用，不允许登陆";
-                    return View();
-
-                }
-
-            }
-            else
-            {
-                ViewBag.msg = "用户名或密码错误";
-                return View();
-
-            }
-
-
-        }
+      
+      
 
         public ActionResult Shudan(int? page)
         {
