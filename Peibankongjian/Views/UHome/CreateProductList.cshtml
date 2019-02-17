@@ -1,7 +1,6 @@
-﻿@model StaticPagedList<SkyEntity.Renwu>
+﻿@model StaticPagedList<SkyEntity.Book>
 @using PagedList;
 @using PagedList.Mvc;
-@using SkyService;
 
 
 <div class="container peiban-container">
@@ -10,19 +9,21 @@
         <div class="col-md-8">
             <h3>陪读书单</h3>
             <div class="row">
-                <ol>
 
-                    @foreach (var item in Model)
-                    {
-                        <li>@item.Title</li>
-                      
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-3 text-center" onclick="ToUrl(@item.Id)">
 
-                    }
-                </ol>
+                        <img src="@item.Cover" alt="..." class="img-thumbnail" style="width:100%">
+                        <h4>@item.Title</h4>
+                        <a class="btn btn-info" href="@Url.Action("CreateProduct","UHome",new{pid=item.Id})">创造陪伴空间</a>
+                    </div>
+
+                }
             </div>
             <div class="box-footer clearfix  text-center">
                 <ul class="pagination pagination-sm no-margin">
-                    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { type = Request.QueryString["type"], page = page }),
+                    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page = page }),
                             new PagedListRenderOptions
                             {
                                 LinkToPreviousPageFormat = "上一页",
@@ -40,15 +41,9 @@
             </div>
         </div>
         <div class="col-md-4">
-            <h3>创始人说</h3>
-            <div class="row">
-                <div class="col-md-12">
-                    <img src="/Resource/img/shu.png" alt="..." class="img-thumbnail" style="width:100%">
-                </div>
-            </div>
+            @Html.Action("UserInfo", "UHome")
         </div>
     </div>
-
 </div>
 
 

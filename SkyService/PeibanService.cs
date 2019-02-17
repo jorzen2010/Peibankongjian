@@ -28,7 +28,7 @@ namespace SkyService
         {
             UnitOfWork unitOfWork = new UnitOfWork();
             bool status = false;
-            var orders = unitOfWork.chanpinOrdersRepository.Get(filter:u=>u.VipUser==rid&&u.ProductType==1&&u.BuyChanpin==1&&u.Status==true);
+            var orders = unitOfWork.chanpinOrdersRepository.Get(filter:u=>u.VipUser==rid&&u.ProductType==1&&u.BuyChanpin==2&&u.Status==true);
             if (orders.Count() > 0)
             {
                 foreach (ChanpinOrder o in orders)

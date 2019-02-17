@@ -1,0 +1,48 @@
+﻿@model SkyEntity.Product
+@using SkyEntity;
+@using SkyService
+@{
+    Book book = ViewData["probook"] as Book;
+    List<Renwu> renwus = ViewData["proRenwus"] as List<Renwu>;
+}
+
+
+
+<div class="container peiban-container">
+
+    <div class="row">
+        <div class="col-md-8">
+            <h3>@Model.Title</h3>
+            <h5 style="height: 25px;line-height: 25px;">
+                陪伴项目：@PeibanService.GetBookById(Model.ProductBook).Title &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                空间陪伴师：@PeibanService.GetRenById(Model.Peibanshi).RenNickName
+            </h5>
+            <div class="well">
+                @Html.Raw(book.Content)
+            </div>
+
+            
+            <ul>
+                @foreach (Renwu renwu in renwus)
+                {
+                    <li>@renwu.Title <button class="btn btn-default pull-right"><i class="fa fa-lock"></i> 解锁</button>
+                        <span>@Html.Raw(renwu.Content)</span>
+               
+                </li>
+                }
+            </ul>
+
+        </div>
+        <div class="col-md-4">
+
+            @Html.Action("UserInfo", "UHome")
+
+        </div>
+    </div>
+
+</div>
+
+
+@section BottomScripts {
+
+}

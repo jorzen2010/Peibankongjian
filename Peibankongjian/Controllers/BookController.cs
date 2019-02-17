@@ -52,7 +52,8 @@ namespace Peibankongjian.Controllers
                 unitOfWork.Save();
                 return RedirectToAction("Index", "Book");
             }
-
+            CategoryService cate = new CategoryService();
+            ViewData["Categorylist"] = cate.GetCategorySelectList(2);
             return View(book);
         }
 

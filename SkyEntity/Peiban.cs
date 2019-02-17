@@ -84,10 +84,10 @@ namespace SkyEntity
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "商品名称")]
+        [Display(Name = "陪伴空间名称")]
         public string Title { get; set; }
 
-        [Display(Name = "商品源")]
+        [Display(Name = "陪伴项目")]
         public int ProductBook { get; set; }
 
         [Display(Name = "陪伴师")]
@@ -219,7 +219,7 @@ namespace SkyEntity
         [Display(Name = "订单备注")]
         public string Beizhu { get; set; }
 
-        [Display(Name = "注册时间")]
+        [Display(Name = "订单创建时间")]
         public DateTime CreateTime { get; set; }
 
         [Display(Name = "支付审核时间")]
@@ -228,5 +228,19 @@ namespace SkyEntity
         public bool Status { get; set; }
         [Display(Name = "邀请人支付状态")]
         public bool PayStatus { get; set; }
+    }
+
+    public class RenKongList
+    {
+        [Key]
+        public int Id { get; set; }
+
+        [Display(Name = "申请人")]
+        public int Shenqingren { get; set; }
+        [Display(Name = "陪伴空间")]
+        public int Kongjian { get; set; }
+
+        [Display(Name = "状态")]
+        public bool Status { get; set; }
     }
 }

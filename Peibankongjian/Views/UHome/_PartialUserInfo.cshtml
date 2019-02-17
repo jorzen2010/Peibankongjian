@@ -19,8 +19,14 @@
                 会写代码的心理咨询师会写代码的心理咨询师会写代码的心理咨询师会写代码的心理咨询师会写代码的心理咨询师会写代码的心理咨询师会写代码的心理咨询师
             </div>
             <div class="uc-menu">
-                <button class="btn btn-block btn-lg btn-info">我参加的读书营</button>
-                <button class="btn btn-block btn-lg btn-warning">我的读书成长故事</button>
+                <button class="btn btn-block btn-lg btn-warning">打卡成长记录</button>
+                <button class="btn btn-block btn-lg btn-info">我的陪伴空间</button>
+                
+                
+                @if (Session["Vip"].ToString() == "true")
+                {
+                    <a class="btn btn-block btn-lg btn-warning" href="@Url.Action("CreateProductList","UHome")">创建陪伴空间</a>
+                }
             </div>
         </div>
     </div>

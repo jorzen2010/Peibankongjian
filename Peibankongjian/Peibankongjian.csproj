@@ -2112,8 +2112,10 @@
     <Content Include="plugins\下拉刷新\pullToRefresh.css" />
     <Content Include="plugins\下拉刷新\pullToRefresh.js" />
     <Content Include="plugins\下拉刷新\www.jq22.com.txt" />
+    <Content Include="Resource\css\bootstrap-grid.css" />
     <Content Include="Resource\css\PbspaceWap.css" />
     <Content Include="Resource\css\SkyWap.css" />
+    <Content Include="Resource\css\Peiban.css" />
     <Content Include="Resource\css\SkyWeb.css" />
     <Content Include="Resource\img\1.jpg" />
     <Content Include="Resource\img\2.jpg" />
@@ -2128,6 +2130,7 @@
     <Content Include="Resource\img\shu.png" />
     <Content Include="Resource\img\avatar.jpg" />
     <Content Include="Resource\img\zz.jpg" />
+    <Content Include="Resource\js\Peiban.js" />
     <Content Include="Resource\js\Article.js" />
     <Content Include="Resource\js\Category.js" />
     <Content Include="Resource\js\Customer.js" />
@@ -3104,9 +3107,12 @@
     <Content Include="Views\Ucenter\ShengjiPeibanshi.cshtml" />
     <Content Include="Views\ChanpinOrder\Index.cshtml" />
     <Content Include="Views\RenAccount\Login.cshtml" />
-    <Content Include="Views\UHome\CreateProduct.cshtml" />
+    <Content Include="Views\UHome\CreateProductList.cshtml" />
     <Content Include="Views\UHome\Index.cshtml" />
     <Content Include="Views\UHome\_PartialUserInfo.cshtml" />
+    <Content Include="Views\UHome\CreateProduct.cshtml" />
+    <Content Include="Views\UHome\RenwuList.cshtml" />
+    <Content Include="Views\UHome\ShenqingPeiban.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
