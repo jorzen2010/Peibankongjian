@@ -36,8 +36,18 @@
                                 </p>
 
                                 <ul class="social-links">
-                                    <li><button class="btn btn-success" onclick="JinruKongjian('@item.Id','@Session["renid"].ToString()','/UHome/EntrySpace/','/UHome/RenwuList?id=@item.Id')"><i class="fa fa-qq"></i> 申请进入陪伴空间</button></li>
-                                </ul>
+                                    @if (PeibanService.GetStatusBySpaceRen(int.Parse(Session["renid"].ToString()), item.Id).MessageStatus == "false")
+                                    {
+                                        <li><button class="btn btn-success" onclick="JinruKongjian('@item.Id','@Session["renid"].ToString()','/UHome/EntrySpace/','/UHome/RenwuList?id=@item.Id')"><i class="fa fa-qq"></i> 申请进入</button></li>
+                               
+                                    }
+                                    else
+                                    {
+   <li><a class="btn btn-success"  href="@Url.Action("RenwuList","UHome",new{id=item.Id})"><i class="fa fa-qq"></i> 立即进入</a></li>
+                               
+                                    }
+                                   
+                                 </ul>
                             </div>
                         </div>
                     </div>

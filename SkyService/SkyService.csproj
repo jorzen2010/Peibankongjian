@@ -48,6 +48,10 @@
     <Compile Include="WechatReplyService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SkyCommon\SkyCommon.csproj">
+      <Project>{f2175da4-e145-4d76-a1f1-4fbf5bf900f5}</Project>
+      <Name>SkyCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SkyDal\SkyDal.csproj">
       <Project>{fff4400d-cf5a-4f28-9734-e740f4283df4}</Project>
       <Name>SkyDal</Name>

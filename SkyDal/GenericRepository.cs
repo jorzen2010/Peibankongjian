@@ -88,12 +88,15 @@ namespace SkyDal
         {
             return dbSet.SqlQuery(query, parameters).ToList();
         }
+
+
         //使用原生的sql语句更新一个字段
         public virtual void UpdateWithRawSql(string sql)
         {
             context.Database.ExecuteSqlCommand(sql);
         
         }
+
 
     }
 }

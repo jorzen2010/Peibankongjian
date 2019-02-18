@@ -21,22 +21,27 @@
             <div class="well">
                 @Html.Raw(book.Content)
             </div>
-            <ul style="list-style:none;padding:0px;margin:0px">
+            <table class="table table-hover">
+                
                 @foreach (Renwu renwu in renwus)
                 {
-                    <li>
-                        <h4 style="vertical-align:middle">
-                            @renwu.Title
-                        <small><button class="btn btn-default pull-right"><i class="fa fa-lock"></i> 解锁</button></small>
-                    </h4> 
-             
-                        <span>
-                            @CommonTools.ReplaceHtmlTag(renwu.Content, 90)
-                        </span>
-               
-                </li>
+                    <tr>
+                        <td>@renwu.Id 、 @renwu.Title</td>
+                        <td><button class="btn btn-danger pull-right btn-sm"><i class="fa fa-lock"></i> 解锁</button></td>
+                    </tr>
+
+                    @*<h4 style="vertical-align:middle">
+                        @renwu.Title
+                    <small><button class="btn btn-danger pull-right"><i class="fa fa-lock"></i> 解锁</button></small>
+                </h4>
+
+                    <span>
+                        @CommonTools.ReplaceHtmlTag(renwu.Content, 90)
+                    </span>*@
+
+
                 }
-            </ul>
+            </table>
 
         </div>
         <div class="col-md-4">
