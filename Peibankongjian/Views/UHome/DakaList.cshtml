@@ -1,0 +1,57 @@
+﻿@model StaticPagedList<SkyEntity.RenwuDaka>
+@using PagedList;
+@using PagedList.Mvc;
+@using SkyService;
+@using SkyCommon;
+
+<div class="container peiban-container">
+
+    <div class="row">
+        <div class="col-md-8">
+            <h3>打卡记录</h3>
+            <div class="row">
+                @Html.AntiForgeryToken()
+                @foreach (var item in Model)
+                {
+
+                    <h3><a href="@Url.Action("DakaContent","UHome",new{id=item.Id})">@item.DakaTitle</a></h3>
+                    <span>@item.DakaContent</span>
+                    
+                }
+            </div>
+            <div class="box-footer clearfix  text-center">
+                <ul class="pagination pagination-sm no-margin">
+                    @Html.PagedListPager((IPagedList)Model, page => Url.Action("DakaList", new {page = page }),
+                            new PagedListRenderOptions
+                            {
+                                LinkToPreviousPageFormat = "上一页",
+                                LinkToNextPageFormat = "下一页",
+                                DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded,
+                                DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded,
+                                DisplayLinkToPreviousPage = PagedListDisplayMode.IfNeeded,
+                                DisplayLinkToNextPage = PagedListDisplayMode.IfNeeded,
+                                MaximumPageNumbersToDisplay = 5,
+                                LinkToFirstPageFormat = "首页",
+                                LinkToLastPageFormat = "最后一页",
+                                PageCountAndCurrentLocationFormat = "第 {0}页 共 {1}页"
+                            })
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-4">
+
+            @Html.Action("UserInfo", "UHome")
+
+        </div>
+    </div>
+
+</div>
+
+
+@section BottomScripts {
+
+    <script type="text/javascript">
+
+
+    </script>
+}

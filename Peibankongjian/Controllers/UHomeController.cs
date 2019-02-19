@@ -30,6 +30,22 @@ namespace Peibankongjian.Controllers
             return View(PageList);
         }
 
+        public ActionResult DakaList(int? page)
+        {
+            Pager pager = new Pager();
+            pager.table = "RenwuDaka";
+            pager.strwhere = "RenwuZhixingzhe="+int.Parse(Session["renid"].ToString());
+            pager.PageSize = 12;
+            pager.PageNo = page ?? 1;
+            pager.FieldKey = "Id";
+            pager.FiledOrder = "Id desc";
+
+            pager = CommonDal.GetPager(pager);
+            IList<RenwuDaka> dataList = DataConvertHelper<RenwuDaka>.ConvertToModel(pager.EntityDataTable);
+            var PageList = new StaticPagedList<RenwuDaka>(dataList, pager.PageNo, pager.PageSize, pager.Amount);
+            return View(PageList);
+        }
+
         public ActionResult CreateProductList(int? page)
         {
             Pager pager = new Pager();
@@ -150,6 +166,14 @@ namespace Peibankongjian.Controllers
                  unitOfWork.Save();
                  return RedirectToAction("Index", "UHome");
              }
+             return View(daka);
+         }
+
+         public ActionResult DakaContent(int id)
+         {
+             RenwuDaka daka = unitOfWork.renwuDakasRepository.GetByID(id);
+
+
              return View(daka);
          }
 

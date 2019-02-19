@@ -183,12 +183,30 @@ namespace SkyDal
             {
                 new SysUser{SysUserName="Tom",SysPassword=CommonTools.ToMd5("111111"),SysEmail="Tom@163.com",SysStatus=true},
                 new SysUser{SysUserName="Jerry",SysPassword=CommonTools.ToMd5("111111"),SysEmail="Tom@163.com",SysStatus=true},
-                new SysUser{SysUserName="Jeem",SysPassword=CommonTools.ToMd5("1111111"),SysEmail="Tom@163.com",SysStatus=true}
+                new SysUser{SysUserName="Jeem",SysPassword=CommonTools.ToMd5("111111"),SysEmail="Tom@163.com",SysStatus=true}
             };
             sysUsers.ForEach(s => context.SysUsers.Add(s));
             context.SaveChanges();
 
             #endregion 初始化配置
+
+            #region 用户信息
+
+            context.Rens.Add(new Ren
+            {
+                RenPhone = "17645134197",
+                RenPassword = CommonTools.ToMd5("111111"),
+                RenNickName = "赵征",
+                RenName = "zhaozheng",
+                Yaoqingren = 1234,
+                Status = true,
+                MsgStatus = true,
+                CreateTime = System.DateTime.Now,
+            });
+
+            context.SaveChanges();
+
+            #endregion 用户初始化
 
 
         }

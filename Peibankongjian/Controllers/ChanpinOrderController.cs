@@ -81,6 +81,30 @@ namespace Peibankongjian.Controllers
             return View(chanpinOrder);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult UpdateStatus(int? id, bool status)
+        {
+            Message msg = new Message();
+            if (id == null)
+            {
+                msg.MessageStatus = "false";
+                msg.MessageInfo = "找不到ID";
+            }
+            ChanpinOrder _order = unitOfWork.chanpinOrdersRepository.GetByID(id);
+            _order.Status = !status;
+            _order.PayTime = DateTime.Now;
+            if (ModelState.IsValid)
+            {
+
+                unitOfWork.chanpinOrdersRepository.Update(_order);
+                unitOfWork.Save();
+                msg.MessageStatus = "true";
+                msg.MessageInfo = "已经更改为" + _order.Status.ToString();
+            }
+            return Json(msg, JsonRequestBehavior.AllowGet);
+        }
+
         //彻底删除
         [HttpPost]
         [ValidateAntiForgeryToken]

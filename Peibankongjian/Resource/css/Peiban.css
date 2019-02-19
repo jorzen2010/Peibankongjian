@@ -11,6 +11,14 @@
     cursor: pointer;
 }
 
+.uc-jieshao {
+    text-align: left;
+    margin: 10px 0px;
+    line-height: 30px;
+}
+.uc-menu a{
+    margin: 10px 0px;
+}
 .probox{position:relative;perspective:1000px}
 .probox .probox-img{transform:rotateY(0);transition:all .5s ease-in-out 0s}
 .probox:hover .probox-img{transform:rotateY(-90deg)}

@@ -1,0 +1,27 @@
+﻿@model SkyEntity.RenwuDaka
+@using SkyService;
+<div class="container peiban-container">
+
+    <div class="row">
+        <div class="col-md-8">
+            <h3>@Model.DakaTitle</h3>
+            <span>陪伴师：@PeibanService.GetRenById(Model.Peibanshi).RenNickName 发布时间：@Model.DakaTime 最后编辑时间：@Model.LastEditTime</span>
+            <hr/>
+            <article>
+                @Model.DakaContent
+            </article>
+
+        </div>
+        <div class="col-md-4">
+
+            @Html.Action("UserInfo", "UHome")
+
+        </div>
+    </div>
+
+</div>
+
+
+@section BottomScripts {
+
+}

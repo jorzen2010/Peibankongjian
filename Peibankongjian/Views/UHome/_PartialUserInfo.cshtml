@@ -7,7 +7,7 @@
         <div class="col-md-12">
             <img src="/Resource/img/zz.jpg" alt="..." class="img-thumbnail img-circle" style="width:50%">
             <h3>赵征</h3>
-            <span style="height:50px;line-height:30px">会写代码的心理咨询师</span>
+            <span>会写代码的心理咨询师</span>
             <table class="table">
                 <tr>
                     <td><h4>79</h4><span>打卡</span></td>
@@ -19,13 +19,13 @@
                 会写代码的心理咨询师会写代码的心理咨询师会写代码的心理咨询师会写代码的心理咨询师会写代码的心理咨询师会写代码的心理咨询师会写代码的心理咨询师
             </div>
             <div class="uc-menu">
-                <button class="btn btn-block btn-lg btn-warning">打卡成长记录</button>
-                <button class="btn btn-block btn-lg btn-info">我的陪伴空间</button>
-                
+               
+                <a class="btn btn-block btn-lg btn-info" href="@Url.Action("Index","UHome")">我的陪伴空间</a>
+                <a class="btn btn-block btn-lg btn-warning" href="@Url.Action("DakaList","UHome")">打卡成长记录</a>
                 
                 @if (Session["Vip"].ToString() == "true")
                 {
-                    <a class="btn btn-block btn-lg btn-warning" href="@Url.Action("CreateProductList","UHome")">创建陪伴空间</a>
+                    <a class="btn btn-block btn-lg btn-danger" href="@Url.Action("CreateProductList","UHome")">创建陪伴空间</a>
                 }
             </div>
         </div>

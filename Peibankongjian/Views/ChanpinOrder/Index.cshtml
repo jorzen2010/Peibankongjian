@@ -35,6 +35,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body table-responsive no-padding">
+                        @Html.AntiForgeryToken()
                         <table class="table table-bordered table-hover">
                             <thead>
                                 <tr>
@@ -98,14 +99,14 @@
                                             }
                                             @if (item.ProductType == 2)
                                             {
-                                                    @Html.Raw("课程产品名称")
+                                                @Html.Raw("课程产品名称")
                                             }
 
                                         </td>
                                         <td>
                                             @if (PeibanService.GetRenById(item.Yaoqingren) == null)
                                             { 
-                                                 @Html.Raw("邀请人编号有误")
+                                                @Html.Raw("邀请人编号有误")
                                             }
                                             else
                                             {
@@ -115,7 +116,7 @@
 
                                        
                                         <th class="col-sm-1">
-                                            <button class="btn btn-xs btn-@(item.Status ? "success" : "danger")">@(item.Status ? "已支付" : "未支付") - @item.CreateTime</button>
+                                            <button class="btn btn-xs btn-@(item.Status ? "success" : "danger")" onclick="UpdateStatus(@item.Id,@(item.Status ? "true" : "false"),'/ChanpinOrder/UpdateStatus/')">@(item.Status ? "已支付" : "未支付") - @item.CreateTime</button>
                                         </th>
                                         
                                         <th class="col-sm-1">
@@ -162,5 +163,62 @@
     <script type="text/javascript" src="/plugins/bootbox.min.js"></script>
     <script type="text/javascript" src="/plugins/bootstrap-switch/js/bootstrap-switch.js"></script>
 
-    
+    <script type="text/javascript">
+
+    function UpdateStatus(id, status, url) {
+        bootbox.confirm({
+            buttons: {
+                confirm: {
+                    label: '审核通过',
+                    className: 'btn-danger'
+                },
+                cancel: {
+                    label: '取消',
+                    className: 'btn-default'
+                }
+            },
+            message: '你确认审核本订单吗？',
+            callback: function (result) {
+                if (result) {
+                    var token = $('[name=__RequestVerificationToken]').val();
+                    var headers = {};
+                    //防伪标记放入headers
+                    //也可以将防伪标记放入data
+                    headers["__RequestVerificationToken"] = token;
+                    $.ajax({
+                        url: url,
+                        headers: headers,
+                        type: 'post',
+                        timeout: 3000,
+                        data: {
+                            id: id,
+                            __RequestVerificationToken: token,
+                            status: status,
+                        },
+                        success: function (msg) {
+                            if (msg.MessageStatus == 'true') {
+                                 window.location.reload();
+                            }
+                            else {
+                                alertconfirm('审核失败');
+                            }
+                        },
+                        error: function (e) {
+                            alertconfirm('出现意外错误，审核失败！');
+                        }
+                    });
+                }
+                else {
+                    // alertconfirm('您已经取消审核了');
+                }
+            },
+            title: "审核确认提示框",
+        });
+    }
+
+
+
+    </script>
 }
+
+

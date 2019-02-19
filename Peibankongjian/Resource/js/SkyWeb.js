@@ -177,8 +177,9 @@ function alertconfirmToUrl(message,url) {
         message: message,
         callback: function (result) {
             if (result) {
-                alert("点击了确定"+url);
-             //   window.location.href=url;
+                //  alert("点击了确定"+url);
+                window.location(url);
+              // window.location.href=url;
             }
         },
         title: "信息提示框",

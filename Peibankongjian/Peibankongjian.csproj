@@ -3115,6 +3115,8 @@
     <Content Include="Views\UHome\RenwuList.cshtml" />
     <Content Include="Views\UHome\ShenqingPeiban.cshtml" />
     <Content Include="Views\UHome\Daka.cshtml" />
+    <Content Include="Views\UHome\DakaList.cshtml" />
+    <Content Include="Views\UHome\DakaContent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
