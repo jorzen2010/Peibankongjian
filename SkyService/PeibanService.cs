@@ -63,7 +63,7 @@ namespace SkyService
                     if (!rk.Status)
                     {
                         msg.MessageStatus = "true";
-                        msg.MessageInfo = "暂时无法进入空间";
+                        msg.MessageInfo = "";
                         return msg;
                     }
                 }
@@ -77,12 +77,12 @@ namespace SkyService
             }
         }
 
-        public static Message GetStatusByPreDaka(int id)
+        public static Message GetStatusByPreDaka(int id,int bid)
         {
             Message msg = new Message();
             UnitOfWork unitOfWork = new UnitOfWork();
             bool status = false;
-            string sql = "select top 1 * from Renwu where Id<"+id+" order by Id DESC";
+            string sql = "select top 1 * from Renwu where Id<" + id + " and  RenwuBook="+bid+" order by Id DESC";
             var renwus = unitOfWork.renwusRepository.GetWithRawSql(sql);
             if (renwus.Count() > 0)
             {
@@ -93,12 +93,17 @@ namespace SkyService
                     msg.MessageStatus = "true";
                     msg.MessageInfo = "打卡";
                 }
+                else
+                {
+                    msg.MessageStatus = "false";
+                    msg.MessageInfo = "解锁";
+                }
                 return msg;
             }
             else
             {
-                msg.MessageStatus = "false";
-                msg.MessageInfo = "解锁";
+                msg.MessageStatus = "true";
+                msg.MessageInfo = "解锁";          
                 return msg;
             }
         }

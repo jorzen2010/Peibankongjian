@@ -19,7 +19,9 @@
                 空间陪伴师：@PeibanService.GetRenById(Model.Peibanshi).RenNickName
             </h5>
             <div class="well">
-                @Html.Raw(book.Content)
+                <article>
+                    @Html.Raw(book.Content)
+                </article>
             </div>
             <table class="table table-hover">
                 
@@ -27,7 +29,16 @@
                 {
                     <tr>
                         <td>@renwu.Id 、 @renwu.Title</td>
-                        <td><button class="btn btn-danger pull-right btn-sm"><i class="fa fa-lock"></i> 解锁</button></td>
+
+                        @if (PeibanService.GetStatusByPreDaka(renwu.Id,Model.ProductBook).MessageStatus == "true")
+                        {
+                            <td><a class="btn btn-danger pull-right btn-sm" href="@Url.Action("Daka", "UHome", new {renwu=renwu.Id,book=renwu.RenwuBook,peibanshi=Model.Peibanshi,kongjian=Model.Id,dakaren=Session["renid"].ToString()})"><i class="fa fa-edit"></i> 打卡</a></td>
+                        }
+                        else
+                        { 
+                            <td><button class="btn btn-default pull-right btn-sm"><i class="fa fa-lock"></i> 解锁</button></td>                       
+                        }
+                        
                     </tr>
 
                     @*<h4 style="vertical-align:middle">
@@ -55,5 +66,16 @@
 
 
 @section BottomScripts {
+    <script type="text/javascript" src="~/plugins/readmore/readmore.js"></script>
+    <script type="text/javascript">
+
+        $('article').readmore({
+            speed: 75,
+            moreLink: '<br><a href="#">展开</a>',
+            lessLink: '<br><a href="#">收起</a>',
+        });
+
+
+    </script>
 
 }

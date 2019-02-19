@@ -1754,6 +1754,7 @@
     <Content Include="plugins\pace\pace.js" />
     <Content Include="plugins\pace\pace.min.css" />
     <Content Include="plugins\pace\pace.min.js" />
+    <Content Include="plugins\readmore\readmore.js" />
     <Content Include="plugins\scale\css\labelauty.css" />
     <Content Include="plugins\scale\demo.htm" />
     <Content Include="plugins\scale\images\input-checked.png" />
@@ -2107,11 +2108,11 @@
     <Content Include="plugins\ueditor\ueditor.config.js" />
     <Content Include="plugins\ueditor\ueditor.parse.js" />
     <Content Include="plugins\ueditor\ueditor.parse.min.js" />
-    <Content Include="plugins\下拉刷新\index.html" />
-    <Content Include="plugins\下拉刷新\iscroll.js" />
-    <Content Include="plugins\下拉刷新\pullToRefresh.css" />
-    <Content Include="plugins\下拉刷新\pullToRefresh.js" />
-    <Content Include="plugins\下拉刷新\www.jq22.com.txt" />
+    <Content Include="plugins\pullToRefresh\index.html" />
+    <Content Include="plugins\pullToRefresh\iscroll.js" />
+    <Content Include="plugins\pullToRefresh\pullToRefresh.css" />
+    <Content Include="plugins\pullToRefresh\pullToRefresh.js" />
+    <Content Include="plugins\pullToRefresh\www.jq22.com.txt" />
     <Content Include="Resource\css\bootstrap-grid.css" />
     <Content Include="Resource\css\PbspaceWap.css" />
     <Content Include="Resource\css\SkyWap.css" />
@@ -2220,7 +2221,7 @@
     <Content Include="plugins\ueditor\third-party\video-js\font\vjs.svg" />
     <Content Include="plugins\ueditor\third-party\video-js\font\vjs.ttf" />
     <Content Include="plugins\ueditor\third-party\video-js\font\vjs.woff" />
-    <Content Include="plugins\下拉刷新\jquery插件库.url" />
+    <Content Include="plugins\pullToRefresh\jquery插件库.url" />
     <Content Include="AdminLTE\bootstrap\css\bootstrap-theme.css.map" />
     <Content Include="AdminLTE\bootstrap\css\bootstrap-theme.min.css.map" />
     <Content Include="AdminLTE\bootstrap\css\bootstrap.css.map" />
@@ -3113,6 +3114,7 @@
     <Content Include="Views\UHome\CreateProduct.cshtml" />
     <Content Include="Views\UHome\RenwuList.cshtml" />
     <Content Include="Views\UHome\ShenqingPeiban.cshtml" />
+    <Content Include="Views\UHome\Daka.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

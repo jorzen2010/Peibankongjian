@@ -107,7 +107,7 @@ namespace Peibankongjian.Controllers
             
             return View();
         }
-         [HttpPost]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
 
@@ -125,6 +125,33 @@ namespace Peibankongjian.Controllers
             }
             return View(chanpinOrder);
         }
+
+         public ActionResult Daka(int renwu,int book,int peibanshi ,int kongjian,int dakaren)
+         {
+             ViewBag.peibanshi = peibanshi;
+             ViewBag.renwu = renwu;
+             ViewBag.book = book;
+             ViewBag.dakaren = dakaren;
+             ViewBag.kongjian = kongjian;
+
+             return View();
+         }
+
+         [HttpPost]
+         [ValidateAntiForgeryToken]
+         [ValidateInput(false)]
+
+         public ActionResult Daka(RenwuDaka daka)
+         {
+             if (ModelState.IsValid)
+             {
+
+                 unitOfWork.renwuDakasRepository.Insert(daka);
+                 unitOfWork.Save();
+                 return RedirectToAction("Index", "UHome");
+             }
+             return View(daka);
+         }
 
     }
 }

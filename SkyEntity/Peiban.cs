@@ -131,8 +131,12 @@ namespace SkyEntity
         [Display(Name = "打卡内容")]
         public string DakaContent { get; set; }
 
+        [Display(Name = "打卡标题")]
+        public string DakaTitle { get; set; }
+
         [Display(Name = "打卡时间")]
         public DateTime DakaTime { get; set; }
+
 
         [Display(Name = "最后修改时间")]
         public DateTime LastEditTime { get; set; }

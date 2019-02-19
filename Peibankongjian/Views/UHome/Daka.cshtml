@@ -1,0 +1,63 @@
+﻿@model SkyEntity.RenwuDaka
+@using SkyService;
+@using SkyEntity;
+
+<div class="container peiban-container">
+
+    <div class="row">
+        <div class="col-md-8">
+            <h3>申请成为陪伴师</h3>
+            @using (Html.BeginForm("Daka", "UHome", FormMethod.Post, new { @class = "form-horizontal", @name = "CreateProduct", @id = "CreateProduct" }))
+            {
+
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DakaTitle, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.DakaTitle, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DakaTitle)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2">打卡内容</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.DakaContent, new { @class = "form-control", @rows = "5" })
+                        @Html.ValidationMessageFor(model => model.DakaContent)
+                    </div>
+                </div>
+
+                @Html.HiddenFor(model => model.ProductBook, new { @Value = ViewBag.book })
+                @Html.HiddenFor(model => model.RenwuName, new { @Value = ViewBag.renwu })
+                @Html.HiddenFor(model => model.ProductName, new { @Value = ViewBag.kongjian })
+                @Html.HiddenFor(model => model.Peibanshi, new { @Value = ViewBag.peibanshi })
+                @Html.HiddenFor(model => model.RenwuZhixingzhe, new { @Value = int.Parse(Session["renid"].ToString()) })
+                @Html.HiddenFor(model => model.Status, new { @Value = true })
+
+                @Html.HiddenFor(model => model.DakaTime, new { @Value = DateTime.Now })
+                @Html.HiddenFor(model => model.LastEditTime, new { @Value = DateTime.Now })
+
+                <div class="form-group">
+
+                    <div class="col-md-8 col-md-offset-2">
+
+                        <button type="submit" class="btn btn-primary btn-lg">&nbsp;&nbsp;&nbsp;&nbsp;立即申请&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                    </div>
+                </div>
+
+            }
+
+        </div>
+        <div class="col-md-4">
+
+            @Html.Action("UserInfo", "UHome")
+
+        </div>
+    </div>
+
+</div>
+
+
+@section BottomScripts {
+
+}
