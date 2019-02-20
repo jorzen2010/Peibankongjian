@@ -16,6 +16,5 @@ E:\2019\Peibankongjian\SkyCommon\bin\Debug\SkyCommon.dll
 E:\2019\Peibankongjian\SkyCommon\bin\Debug\SkyCommon.pdb
 E:\2019\Peibankongjian\SkyCommon\bin\Debug\ChnCharInfo.dll
 E:\2019\Peibankongjian\SkyCommon\bin\Debug\Microsoft.ApplicationBlocks.Data.dll
-E:\2019\Peibankongjian\SkyCommon\obj\Debug\SkyCommon.csprojResolveAssemblyReference.cache
 E:\2019\Peibankongjian\SkyCommon\obj\Debug\SkyCommon.dll
 E:\2019\Peibankongjian\SkyCommon\obj\Debug\SkyCommon.pdb

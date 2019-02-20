@@ -88,13 +88,15 @@ namespace Peibankongjian.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public JsonResult EntrySpace(int rid,int kid,bool status)
+        public JsonResult EntrySpace(int rid,int kid,int bid,int pid,bool status)
         {
             Message msg = new Message();
 
             RenKongList rklist=new RenKongList();
             rklist.Kongjian = kid;
             rklist.Shenqingren = rid;
+            rklist.Peibanshi = pid;
+            rklist.ProductBook = bid;
             rklist.Status = status;
 
 
@@ -176,6 +178,49 @@ namespace Peibankongjian.Controllers
 
              return View(daka);
          }
+
+         public ActionResult PinglunList(int bid)
+         {
+             var Pingluns = unitOfWork._bijiPinglunsRepository.Get(filter: u => u.DakaBiji == bid, orderBy: q => q.OrderByDescending(u => u.Id));
+             ViewData["Pingluns"] = Pingluns;
+
+             return View("~/Views/UHome/_PartialPinglun.cshtml");
+         }
+
+         //评论笔记
+         [HttpPost]
+         [ValidateAntiForgeryToken]
+         public JsonResult PinglunBiji(int DakaRen, int PinglunRen, int Kongjian, int Peibanshi, int ProductBook, int DakaBiji, string Pinglun)
+         {
+             BijiPinglun pinglun = new BijiPinglun();
+             pinglun.DakaRen = DakaRen;
+             pinglun.PinglunContent = Pinglun;
+             pinglun.PinglunRen = PinglunRen;
+             pinglun.DakaBiji = DakaBiji;
+             pinglun.Kongjian = Kongjian;
+             pinglun.Peibanshi = Peibanshi;
+             pinglun.ProductBook = ProductBook;
+             pinglun.CreateTime = DateTime.Now;
+             Message msg = new Message();
+
+             try
+             {
+
+                 unitOfWork._bijiPinglunsRepository.Insert(pinglun);
+                 unitOfWork.Save();
+
+                 msg.MessageStatus = "true";
+                 msg.MessageInfo = "评论成功";
+             }
+             catch
+             {
+                 msg.MessageStatus = "false";
+                 msg.MessageInfo = "评论失败";
+             }
+
+             return Json(msg, JsonRequestBehavior.AllowGet);
+         }
+
 
     }
 }

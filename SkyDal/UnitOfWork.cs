@@ -207,6 +207,83 @@ namespace SkyDal
                  return RenKongListsRepository;
              }
          }
+
+         private GenericRepository<ViewHistory> ViewHistorysRepository;
+
+         public GenericRepository<ViewHistory> _viewHistorysRepository
+         {
+             get
+             {
+
+                 if (this.ViewHistorysRepository == null)
+                 {
+                     this.ViewHistorysRepository = new GenericRepository<ViewHistory>(context);
+                 }
+                 return ViewHistorysRepository;
+             }
+         }
+
+         private GenericRepository<BijiPinglun> BijiPinglunsRepository;
+
+         public GenericRepository<BijiPinglun> _bijiPinglunsRepository
+         {
+             get
+             {
+
+                 if (this.BijiPinglunsRepository == null)
+                 {
+                     this.BijiPinglunsRepository = new GenericRepository<BijiPinglun>(context);
+                 }
+                 return BijiPinglunsRepository;
+             }
+         }
+
+         private GenericRepository<PinglunReply> PinglunReplysRepository;
+
+         public GenericRepository<PinglunReply> _pinglunReplysRepository
+         {
+             get
+             {
+
+                 if (this.PinglunReplysRepository == null)
+                 {
+                     this.PinglunReplysRepository = new GenericRepository<PinglunReply>(context);
+                 }
+                 return PinglunReplysRepository;
+             }
+         }
+
+         private GenericRepository<BijiDianzan> BijiDianzansRepository;
+
+         public GenericRepository<BijiDianzan> _bijiDianzansRepository
+         {
+             get
+             {
+
+                 if (this.BijiDianzansRepository == null)
+                 {
+                     this.BijiDianzansRepository = new GenericRepository<BijiDianzan>(context);
+                 }
+                 return BijiDianzansRepository;
+             }
+         }
+
+         private GenericRepository<DianzanPinglun> DianzanPinglunsRepository;
+
+         public GenericRepository<DianzanPinglun> _dianzanPinglunsRepository
+         {
+             get
+             {
+
+                 if (this.DianzanPinglunsRepository == null)
+                 {
+                     this.DianzanPinglunsRepository = new GenericRepository<DianzanPinglun>(context);
+                 }
+                 return DianzanPinglunsRepository;
+             }
+         }
+   
+   
    
    
 

@@ -110,14 +110,14 @@ namespace SkyEntity
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "任务名")]
+        [Display(Name = "任务名称")]
         public int RenwuName { get; set; }
 
-        [Display(Name = "商品源")]
+        [Display(Name = "书目名称")]
         public int ProductBook { get; set; }
 
-        [Display(Name = "商品源")]
-        public int ProductName { get; set; }
+        [Display(Name = "空间名称")]
+        public int Kongjian { get; set; }
 
         [Display(Name = "陪伴师")]
         public int Peibanshi { get; set; }
@@ -125,7 +125,7 @@ namespace SkyEntity
         [Display(Name = "任务执行人")]
         public int RenwuZhixingzhe { get; set; }
 
-        [Display(Name = "执行状态")]
+        [Display(Name = "隐私设置")]
         public bool Status { get; set; }
 
         [Display(Name = "打卡内容")]
@@ -133,6 +133,9 @@ namespace SkyEntity
 
         [Display(Name = "打卡标题")]
         public string DakaTitle { get; set; }
+
+        [Display(Name = "标签")]
+        public string Tags { get; set; }
 
         [Display(Name = "打卡时间")]
         public DateTime DakaTime { get; set; }
@@ -142,6 +145,8 @@ namespace SkyEntity
         public DateTime LastEditTime { get; set; }
 
     }
+
+
 
     public class Ren
     {
@@ -243,8 +248,134 @@ namespace SkyEntity
         public int Shenqingren { get; set; }
         [Display(Name = "陪伴空间")]
         public int Kongjian { get; set; }
+        [Display(Name = "陪伴师")]
+        public int Peibanshi { get; set; }
+        [Display(Name = "源产品")]
+        public int ProductBook { get; set; }
 
         [Display(Name = "状态")]
         public bool Status { get; set; }
+    }
+
+    public class ViewHistory
+    {
+        [Key]
+        public int Id { get; set; }
+        [Display(Name = "打卡Id")]
+        public int DakaBiji { get; set; }
+        [Display(Name = "打卡人")]
+        public int DakaRen { get; set; }
+        [Display(Name = "陪伴师")]
+        public int Peibanshi { get; set; }
+        [Display(Name = "空间Id")]
+        public int Kongjian { get; set; }
+        [Display(Name = "源产品")]
+        public int ProductBook { get; set; }
+        [Display(Name = "阅读人")]
+        public int ViewRen { get; set; }
+        [Display(Name = "阅读时间")]
+        public DateTime ViewTime { get; set; }
+
+    }
+    public class BijiPinglun
+    {
+        [Key]
+        public int Id { get; set; }
+        [Display(Name = "打卡Id")]
+        public int DakaBiji { get; set; }
+        [Display(Name = "打卡人")]
+        public int DakaRen { get; set; }
+        [Display(Name = "陪伴师")]
+        public int Peibanshi { get; set; }
+        [Display(Name = "空间Id")]
+        public int Kongjian { get; set; }
+        [Display(Name = "源产品")]
+        public int ProductBook { get; set; }
+        [Display(Name = "评论人")]
+        public int PinglunRen { get; set; }
+        [Display(Name = "评论内容")]
+        public string PinglunContent { get; set; }
+        [Display(Name = "评论时间")]
+        public DateTime CreateTime { get; set; }
+
+
+    }
+
+    public class PinglunReply
+    {
+        [Key]
+        public int Id { get; set; }
+        [Display(Name = "评论人")]
+        public int Pinglunren { get; set; }
+        [Display(Name = "回复评论人")]
+        public int PinglunReplyren { get; set; }
+        [Display(Name = "评论Id")]
+        public int ReplyPinlun { get; set; }
+        [Display(Name = "打卡Id")]
+        public int DakaBiji { get; set; }
+        [Display(Name = "打卡人")]
+        public int DakaRen { get; set; }
+        [Display(Name = "陪伴师")]
+        public int Peibanshi { get; set; }
+        [Display(Name = "空间Id")]
+        public int Kongjian { get; set; }
+        [Display(Name = "源产品")]
+        public int ProductBook { get; set; }
+
+        [Display(Name = "评论内容")]
+        public string PinglunContent { get; set; }
+        [Display(Name = "评论时间")]
+        public DateTime CreateTime { get; set; }
+
+    }
+
+
+
+    public class BijiDianzan
+    {
+        [Key]
+        public int Id { get; set; }
+        [Display(Name = "打卡Id")]
+        public int DakaBiji { get; set; }
+        [Display(Name = "打卡人")]
+        public int DakaRen { get; set; }
+        [Display(Name = "陪伴师")]
+        public int Peibanshi { get; set; }
+        [Display(Name = "空间Id")]
+        public int Kongjian { get; set; }
+        [Display(Name = "源产品")]
+        public int ProductBook { get; set; }
+        [Display(Name = "点赞人")]
+        public int DianzanRen { get; set; }
+        [Display(Name = "点赞")]
+        public bool Dianzan { get; set; }
+        [Display(Name = "创建时间")]
+        public DateTime CreateTime { get; set; }
+    }
+
+    public class DianzanPinglun
+    {
+        [Key]
+        public int Id { get; set; }
+        [Display(Name = "打卡Id")]
+        public int DakaBiji { get; set; }
+        [Display(Name = "打卡人")]
+        public int DakaRen { get; set; }
+        [Display(Name = "陪伴师")]
+        public int Peibanshi { get; set; }
+        [Display(Name = "空间Id")]
+        public int Kongjian { get; set; }
+        [Display(Name = "源产品")]
+        public int ProductBook { get; set; }
+        [Display(Name = "点赞人")]
+        public int DianzanRen { get; set; }
+        [Display(Name = "评论Id")]
+        public int DzPinglun { get; set; }
+        [Display(Name = "评论人")]
+        public int Pinglunren { get; set; }
+        [Display(Name = "点赞")]
+        public bool Dianzan { get; set; }
+        [Display(Name = "创建时间")]
+        public DateTime CreateTime { get; set; }
     }
 }

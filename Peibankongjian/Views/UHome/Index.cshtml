@@ -38,7 +38,7 @@
                                 <ul class="social-links">
                                     @if (PeibanService.GetStatusBySpaceRen(int.Parse(Session["renid"].ToString()), item.Id).MessageStatus == "false")
                                     {
-                                        <li><button class="btn btn-success" onclick="JinruKongjian('@item.Id','@Session["renid"].ToString()','/UHome/EntrySpace/','/UHome/RenwuList?id=@item.Id')"><i class="fa fa-qq"></i> 申请进入</button></li>
+                                        <li><button class="btn btn-success" onclick="JinruKongjian('@item.Id','@Session["renid"].ToString()','@item.ProductBook','@item.Peibanshi','/UHome/EntrySpace/','/UHome/RenwuList?id=@item.Id')"><i class="fa fa-qq"></i> 申请进入</button></li>
                                
                                     }
                                     else
@@ -86,7 +86,7 @@
 @section BottomScripts {
 
     <script type="text/javascript">
-        function JinruKongjian(kid, rid, url, tourl) {
+        function JinruKongjian(kid, rid, bid,pid,url, tourl) {
             bootbox.confirm({
                 buttons: {
                     confirm: {
@@ -114,6 +114,8 @@
                             data: {
                                 rid: rid,
                                 kid: kid,
+                                bid: bid,
+                                pid: pid,
                                 __RequestVerificationToken: token,
                                 status: 'true',
                             },

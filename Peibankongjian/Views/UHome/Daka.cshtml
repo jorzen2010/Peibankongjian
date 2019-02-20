@@ -1,7 +1,14 @@
 ﻿@model SkyEntity.RenwuDaka
 @using SkyService;
 @using SkyEntity;
+@section Topcss {
+    <link href="~/plugins/bootstrap-validator/css/bootstrapValidator.css" rel="stylesheet" type="text/css" />
+    <link href="~/plugins/iCheck/square/green.css" rel="stylesheet" type="text/css" />
+    <link href="~/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css" rel="stylesheet">
 
+
+
+}
 <div class="container peiban-container">
 
     <div class="row">
@@ -15,35 +22,34 @@
                     @Html.TextBoxFor(model => model.DakaTitle, new { @class = "form-control", @placeholder = "输入打卡文章标题" })
                     @Html.ValidationMessageFor(model => model.DakaTitle)
                 </div>
-               <div class="form-group">
-                   <textarea id="DakaContent" name="DakaContent" style="height:500px;"></textarea>
+                <div class="form-group">
+                    <textarea id="DakaContent" name="DakaContent" style="height:500px;"></textarea>
                     @Html.ValidationMessageFor(model => model.DakaContent)
                 </div>
-
-                @*<div class="form-group">
-                    <label class="control-label col-md-2">打卡内容</label>
-                    <div class="col-md-10">
-                        @Html.TextAreaFor(model => model.DakaContent, new { @class = "form-control", @rows = "5" })
-                        @Html.ValidationMessageFor(model => model.DakaContent)
-                    </div>
-                </div>*@
+                
+                <div class="form-group">
+                    
+                    @Html.TextBoxFor(model => model.Tags, new { @class = "form-control", @data_role = "tagsinput", @placeholder = "输入标签回车键确认" })
+                </div>
+                
+                <div class="form-group">
+                    
+                    @Html.LabelFor(model => model.Status, new { @class = "control-label" })
+          
+                        @Html.CheckBoxFor(model => model.Status, new { @class = "form-control" })
+        
+                </div>
 
                 @Html.HiddenFor(model => model.ProductBook, new { @Value = ViewBag.book })
                 @Html.HiddenFor(model => model.RenwuName, new { @Value = ViewBag.renwu })
-                @Html.HiddenFor(model => model.ProductName, new { @Value = ViewBag.kongjian })
+                @Html.HiddenFor(model => model.Kongjian, new { @Value = ViewBag.kongjian })
                 @Html.HiddenFor(model => model.Peibanshi, new { @Value = ViewBag.peibanshi })
                 @Html.HiddenFor(model => model.RenwuZhixingzhe, new { @Value = int.Parse(Session["renid"].ToString()) })
-                @Html.HiddenFor(model => model.Status, new { @Value = true })
-
                 @Html.HiddenFor(model => model.DakaTime, new { @Value = DateTime.Now })
                 @Html.HiddenFor(model => model.LastEditTime, new { @Value = DateTime.Now })
 
                 <div class="form-group">
-
-                   
-
-                        <button type="submit" class="btn btn-primary btn-lg pull-right">&nbsp;&nbsp;&nbsp;&nbsp;保存打卡&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                   
+                    <button type="submit" class="btn btn-primary btn-lg pull-right">&nbsp;&nbsp;&nbsp;&nbsp;保存打卡&nbsp;&nbsp;&nbsp;&nbsp;</button>         
                 </div>
 
             }

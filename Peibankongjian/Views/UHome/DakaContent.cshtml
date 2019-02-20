@@ -11,6 +11,34 @@
                 @Html.Raw(Model.DakaContent)
                 <span class="pull-right text-gray">首次发布时间：@Model.DakaTime.ToString("yyyy-MM-dd hh:mm:ss") <br/>最后编辑时间：@Model.LastEditTime.ToString("yyyy-MM-dd hh:mm:ss")</span>
             </div>
+            
+            <div class="box-footer text-center">
+                @*@if (ViewBag.dianzan)
+                {
+                    <button type="button" class="btn btn-lg btn-danger" id="xihuanbiji" data-status="false" style="margin:20px 0px;">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-heart"></span> 喜欢&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </button>
+                }
+                else
+                {
+                    <button type="button" class="btn btn-lg btn-default" id="xihuanbiji" data-status="true" style="margin:20px 0px;">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-heart-empty"></span> 喜欢&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </button>
+                }*@
+
+
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.RenwuZhixingzhe)
+                @Html.HiddenFor(model => model.ProductBook)
+                @Html.HiddenFor(model => model.Peibanshi)
+                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.Kongjian)
+
+
+                <input type="hidden" value="@Session["renid"].ToString()" name="PinglunRen" id="PinglunRen" />
+            </div>
+            
+            @Html.Action("PinglunList", "UHome", new { bid = Model.Id })
 
         </div>
         <div class="col-md-4">
@@ -24,5 +52,43 @@
 
 
 @section BottomScripts {
+    <script type="text/javascript">
+      
+
+            $("#biji-pinglun").on("click", function() {
+                var token = $('[name=__RequestVerificationToken]').val();
+                var headers = {};
+                headers["__RequestVerificationToken"] = token;
+                $.ajax({
+                    type: "POST",
+                    url: "/UHome/PinglunBiji",
+                    data: {
+                        DakaRen: $("#RenwuZhixingzhe").val(),
+                        BijiZuozhe: $("#RenwuZhixingzhe").val(),
+                        ProductBook: $("#ProductBook").val(),
+                        Peibanshi: $("#Peibanshi").val(),
+                        Kongjian: $("#Kongjian").val(),
+                        DakaBiji: $("#Id").val(),
+                        PinglunRen: $("#PinglunRen").val(),
+                        __RequestVerificationToken: token,
+                        Pinglun: $("#pinglun").val()
+                    },
+                    dataType: "json",
+                    success: function(msg) {
+                        if (msg.MessageStatus == 'true') {
+                            $("#pinglun").val("");
+                            window.location.reload();
+                            //window.location.href = tourl;
+                        } else {
+                            // alertconfirm('感谢你的喜欢！');
+                        }
+                    },
+                    error: function(e) {
+                        //  alertconfirm('网络有问题，点赞失败，再点一次吧！');
+                    }
+                });
+            });
+
+    </script>
 
 }

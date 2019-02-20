@@ -30,6 +30,7 @@ D:\MyPro\2019\Peibankongjian\SkyWechatService\bin\Debug\EntityFramework.xml
 D:\MyPro\2019\Peibankongjian\SkyWechatService\obj\Debug\SkyWechat.csprojResolveAssemblyReference.cache
 D:\MyPro\2019\Peibankongjian\SkyWechatService\obj\Debug\SkyWechatService.dll
 D:\MyPro\2019\Peibankongjian\SkyWechatService\obj\Debug\SkyWechatService.pdb
+E:\2019\Peibankongjian\SkyWechatService\obj\Debug\SkyWechat.csprojResolveAssemblyReference.cache
 E:\2019\Peibankongjian\SkyWechatService\bin\Debug\SkyWechatService.dll
 E:\2019\Peibankongjian\SkyWechatService\bin\Debug\SkyWechatService.pdb
 E:\2019\Peibankongjian\SkyWechatService\bin\Debug\Newtonsoft.Json.dll
@@ -46,6 +47,5 @@ E:\2019\Peibankongjian\SkyWechatService\bin\Debug\SkyService.pdb
 E:\2019\Peibankongjian\SkyWechatService\bin\Debug\Newtonsoft.Json.xml
 E:\2019\Peibankongjian\SkyWechatService\bin\Debug\SkyDal.pdb
 E:\2019\Peibankongjian\SkyWechatService\bin\Debug\EntityFramework.xml
-E:\2019\Peibankongjian\SkyWechatService\obj\Debug\SkyWechat.csprojResolveAssemblyReference.cache
 E:\2019\Peibankongjian\SkyWechatService\obj\Debug\SkyWechatService.dll
 E:\2019\Peibankongjian\SkyWechatService\obj\Debug\SkyWechatService.pdb

@@ -67,4 +67,47 @@
 
 .text-gray {
     color:#999999;
-}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+}        
+
+
+
+.biji-comment {
+    margin-top:10px;
+    border-bottom:1px solid #dddddd;
+    padding-bottom:10px;
+}
+.biji-comment .comment-avatar {
+    float:left;
+}
+.comment-avatar img {
+    width:35px;
+    height:35px;
+}
+.biji-comment .comment-title {
+    padding-left: 20px;
+    float: left;
+    line-height: 22px;
+    height: 45px;
+}
+.biji-comment-content{
+display:inline-block;
+margin-top:10px;
+word-break:break-all;
+width:100%;
+
+}
+    .biji-comment-content p {
+        padding-top:8px;
+    }
+.huifu a{
+    text-decoration:none;
+    color:#999999;
+
+}
+.comment-zan a{
+    text-decoration:none;
+    color:#999999;
+
+}
+
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             

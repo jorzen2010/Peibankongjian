@@ -1,0 +1,107 @@
+﻿@using SkyEntity;
+@using SkyService;
+@{
+    Layout = null;
+    var pinglunscount = ViewData["Pingluns"] as List<BijiPinglun>;
+    var n = pinglunscount.Count();
+}
+
+<h3>参与评论</h3>
+
+@if (Session["renname"] == null)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <h4>登陆后可发表表情</h4>
+        </div>
+    </div>
+}
+else
+{
+
+    <div class="row">
+        <div class="col-md-12">
+            <textarea rows="5" style="width: 100%; border: 0px; background-color: #eeeeee; resize: none;padding:5px; margin-bottom:10px;" placeholder="请在此处输入你的评论" id="pinglun"></textarea>
+            <button type="button" class="btn btn-primary pull-right" id="biji-pinglun">&nbsp;&nbsp;&nbsp;&nbsp;发表评论&nbsp;&nbsp;&nbsp;&nbsp;</button>
+        </div>
+    </div>
+}
+
+
+
+@foreach (BijiPinglun pinglun in ViewData["Pingluns"] as List<BijiPinglun>)
+{
+
+    <div class="row">
+        <div class="col-md-12 biji-comment">
+            <div class="comment-avatar"><img src="/Resource/img/zz.jpg" class="img-circle" /></div>
+            <div class="comment-title">
+                <strong>@PeibanService.GetRenById(pinglun.PinglunRen).RenNickName</strong><br />
+
+                <span style="color: #bbbbbb;">@n 楼 评论于：@pinglun.CreateTime.ToString("yyyy-MM-dd hh:mm")</span>
+            </div>
+            <div class="biji-comment-content">
+                @pinglun.PinglunContent
+                <p>
+                    @if (PeibanService.GetDianzanById(pinglun.Id, int.Parse(Session["renid"].ToString())))
+                    {
+                        <span class="comment-zan" onclick="dainzanPinglun(this)" data-status="false">
+                            <a href="javascript:void(0);" style="color:#ff0000"><span class="glyphicon glyphicon-thumbs-up"></span> 赞</a>
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="comment-zan" onclick="dainzanPinglun(this)" data-status="true">
+                            <a href="javascript:void(0);"><span class="glyphicon glyphicon-thumbs-up"></span> 赞</a>
+                        </span>
+
+                    }
+
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+
+                    <span class="huifu"><a href="javascript:void(0);"><span class="glyphicon glyphicon-comment"></span> 回复</a></span>
+                    <input type="hidden" value="@pinglun.PinglunRen" id="PinglunRen" name="PinglunRen" />
+                    <input type="hidden" value="@pinglun.DakaBiji" id="DakaBiji" name="DakaBiji" />
+                    <input type="hidden" value="@pinglun.ProductBook" id="ProductBook" name="ProductBook" />
+                    <input type="hidden" value="@pinglun.Peibanshi" id="Peibanshi" name="Peibanshi" />
+                    <input type="hidden" value="@pinglun.DakaRen" id="DakaRen" name="DakaRen" />
+                    <input type="hidden" value="@pinglun.Id" id="ReplyPinlun" name="ReplyPinlun" />
+                    <input type="hidden" value="@pinglun.Kongjian" id="Kongjian" name="Kongjian" />
+                    <input type="hidden" value="@int.Parse(Session["renid"].ToString())" id="PinglunReplyren" name="PinglunReplyren" />
+
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-12" style="margin:10px 0px 0px 5px;border-left:3px solid #cccccc">
+            @foreach (PinglunReply pinglunreply in PeibanService.GetPinglunReplyByPinglunId(pinglun.Id))
+            {
+            <div class="comment-title"><strong>@PeibanService.GetRenById(pinglunreply.PinglunReplyren).RenNickName</strong></div>
+
+            <div class="biji-comment-content">
+                回复：<a href="@Url.Action("Ren", "Home", new { rid = pinglunreply.Pinglunren })" style="text-decoration: none;"> @PeibanService.GetRenById(pinglunreply.Pinglunren).RenNickName </a> @pinglunreply.PinglunContent
+
+                <p style="color: #bbbbbb;">
+                    @pinglunreply.CreateTime.ToString("yyyy-MM-dd hh:mm") &nbsp;&nbsp;&nbsp;&nbsp;<span class="huifu"><a href="javascript:void(0);"><span class="glyphicon glyphicon-comment"></span> 回复</a></span>
+                    <input type="hidden" value="@pinglun.PinglunRen" id="PinglunRen" name="PinglunRen" />
+                    <input type="hidden" value="@pinglun.DakaBiji" id="DakaBiji" name="DakaBiji" />
+                    <input type="hidden" value="@pinglun.ProductBook" id="ProductBook" name="ProductBook" />
+                    <input type="hidden" value="@pinglun.Peibanshi" id="Peibanshi" name="Peibanshi" />
+                    <input type="hidden" value="@pinglun.DakaRen" id="DakaRen" name="DakaRen" />
+                    <input type="hidden" value="@pinglun.Id" id="ReplyPinlun" name="ReplyPinlun" />
+                    <input type="hidden" value="@pinglun.Kongjian" id="Kongjian" name="Kongjian" />
+                    <input type="hidden" value="@int.Parse(Session["renid"].ToString())" id="PinglunReplyren" name="PinglunReplyren" />
+ </p>
+
+            </div>
+
+
+            }
+
+        </div>
+
+    </div>
+            n--;
+
+}
