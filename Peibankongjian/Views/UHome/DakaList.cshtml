@@ -8,14 +8,21 @@
 
     <div class="row">
         <div class="col-md-8">
-            <h3>打卡记录</h3>
+            <h3>我的成长记录</h3>
             <div class="row">
                 @Html.AntiForgeryToken()
                 @foreach (var item in Model)
                 {
-
-                    <h3><a href="@Url.Action("DakaContent","UHome",new{id=item.Id})">@item.DakaTitle</a></h3>
-                    <span>@item.DakaContent</span>
+                     <div class="dushubiji" onclick="ToUrl(@item.Id)">
+                        <h4>@item.DakaTitle</h4>
+                        <div class="smalltitle">
+                            <span>来自：@PeibanService.GetRenById(item.Peibanshi).RenNickName</span> <span>陪伴师：@PeibanService.GetRenById(item.Peibanshi).RenNickName</span>
+                            <br /><span>作者：@PeibanService.GetRenById(item.RenwuZhixingzhe).RenNickName</span><span>打卡时间：@item.DakaTime</span>
+                        </div>
+                        <div class="contentinfo">
+                             @CommonTools.ReplaceHtmlTag(item.DakaContent, 100)
+                        </div>
+                    </div>
                     
                 }
             </div>
@@ -51,7 +58,17 @@
 @section BottomScripts {
 
     <script type="text/javascript">
+    $('.dushubiji').on("mouseover", function () {
+        $(this).addClass("dushuhuibg");
+        // alert("asdf");
+    }).on("mouseout", function () {
+        $(this).removeClass("dushuhuibg");
 
+    });
+    function ToUrl(id) {
+        var tourl = "/UHome/DakaContent?id=" + id
+        window.location.href = tourl;
+    }
+</script>
 
-    </script>
 }

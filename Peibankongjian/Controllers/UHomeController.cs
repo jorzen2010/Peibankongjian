@@ -164,7 +164,7 @@ namespace Peibankongjian.Controllers
 
                  unitOfWork.renwuDakasRepository.Insert(daka);
                  unitOfWork.Save();
-                 return RedirectToAction("Index", "UHome");
+                 return RedirectToAction("DakaList", "UHome");
              }
              return View(daka);
          }

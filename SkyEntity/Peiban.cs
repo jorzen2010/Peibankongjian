@@ -137,7 +137,7 @@ namespace SkyEntity
         [Display(Name = "打卡时间")]
         public DateTime DakaTime { get; set; }
 
-
+        //加上标签和隐私，还需要加一个类是阅读历史
         [Display(Name = "最后修改时间")]
         public DateTime LastEditTime { get; set; }
 
