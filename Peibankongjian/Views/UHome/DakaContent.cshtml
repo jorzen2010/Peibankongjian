@@ -7,13 +7,18 @@
             <h3>@Model.DakaTitle</h3>
             <span class="text-gray">陪伴师：@PeibanService.GetRenById(Model.Peibanshi).RenNickName 发布时间：@Model.DakaTime 最后编辑时间：@Model.LastEditTime</span>
             <hr/>
-            <div style="line-height:30px;">
-                @Html.Raw(Model.DakaContent)
-                <span class="pull-right text-gray">首次发布时间：@Model.DakaTime.ToString("yyyy-MM-dd hh:mm:ss") <br/>最后编辑时间：@Model.LastEditTime.ToString("yyyy-MM-dd hh:mm:ss")</span>
+            <div  class="box-body" style="line-height:30px;">
+                <article>
+                    @Html.Raw(Model.DakaContent)
+                    <span>关键词：@Html.Raw(Model.Tags)</span>
+                    <div class="text-gray">首次发布时间：@Model.DakaTime.ToString("yyyy-MM-dd hh:mm:ss") <br />最后编辑时间：@Model.LastEditTime.ToString("yyyy-MM-dd hh:mm:ss")</div>
+
+
+                </article>
             </div>
             
             <div class="box-footer text-center">
-                @*@if (ViewBag.dianzan)
+                @if (ViewBag.dianzan)
                 {
                     <button type="button" class="btn btn-lg btn-danger" id="xihuanbiji" data-status="false" style="margin:20px 0px;">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-heart"></span> 喜欢&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -24,7 +29,7 @@
                     <button type="button" class="btn btn-lg btn-default" id="xihuanbiji" data-status="true" style="margin:20px 0px;">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-heart-empty"></span> 喜欢&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </button>
-                }*@
+                }
 
 
                 @Html.AntiForgeryToken()
@@ -88,6 +93,157 @@
                     }
                 });
             });
+
+
+            $('#xihuanbiji').click(function () {
+                var token = $('[name=__RequestVerificationToken]').val();
+                var headers = {};
+                headers["__RequestVerificationToken"] = token;
+                $.ajax({
+                    type: "POST",
+                    url: "/UHome/XihuanBiji",
+                    data: {
+                        PinglunRen: $("#PinglunRen").val(),
+                        DakaRen: $("#RenwuZhixingzhe").val(),
+                        ProductBook: $("#ProductBook").val(),
+                        Peibanshi: $("#Peibanshi").val(),
+                        Kongjian: $("#Kongjian").val(),
+                        DakaBiji: $("#Id").val(),
+                        __RequestVerificationToken: token,
+                        status: $(this).attr("data-status")
+                    },
+                    dataType: "json",
+                    success: function (msg) {
+                        if (msg.MessageStatus == 'true') {
+                            window.location.reload();
+                            //window.location.href = tourl;
+                        }
+                        else {
+                            // alertconfirm('感谢你的喜欢！');
+                        }
+                    },
+                    error: function (e) {
+                        //  alertconfirm('网络有问题，点赞失败，再点一次吧！');
+                    }
+                });
+            });
+
+            $(".huifu").on("click", function () {
+                if ($(this).parent().parent().find("#huifupinglun-p").length > 0) {
+                    $("#huifupinglun-p").remove();
+                }
+                else {
+                    $("#huifupinglun-p").remove();
+
+                    var html = "<p class=\"huifupinglun-p\" id=\"huifupinglun-p\"><textarea id=\"huifupinglun\" rows=\"3\" style=\"width: 100%; border: 0px; background-color: #eeeeee; resize: none;padding:5px; margin-bottom:10px;\" placeholder=\"请在此处输入你的评论\" ></textarea> <button type=\"button\" class=\"btn btn-warning pull-right\" onclick=\"huifupinglun(this)\">回复评论</button></p>"
+                    $(this).parent().parent().after().append(html);
+                }
+
+
+            });
+
+            function huifupinglun(obj) {
+                var thisObj = $(obj);
+
+                var PinglunContent = thisObj.parent().find("#huifupinglun").val();
+                var PinglunRen = thisObj.parent().parent().find("#PinglunRen").val();
+                var PinglunReplyren = thisObj.parent().parent().find("#PinglunReplyren").val();
+                var ReplyPinlun = thisObj.parent().parent().find("#ReplyPinlun").val();
+
+                var DakaRen = thisObj.parent().parent().find("#DakaRen").val();
+                var Peibanshi = thisObj.parent().parent().find("#Peibanshi").val();
+                var ProductBook = thisObj.parent().parent().find("#ProductBook").val();
+                var DakaBiji = thisObj.parent().parent().find("#DakaBiji").val();
+                var Kongjian = thisObj.parent().parent().find("#Kongjian").val();
+
+
+                var token = $('[name=__RequestVerificationToken]').val();
+                var headers = {};
+                headers["__RequestVerificationToken"] = token;
+                $.ajax({
+                    type: "POST",
+                    url: "/UHome/HuifuPinglun",
+                    data: {
+                        PinglunContent: PinglunContent,
+                        PinglunRen: PinglunRen,
+                        PinglunReplyren: PinglunReplyren,
+                        ReplyPinlun: ReplyPinlun,
+                        DakaRen: DakaRen,
+                        Peibanshi: Peibanshi,
+                        ProductBook: ProductBook,
+                        DakaBiji: DakaBiji,
+                        Kongjian: Kongjian,
+                        __RequestVerificationToken: token,
+
+                    },
+                    dataType: "json",
+                    success: function (msg) {
+                        if (msg.MessageStatus == 'true') {
+                            // $("#pinglun").val("");
+                            $(".huifupinglun-p").remove();
+                            window.location.reload();
+                            //window.location.href = tourl;
+                        }
+                        else {
+                            // alertconfirm('感谢你的喜欢！');
+                        }
+                    },
+                    error: function (e) {
+                        //  alertconfirm('网络有问题，点赞失败，再点一次吧！');
+                    }
+                });
+
+                //  $(".huifupinglun-p").remove();
+                //  alert("评论内容：" + huifupinglun + "评论人：" + pinglunren);
+
+            }
+
+
+            function dainzanPinglun(obj) {
+                var thisObj = $(obj);
+
+                var status = thisObj.attr("data-status");
+                var DakaRen = thisObj.parent().find("#DakaRen").val();
+                var Peibanshi = thisObj.parent().find("#Peibanshi").val();
+                var ProductBook = thisObj.parent().find("#ProductBook").val();
+                var PinglunRen = thisObj.parent().find("#PinglunRen").val();
+                var DianzanRen = thisObj.parent().find("#PinglunReplyren").val();
+                var DakaBiji = thisObj.parent().find("#DakaBiji").val();
+                var Kongjian = thisObj.parent().find("#Kongjian").val();
+                var DzPinglun = thisObj.parent().find("#ReplyPinlun").val();
+                var token = $('[name=__RequestVerificationToken]').val();
+                var headers = {};
+                headers["__RequestVerificationToken"] = token;
+                $.ajax({
+                    type: "POST",
+                    url: "/UHome/XihuanPinglun",
+                    data: {
+                        DakaRen: DakaRen,
+                        Peibanshi: Peibanshi,
+                        ProductBook: ProductBook,
+                        PinglunRen: PinglunRen,
+                        DianzanRen: DianzanRen,
+                        DakaBiji: DakaBiji,
+                        Kongjian: Kongjian,
+                        DzPinglun: DzPinglun,
+                        status: status,
+                        __RequestVerificationToken: token,
+
+                    },
+                    dataType: "json",
+                    success: function (msg) {
+                        if (msg.MessageStatus == 'true') {
+                            window.location.reload();
+                        }
+                        else {
+                            // alertconfirm('感谢你的喜欢！');
+                        }
+                    },
+                    error: function (e) {
+                        //  alertconfirm('网络有问题，点赞失败，再点一次吧！');
+                    }
+                });
+            }
 
     </script>
 

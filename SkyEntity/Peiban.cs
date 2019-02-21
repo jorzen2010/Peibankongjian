@@ -306,7 +306,7 @@ namespace SkyEntity
         [Key]
         public int Id { get; set; }
         [Display(Name = "评论人")]
-        public int Pinglunren { get; set; }
+        public int PinglunRen { get; set; }
         [Display(Name = "回复评论人")]
         public int PinglunReplyren { get; set; }
         [Display(Name = "评论Id")]

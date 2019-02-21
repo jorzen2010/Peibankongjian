@@ -131,5 +131,35 @@ namespace SkyService
 
         }
 
+
+        //public static Message GetStatusByOrder(int cid, int rid)
+        //{
+        //    Message msg = new Message();
+        //    UnitOfWork unitOfWork = new UnitOfWork();
+        //    bool status = false;
+        //    var olist = unitOfWork.chanpinOrdersRepository.Get(filter: u => u.VipUser == rid && u.BuyChanpin == cid);
+        //    if (olist.Count() > 0)
+        //    {
+        //        msg.MessageStatus = "true";
+        //        msg.MessageInfo = "进入陪伴空间";
+        //        foreach (ChanpinOrder o in olist)
+        //        {
+        //            if (!rk.Status)
+        //            {
+        //                msg.MessageStatus = "true";
+        //                msg.MessageInfo = "";
+        //                return msg;
+        //            }
+        //        }
+        //        return msg;
+        //    }
+        //    else
+        //    {
+        //        msg.MessageStatus = "false";
+        //        msg.MessageInfo = "申请进入陪伴空间";
+        //        return msg;
+        //    }
+        //}
+
     }
 }

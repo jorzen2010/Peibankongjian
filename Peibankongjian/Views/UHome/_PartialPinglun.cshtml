@@ -80,7 +80,7 @@ else
             <div class="comment-title"><strong>@PeibanService.GetRenById(pinglunreply.PinglunReplyren).RenNickName</strong></div>
 
             <div class="biji-comment-content">
-                回复：<a href="@Url.Action("Ren", "Home", new { rid = pinglunreply.Pinglunren })" style="text-decoration: none;"> @PeibanService.GetRenById(pinglunreply.Pinglunren).RenNickName </a> @pinglunreply.PinglunContent
+                回复：<a href="@Url.Action("Ren", "Home", new { rid = pinglunreply.PinglunRen })" style="text-decoration: none;"> @PeibanService.GetRenById(pinglunreply.PinglunRen).RenNickName </a> @pinglunreply.PinglunContent
 
                 <p style="color: #bbbbbb;">
                     @pinglunreply.CreateTime.ToString("yyyy-MM-dd hh:mm") &nbsp;&nbsp;&nbsp;&nbsp;<span class="huifu"><a href="javascript:void(0);"><span class="glyphicon glyphicon-comment"></span> 回复</a></span>

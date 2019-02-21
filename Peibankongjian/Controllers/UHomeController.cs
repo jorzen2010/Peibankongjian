@@ -144,6 +144,23 @@ namespace Peibankongjian.Controllers
             return View(chanpinOrder);
         }
 
+        public ActionResult MyOrder(int? page)
+        {
+            Pager pager = new Pager();
+            pager.table = "ChanpinOrder";
+            pager.strwhere = "1=1 and VipUser="+int.Parse(Session["renid"].ToString());
+            pager.PageSize = 12;
+            pager.PageNo = page ?? 1;
+            pager.FieldKey = "Id";
+            pager.FiledOrder = "Id desc";
+
+            pager = CommonDal.GetPager(pager);
+            IList<ChanpinOrder> dataList = DataConvertHelper<ChanpinOrder>.ConvertToModel(pager.EntityDataTable);
+            var PageList = new StaticPagedList<ChanpinOrder>(dataList, pager.PageNo, pager.PageSize, pager.Amount);
+            return View(PageList);
+        }
+
+
          public ActionResult Daka(int renwu,int book,int peibanshi ,int kongjian,int dakaren)
          {
              ViewBag.peibanshi = peibanshi;
@@ -175,7 +192,14 @@ namespace Peibankongjian.Controllers
          {
              RenwuDaka daka = unitOfWork.renwuDakasRepository.GetByID(id);
 
+             int dianzanren = int.Parse(Session["renid"].ToString());
 
+             var dianzan = unitOfWork._bijiDianzansRepository.Get(filter: u => u.DakaBiji == id && u.DianzanRen == dianzanren && u.Dianzan == true);
+             ViewBag.dianzan = false;
+             if (dianzan.Count() > 0)
+             {
+                 ViewBag.dianzan = true;
+             }
              return View(daka);
          }
 
@@ -216,6 +240,134 @@ namespace Peibankongjian.Controllers
              {
                  msg.MessageStatus = "false";
                  msg.MessageInfo = "评论失败";
+             }
+
+             return Json(msg, JsonRequestBehavior.AllowGet);
+         }
+
+         //喜欢笔记
+         [HttpPost]
+         [ValidateAntiForgeryToken]
+         public JsonResult XihuanBiji(int DakaRen, int PinglunRen, int Kongjian, int Peibanshi, int ProductBook, int DakaBiji, bool status)
+         {
+             BijiDianzan xihuan = new BijiDianzan();
+             xihuan.DakaRen = DakaRen;
+             xihuan.Dianzan = status;
+             xihuan.DakaBiji = DakaBiji;
+             xihuan.DianzanRen = PinglunRen;
+             xihuan.Kongjian = Kongjian;
+             xihuan.Peibanshi = Peibanshi;
+             xihuan.ProductBook = ProductBook;
+             Message msg = new Message();
+             try
+             {
+                 var dianzan = unitOfWork._bijiDianzansRepository.Get(filter: u => u.DakaBiji == DakaBiji && u.DianzanRen == PinglunRen);
+
+                 if (dianzan.Count() > 0)
+                 {
+                     BijiDianzan _xihuan = dianzan.First();
+                     _xihuan.Dianzan = xihuan.Dianzan;
+                     _xihuan.CreateTime = System.DateTime.Now;
+                     unitOfWork._bijiDianzansRepository.Update(_xihuan);
+                 }
+                 else
+                 {
+                     xihuan.CreateTime = System.DateTime.Now;
+                     unitOfWork._bijiDianzansRepository.Insert(xihuan);
+                 }
+                 unitOfWork.Save();
+
+                 msg.MessageStatus = "true";
+                 msg.MessageInfo = "点赞成功";
+             }
+             catch
+             {
+                 msg.MessageStatus = "false";
+                 msg.MessageInfo = "点赞失败";
+             }
+
+             return Json(msg, JsonRequestBehavior.AllowGet);
+         }
+
+         //喜欢评论
+         [HttpPost]
+         [ValidateAntiForgeryToken]
+         public JsonResult XihuanPinglun(int DianzanRen,int DakaBiji, int DakaRen, int Kongjian, int ProductBook, int Peibanshi, int DzPinglun, int Pinglunren, bool status)
+         {
+             DianzanPinglun dianzan = new DianzanPinglun();
+             dianzan.Dianzan = status;
+             dianzan.DakaRen = DakaRen;
+             dianzan.Kongjian = Kongjian;
+             dianzan.ProductBook = ProductBook;
+             dianzan.Peibanshi = Peibanshi;
+             dianzan.DzPinglun = DzPinglun;
+             dianzan.Pinglunren = Pinglunren;
+             dianzan.DianzanRen = DianzanRen;
+             dianzan.DakaBiji = DakaBiji;
+             dianzan.CreateTime = System.DateTime.Now;
+
+             Message msg = new Message();
+             try
+             {
+                 var dianzan_pinglun = unitOfWork._dianzanPinglunsRepository.Get(filter: u => u.DzPinglun == DzPinglun && u.DianzanRen == DianzanRen);
+
+                 if (dianzan_pinglun.Count() > 0)
+                 {
+                     DianzanPinglun _dianzan = dianzan_pinglun.First();
+                     _dianzan.Dianzan = dianzan.Dianzan;
+                     _dianzan.CreateTime = System.DateTime.Now;
+                     unitOfWork._dianzanPinglunsRepository.Update(_dianzan);
+                 }
+                 else
+                 {
+                     dianzan.CreateTime = System.DateTime.Now;
+                     unitOfWork._dianzanPinglunsRepository.Insert(dianzan);
+                 }
+                 unitOfWork.Save();
+
+                 msg.MessageStatus = "true";
+                 msg.MessageInfo = "点赞成功";
+             }
+             catch
+             {
+                 msg.MessageStatus = "false";
+                 msg.MessageInfo = "点赞失败";
+             }
+
+             return Json(msg, JsonRequestBehavior.AllowGet);
+         }
+
+         //评论笔记
+         [HttpPost]
+         [ValidateAntiForgeryToken]
+         public JsonResult HuifuPinglun(string PinglunContent, int PinglunRen, int PinglunReplyren, int ReplyPinlun, int DakaRen, int Peibanshi, int ProductBook, int DakaBiji, int Kongjian)
+         {
+             PinglunReply huifupinglun = new PinglunReply();
+             huifupinglun.DakaRen = DakaRen;
+             huifupinglun.PinglunContent = PinglunContent;
+             huifupinglun.PinglunRen = PinglunRen;
+             huifupinglun.DakaBiji = DakaBiji;
+             huifupinglun.Kongjian = Kongjian;
+             huifupinglun.Peibanshi = Peibanshi;
+             huifupinglun.ProductBook = ProductBook;
+             huifupinglun.PinglunReplyren = PinglunReplyren;
+             huifupinglun.ReplyPinlun = ReplyPinlun;
+             huifupinglun.CreateTime = DateTime.Now;
+             Message msg = new Message();
+
+             try
+             {
+
+                 unitOfWork._pinglunReplysRepository.Insert(huifupinglun);
+                 unitOfWork.Save();
+
+                 msg.MessageStatus = "true";
+                 msg.MessageInfo = "回复评论成功";
+             }
+             catch
+             {
+                 msg.MessageStatus = "false";
+                 msg.MessageInfo = "回复评论失败";
              }
 
              return Json(msg, JsonRequestBehavior.AllowGet);

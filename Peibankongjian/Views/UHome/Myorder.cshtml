@@ -1,4 +1,4 @@
-﻿@model StaticPagedList<SkyEntity.Product>
+﻿@model StaticPagedList<SkyEntity.ChanpinOrder>
 @using PagedList;
 @using PagedList.Mvc;
 @using SkyService;
@@ -11,48 +11,31 @@
             <h3>陪伴空间</h3>
             <div class="row">
                 @Html.AntiForgeryToken()
-                @foreach (var item in Model)
-                {
+                <table>
+                    <tr>
+                        <td>订单号</td>
+                        <td>产品名称</td>
+                        <td>订单状态</td>
+                    </tr>
 
-                    <div class="col-md-4 col-sm-6">
-                        <div class="probox">
-                            <div class="probox-img">
-                                <img src="@PeibanService.GetBookById(item.ProductBook).Cover" alt="" class="img-thumbnail">
-                                <h4 class="text-center">@item.Title</h4>
-                            </div>
-                            <div class="probox-content">
-                                <h4 class="title">@item.Title</h4>
 
-                                <p class="description" style="text-align: left">
-                                    陪伴项目：@PeibanService.GetBookById(item.ProductBook).Title<br>
-                                    @CommonTools.ReplaceHtmlTag(PeibanService.GetBookById(item.ProductBook).Content, 60)
-                                </p>
-                                <p style="text-align: center;color: #fff">
-                                    <b style="text-align: center">空间陪伴师：@PeibanService.GetRenById(item.Peibanshi).RenNickName</b><br>
-                                </p>
+                    @foreach (var item in Model)
+                    {
 
-                                <ul class="social-links">
-                                    @if (PeibanService.GetStatusBySpaceRen(int.Parse(Session["renid"].ToString()), item.Id).MessageStatus == "false")
-                                    {
-                                        <li><button class="btn btn-success" onclick="JinruKongjian('@item.Id','@Session["renid"].ToString()','@item.ProductBook','@item.Peibanshi','/UHome/EntrySpace/','/UHome/RenwuList?id=@item.Id')"><i class="fa fa-qq"></i> 申请进入</button></li>
-                               
-                                    }
-                                    else
-                                    {
-   <li><a class="btn btn-success"  href="@Url.Action("RenwuList","UHome",new{id=item.Id})"><i class="fa fa-qq"></i> 立即进入</a></li>
-                               
-                                    }
-                                   
-                                 </ul>
-                            </div>
-                        </div>
-                    </div>
-                    
-                }
+                     <tr>
+                        <td>@item.OrderNumber</td>
+                        <td>@item.BuyChanpin</td>
+                        <td>@item.Status</td>
+                    </tr>
+
+                    }
+
+                </table>
+
             </div>
             <div class="box-footer clearfix  text-center">
                 <ul class="pagination pagination-sm no-margin">
-                    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new {page = page }),
+                    @Html.PagedListPager((IPagedList)Model, page => Url.Action("MyOrder", new {page = page }),
                             new PagedListRenderOptions
                             {
                                 LinkToPreviousPageFormat = "上一页",
