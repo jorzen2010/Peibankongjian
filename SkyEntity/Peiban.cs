@@ -140,7 +140,6 @@ namespace SkyEntity
         [Display(Name = "打卡时间")]
         public DateTime DakaTime { get; set; }
 
-        //加上标签和隐私，还需要加一个类是阅读历史
         [Display(Name = "最后修改时间")]
         public DateTime LastEditTime { get; set; }
 
@@ -232,11 +231,30 @@ namespace SkyEntity
         public DateTime CreateTime { get; set; }
 
         [Display(Name = "支付审核时间")]
-        public DateTime PayTime { get; set; }
-        [Display(Name = "审核状态")]
-        public bool Status { get; set; }
+        public string PayTime { get; set; }
+
+        //[Display(Name = "订单状态")]
+        //public bool Status { get; set; }
+        //[Display(Name = "邀请人支付状态")]
+        //public bool PayStatus { get; set; }
+
+
+        [Display(Name = "订单状态")]
+        public string Status { get; set; }
+
+        [Display(Name = "订单到期时间")]
+        public string ExpiredTime { get; set; }
+        [Display(Name = "订单备注")]
+        public string ShenheBeizhu { get; set; }
+
+        [Display(Name = "邀请人支付审核时间")]
+        public DateTime YaoqingPayTime { get; set; }
+
         [Display(Name = "邀请人支付状态")]
-        public bool PayStatus { get; set; }
+        public string PayStatus { get; set; }
+
+        [Display(Name = "订单备注")]
+        public string YaoqingrenBeizhu { get; set; }
     }
 
     public class RenKongList

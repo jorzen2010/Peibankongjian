@@ -31,12 +31,12 @@ namespace SkyService
             //buychanpin：1表示大众会员 2表示陪伴式会员 其他数字表示产品ID
             UnitOfWork unitOfWork = new UnitOfWork();
             bool status = false;
-            var orders = unitOfWork.chanpinOrdersRepository.Get(filter:u=>u.VipUser==rid&&u.ProductType==ptid&&u.BuyChanpin==cid&&u.Status==true);
+            var orders = unitOfWork.chanpinOrdersRepository.Get(filter:u=>u.VipUser==rid&&u.ProductType==ptid&&u.BuyChanpin==cid&&u.Status=="true");
             if (orders.Count() > 0)
             {
                 foreach (ChanpinOrder o in orders)
                 {
-                    if (o.PayTime.AddYears(1) > DateTime.Now)
+                    if (DateTime.Parse(o.ExpiredTime) > DateTime.Now)
                     {
                         status = true;
                         return status;
@@ -140,9 +140,9 @@ namespace SkyService
             var olist = unitOfWork.chanpinOrdersRepository.Get(filter: u => u.VipUser == rid && u.BuyChanpin == cid &&u.ProductType==ptid);
             if (olist.Count() > 0)
             {
-                if (olist.First().Status)
+                if (olist.First().Status=="ture")
                 {
-                    if (olist.First().PayTime.AddYears(1) > DateTime.Now)
+                    if (DateTime.Parse(olist.First().ExpiredTime) > DateTime.Now)
                     {
                         msg.MessageStatus = "true";
                         msg.MessageInfo = "有权限进入";
