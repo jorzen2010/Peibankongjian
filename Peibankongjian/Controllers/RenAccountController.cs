@@ -46,9 +46,15 @@ namespace Peibankongjian.Controllers
                     System.Web.HttpContext.Current.Session["renid"] = rens.First().Id.ToString();
                     System.Web.HttpContext.Current.Session["renname"] = username;
                     System.Web.HttpContext.Current.Session["Vip"] = "false";
-                    if (PeibanService.GetVipByRen(rens.First().Id))
+                    System.Web.HttpContext.Current.Session["Peibanshi"] = "false";
+                    if (PeibanService.GetVipByRen(1,1,rens.First().Id))
                     {
                         System.Web.HttpContext.Current.Session["Vip"] = "true";
+                    }
+                    if (PeibanService.GetVipByRen(1, 2, rens.First().Id))
+                    {
+                        System.Web.HttpContext.Current.Session["Vip"] = "true";
+                        System.Web.HttpContext.Current.Session["Peibanshi"] = "true";
                     }
 
                     return RedirectToAction("Index", "Home");

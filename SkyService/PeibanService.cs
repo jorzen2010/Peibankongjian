@@ -25,11 +25,13 @@ namespace SkyService
             return ren;
         }
 
-        public static bool GetVipByRen(int rid)
+        public static bool GetVipByRen(int ptid,int cid,int rid)
         {
+            //producttyep ：1表示 会员成品 2表示课程产品 
+            //buychanpin：1表示大众会员 2表示陪伴式会员 其他数字表示产品ID
             UnitOfWork unitOfWork = new UnitOfWork();
             bool status = false;
-            var orders = unitOfWork.chanpinOrdersRepository.Get(filter:u=>u.VipUser==rid&&u.ProductType==1&&u.BuyChanpin==2&&u.Status==true);
+            var orders = unitOfWork.chanpinOrdersRepository.Get(filter:u=>u.VipUser==rid&&u.ProductType==ptid&&u.BuyChanpin==cid&&u.Status==true);
             if (orders.Count() > 0)
             {
                 foreach (ChanpinOrder o in orders)
@@ -81,7 +83,6 @@ namespace SkyService
         {
             Message msg = new Message();
             UnitOfWork unitOfWork = new UnitOfWork();
-            bool status = false;
             string sql = "select top 1 * from Renwu where Id<" + id + " and  RenwuBook="+bid+" order by Id DESC";
             var renwus = unitOfWork.renwusRepository.GetWithRawSql(sql);
             if (renwus.Count() > 0)
@@ -132,34 +133,42 @@ namespace SkyService
         }
 
 
-        //public static Message GetStatusByOrder(int cid, int rid)
-        //{
-        //    Message msg = new Message();
-        //    UnitOfWork unitOfWork = new UnitOfWork();
-        //    bool status = false;
-        //    var olist = unitOfWork.chanpinOrdersRepository.Get(filter: u => u.VipUser == rid && u.BuyChanpin == cid);
-        //    if (olist.Count() > 0)
-        //    {
-        //        msg.MessageStatus = "true";
-        //        msg.MessageInfo = "进入陪伴空间";
-        //        foreach (ChanpinOrder o in olist)
-        //        {
-        //            if (!rk.Status)
-        //            {
-        //                msg.MessageStatus = "true";
-        //                msg.MessageInfo = "";
-        //                return msg;
-        //            }
-        //        }
-        //        return msg;
-        //    }
-        //    else
-        //    {
-        //        msg.MessageStatus = "false";
-        //        msg.MessageInfo = "申请进入陪伴空间";
-        //        return msg;
-        //    }
-        //}
+        public static Message GetStatusByOrder(int ptid,int cid, int rid)
+        {
+            Message msg = new Message();
+            UnitOfWork unitOfWork = new UnitOfWork();
+            var olist = unitOfWork.chanpinOrdersRepository.Get(filter: u => u.VipUser == rid && u.BuyChanpin == cid &&u.ProductType==ptid);
+            if (olist.Count() > 0)
+            {
+                if (olist.First().Status)
+                {
+                    if (olist.First().PayTime.AddYears(1) > DateTime.Now)
+                    {
+                        msg.MessageStatus = "true";
+                        msg.MessageInfo = "有权限进入";
+                        return msg;
+                    }
+                    else
+                    {
+                        msg.MessageStatus = "expired";
+                        msg.MessageInfo = "会员已经过期";
+                        return msg;
+                    }
+                }
+                else
+                {
+                    msg.MessageStatus = "nopay";
+                    msg.MessageInfo = "已申请，未付款";
+                    return msg;
+                }
+            }
+            else
+            {
+                msg.MessageStatus = "false";
+                msg.MessageInfo = "为什么会员，无权进入";
+                return msg;
+            }
+        }
 
     }
 }

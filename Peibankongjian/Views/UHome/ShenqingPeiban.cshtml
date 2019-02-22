@@ -9,12 +9,34 @@
 
     <div class="row">
         <div class="col-md-8">
-            <h3>申请成为陪伴师</h3>
+            <h3>申请成为
+            @if (ViewBag.cid == 1)
+            {
+                @Html.Raw("会员") 
+            }
+            @if (ViewBag.cid == 2)
+            {
+                @Html.Raw("陪伴师")
+            }
+            </h3>
             @using (Html.BeginForm("ShenqingPeiban", "UHome", FormMethod.Post, new { @class = "form-horizontal", @name = "CreateProduct", @id = "CreateProduct" }))
             {
 
                 @Html.AntiForgeryToken()
-                <div class="form-group">
+               
+
+                
+             if (ViewBag.status == "true")
+            {                
+                 <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                    <strong>Success!</strong> @Html.Raw("你已经是会员了")
+                </div>
+
+            }
+            else if (ViewBag.status == "false")
+            {
+                 <div class="form-group">
                     @Html.LabelFor(model => model.VipUser, new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         <input class="form-control" readonly="readonly" value="@PeibanService.GetRenById(int.Parse(Session["renid"].ToString())).RenNickName" />
@@ -22,7 +44,6 @@
                         @Html.ValidationMessageFor(model => model.VipUser)
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label class="control-label col-md-2">申请理由</label>
                     <div class="col-md-10">
@@ -30,19 +51,58 @@
                         @Html.ValidationMessageFor(model => model.Beizhu)
                     </div>
                 </div>
-
-                 @Html.HiddenFor(model => model.Yaoqingren, new { @Value = @PeibanService.GetRenById(int.Parse(Session["renid"].ToString())).Yaoqingren })
-                 @Html.HiddenFor(model => model.BuyChanpin, new { @Value = "2" })
-                 @Html.HiddenFor(model => model.ProductType, new { @Value = "1" })
-                 @Html.HiddenFor(model => model.CreateTime, new { @Value =DateTime.Now })
-                 @Html.HiddenFor(model => model.PayTime, new { @Value = DateTime.Now })
-                <div class="form-group">
+                 <div class="form-group">
 
                     <div class="col-md-8 col-md-offset-2">
 
                         <button type="submit" class="btn btn-primary btn-lg">&nbsp;&nbsp;&nbsp;&nbsp;立即申请&nbsp;&nbsp;&nbsp;&nbsp;</button>
                     </div>
                 </div>
+            }
+            else if (ViewBag.status == "expired")
+            {
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                    <strong>Warning!</strong> @Html.Raw("你会员过期了")
+                </div>
+                 <div class="form-group">
+                    @Html.LabelFor(model => model.VipUser, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <input class="form-control" readonly="readonly" value="@PeibanService.GetRenById(int.Parse(Session["renid"].ToString())).RenNickName" />
+                        @Html.HiddenFor(model => model.VipUser, new { @Value = Session["renid"].ToString(), @readonly = "readonly" })
+                        @Html.ValidationMessageFor(model => model.VipUser)
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="control-label col-md-2">申请理由</label>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Beizhu, new { @class = "form-control",@rows="5" })
+                        @Html.ValidationMessageFor(model => model.Beizhu)
+                    </div>
+                </div>
+                 <div class="form-group">
+
+                    <div class="col-md-8 col-md-offset-2">
+
+                        <button type="submit" class="btn btn-primary btn-lg">&nbsp;&nbsp;&nbsp;&nbsp;立即申请&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                    </div>
+                </div>
+            }
+            else if (ViewBag.status == "nopay")
+            {
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                    <strong>Warning!</strong> @Html.Raw("你申请会员了，还未付款，请联系邀请人汇款！")
+                </div>
+            }
+                
+
+                 @Html.HiddenFor(model => model.Yaoqingren, new { @Value = @PeibanService.GetRenById(int.Parse(Session["renid"].ToString())).Yaoqingren })
+                 @Html.HiddenFor(model => model.BuyChanpin, new { @Value = @ViewBag.cid })
+                 @Html.HiddenFor(model => model.ProductType, new { @Value = "1" })
+                 @Html.HiddenFor(model => model.CreateTime, new { @Value =DateTime.Now })
+                 @Html.HiddenFor(model => model.PayTime, new { @Value = DateTime.Now })
+               
 
             }
 

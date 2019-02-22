@@ -8,6 +8,7 @@ using PagedList;
 using SkyCommon;
 using SkyDal;
 using SkyEntity;
+using SkyService;
 
 namespace Peibankongjian.Controllers
 {
@@ -120,9 +121,14 @@ namespace Peibankongjian.Controllers
             return View(product);
         }
 
-        public ActionResult ShenqingPeiban()
+        public ActionResult ShenqingPeiban(int cid)
         {
-            
+            int ptid = 1;
+            int rid=int.Parse(Session["renid"].ToString());
+            Message msg = PeibanService.GetStatusByOrder(ptid,cid, rid);
+            ViewBag.status = msg.MessageStatus;
+            ViewBag.cid = cid;
+           
             return View();
         }
         [HttpPost]

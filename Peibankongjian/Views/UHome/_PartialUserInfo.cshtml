@@ -23,10 +23,7 @@
                 <a class="btn btn-block btn-lg btn-info" href="@Url.Action("Index","UHome")">我的陪伴空间</a>
                 <a class="btn btn-block btn-lg btn-warning" href="@Url.Action("DakaList","UHome")">打卡成长记录</a>
                 
-                @if (Session["Vip"].ToString() == "true")
-                {
-                    <a class="btn btn-block btn-lg btn-danger" href="@Url.Action("CreateProductList","UHome")">创建陪伴空间</a>
-                }
+            
             </div>
         </div>
     </div>

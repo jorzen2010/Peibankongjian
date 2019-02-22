@@ -8,17 +8,17 @@
             </a>
             <ul class="dropdown-menu">
 
-              
+
                 <li><a href="@Url.Action("Index", "UHome")">我的陪伴空间</a></li>
                 <li class="divider"></li>
                 @if (Session["Vip"] == "false")
                 {
-                    <li><a href="@Url.Action("ShenqingPeiban","UHome")">申请成为陪伴师</a></li>
+                    <li><a href="@Url.Action("ShenqingPeiban", "UHome", new { cid=1})">申请成为会员</a></li>
                     <li class="divider"></li>
                 }
-                else
+                @if (Session["Peibanshi"] == "false")
                 {
-                    <li><a href="@Url.Action("CreateProductList", "UHome")">创建陪伴空间</a></li>
+                    <li><a href="@Url.Action("ShenqingPeiban", "UHome", new { cid=2})">申请成为陪伴师</a></li>
                     <li class="divider"></li>
                 }
                 <li><a href="@Url.Action("AccountSetting", "Ucenter")">账号设置</a></li>
