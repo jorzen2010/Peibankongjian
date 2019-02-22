@@ -248,7 +248,7 @@ namespace SkyEntity
         public string ShenheBeizhu { get; set; }
 
         [Display(Name = "邀请人支付审核时间")]
-        public DateTime YaoqingPayTime { get; set; }
+        public string YaoqingPayTime { get; set; }
 
         [Display(Name = "邀请人支付状态")]
         public string PayStatus { get; set; }

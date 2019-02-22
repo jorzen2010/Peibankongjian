@@ -139,8 +139,8 @@ namespace Peibankongjian.Controllers
         {
             if (ModelState.IsValid)
             {
-                chanpinOrder.Status = false;
-                chanpinOrder.PayStatus = false;
+                chanpinOrder.Status = "false";
+                chanpinOrder.PayStatus = "false";
                 chanpinOrder.OrderNumber = CommonTools.ToUnixTime(DateTime.Now) +
                                            CommonTools.getRandomNumber(10000, 99999);
                 unitOfWork.chanpinOrdersRepository.Insert(chanpinOrder);

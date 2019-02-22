@@ -1,0 +1,181 @@
+﻿@using System.Activities.Expressions
+@using SkyService
+@model SkyEntity.ChanpinOrder
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.title = "订单管理";
+}
+@section Topcss {
+<link href="~/plugins/bootstrap-validator/css/bootstrapValidator.css" rel="stylesheet" type="text/css" />
+<link href="~/plugins/iCheck/square/green.css" rel="stylesheet" type="text/css" />
+
+}
+
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>          
+            修改 @ViewBag.title
+        </h1>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <!-- Default box -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">
+                            修改 @ViewBag.title
+                        </h3>
+
+                    </div>
+                    <!-- /.box-header -->
+                    @using (Html.BeginForm("Edit", "ChanpinOrder", FormMethod.Post, new { @class = "form-horizontal", @name = "Edit", @id = "Edit" }))
+                    {
+                        @Html.AntiForgeryToken()
+                         @Html.ValidationSummary(true)
+                          @Html.HiddenFor(model=>model.Id)
+                    <div class="box-body">
+                        <div class="col-md-12">
+
+                          
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.OrderNumber, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-9">
+                                    @Html.TextBoxFor(model => model.OrderNumber, new { @class = "form-control",@Value=Model.OrderNumber,@readonly="readonly"})
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ProductType, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-9">
+                                    <input class="form-control" value="@ViewBag.productType" readonly="readonly" />
+                                    @Html.HiddenFor(model => model.ProductType, new { @class = "form-control", @Value = Model.ProductType, @readonly = "readonly" })
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.BuyChanpin, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-9">
+                                    <input class="form-control" value="@ViewBag.chanpin" readonly="readonly"  />
+                                    @Html.HiddenFor(model => model.BuyChanpin, new { @class = "form-control", @Value = Model.BuyChanpin, @readonly = "readonly" })
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.VipUser, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-9">
+                                    <input class="form-control" value="@PeibanService.GetRenById(Model.VipUser).RenNickName" readonly="readonly"  />
+                                    @Html.HiddenFor(model => model.VipUser, new { @class = "form-control", @Value = Model.VipUser, @readonly = "readonly" })
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Yaoqingren, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-9">
+                                    <input class="form-control" value="@ViewBag.yaoqingren" readonly="readonly" />
+                                    @Html.HiddenFor(model => model.Yaoqingren, new { @class = "form-control", @Value =Model.Yaoqingren , @readonly = "readonly" })
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Beizhu, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-9">
+                                    @Html.TextAreaFor(model => model.Beizhu, new { @class = "form-control" ,@Value=Model.Beizhu,@readonly="readonly"})
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Status, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="Status" id="Status">
+                                        <option value="false">未审核（false）</option>
+                                        <option value="true">已支付(true)</option>
+                                        <option value="nopay">未支付(nopay)</option>
+                                        <option value="expired">已过期(expired)</option>
+                                        <option value="close">已关闭(close)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.PayTime, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-9">
+                                    @Html.TextBoxFor(model => model.PayTime, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ShenheBeizhu, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-9">
+                                    @Html.TextAreaFor(model => model.ShenheBeizhu, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.PayStatus, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="PayStatus" id="PayStatus">
+                                        <option value="false">被邀请人未支付（false）</option>
+                                        <option value="nopay">邀请人未支付(nopay)</option>
+                                        <option value="true">邀请人已支付(true)</option>
+                                        <option value="expired">已过期(expired)</option>
+                                        <option value="close">已关闭(close)</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.YaoqingPayTime, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-9">
+                                    @Html.TextBoxFor(model => model.YaoqingPayTime, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.YaoqingrenBeizhu, new { @class = "control-label col-md-2" })
+                                <div class="col-sm-9">
+                                    @Html.TextAreaFor(model => model.YaoqingrenBeizhu, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            @Html.HiddenFor(model=>model.CreateTime ,new{@Value=Model.CreateTime})
+
+                        </div>
+
+
+                    </div>
+                    
+                    <!-- /.box-body -->
+                    <div class="box-footer clearfix">
+                        
+                        <button type="submit" class="btn btn-primary pull-right">保存并发布</button>
+                    </div>
+               
+                    } </div>
+                <!-- /.box -->
+            </div>
+        </div>
+        <!-- /.box -->
+    </section>
+    <!-- /.content -->
+</div>
+
+
+
+@section BottomScripts {
+    <script type="text/javascript" src="~/plugins/bootbox.min.js"></script>
+    <script type="text/javascript" src="~/plugins/bootstrap-validator/js/bootstrapValidator.js"></script>
+    
+<script type="text/javascript">
+    $(document).ready(function () {
+        //根据值让option选中
+        $("#Status option[value='@Model.Status']").attr("selected", "selected");
+        $("#PayStatus option[value='@Model.PayStatus']").attr("selected", "selected");
+    });
+</script>
+}
+

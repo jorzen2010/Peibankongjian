@@ -3119,6 +3119,7 @@
     <Content Include="Views\UHome\DakaContent.cshtml" />
     <Content Include="Views\UHome\_PartialPinglun.cshtml" />
     <Content Include="Views\UHome\Myorder.cshtml" />
+    <Content Include="Views\ChanpinOrder\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
