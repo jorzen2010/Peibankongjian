@@ -93,7 +93,7 @@
                                             {
                                                 if (item.BuyChanpin == 1)
                                                 {
-                                                    @Html.Raw("普通会员")
+                                                    @Html.Raw("VIP会员")
                                                 }
                                                 else
                                                 {
@@ -119,11 +119,28 @@
 
                                        
                                         <td class="col-sm-1">
-                                            <button class="btn btn-xs btn-@(item.Status=="true" ? "success" : "danger")">@(item.Status == "true" ? "已支付" : "未支付") - @item.CreateTime</button>
+                                            <span class="label label-@(item.Status=="true" ? "success" : "danger")">
+                                                @{ ViewBag.paystatus =
+                                                       item.Status == "true" ? "已支付(true)"
+                                                           : item.Status == "false" ? "未审核(false)"
+                                                               : item.Status == "nopay" ? "未支付(nopay)"
+                                                                   : item.Status == "close" ? "已关闭(close)"
+                                                                       : item.Status == "expired" ? "已过期(expired)" : "";}
+                                                @ViewBag.paystatus
+
+                                            </span>
                                         </td>
                                         
                                         <td class="col-sm-1">
-                                            <button class="btn btn-xs btn-@(item.PayStatus=="true" ? "success" : "danger")">@(item.PayStatus=="true" ? "已支付" : "未支付")</button>
+                                            <span class="label label-@(item.PayStatus=="true" ? "success" : "danger")">
+                                                @{ ViewBag.yaoqingrenpaystatus =
+                                                       item.PayStatus == "true" ? "邀请人已支付(true)"
+                                                           : item.PayStatus == "false" ? "被邀请人未支付"
+                                                               : item.PayStatus == "nopay" ? "邀请人未支付(nopay)"
+                                                                   : item.PayStatus == "close" ? "已关闭(close)"
+                                                                       : item.PayStatus == "expired" ? "已过期(expired)" : "";}
+@ViewBag.yaoqingrenpaystatus
+                                            </span>
                                         </td>
                                         <td class="col-sm-1">
                                             <a class="btn btn-xs btn-success" href="@Url.Action("Edit","ChanpinOrder",new{id=item.Id})"><i class="fa fa-pencil"></i> 编辑</a>

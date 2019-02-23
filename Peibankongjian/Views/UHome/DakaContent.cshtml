@@ -1,16 +1,17 @@
 ﻿@model SkyEntity.RenwuDaka
 @using SkyService;
+@using SkyCommon;
 <div class="container peiban-container">
 
     <div class="row">
         <div class="col-md-8">
             <h3>@Model.DakaTitle</h3>
-            <span class="text-gray">陪伴师：@PeibanService.GetRenById(Model.Peibanshi).RenNickName 发布时间：@Model.DakaTime 最后编辑时间：@Model.LastEditTime</span>
+            <span class="text-gray">空间名称：@PeibanService.GetKongjianById(Model.Kongjian).Title  &nbsp;&nbsp;&nbsp;&nbsp; 陪伴师：@PeibanService.GetRenById(Model.Peibanshi).RenNickName  &nbsp;&nbsp;&nbsp;&nbsp;作者：@PeibanService.GetRenById(Model.RenwuZhixingzhe).RenNickName</span>
             <hr/>
             <div  class="box-body" style="line-height:30px;">
                 <article>
                     @Html.Raw(Model.DakaContent)
-                    <span>关键词：@Html.Raw(Model.Tags)</span>
+                    <span class="text-gray">字数：@CommonTools.CountWords(Model.DakaContent) &nbsp;&nbsp;&nbsp;&nbsp; 关键词：@Html.Raw(Model.Tags)</span>
                     <div class="text-gray">首次发布时间：@Model.DakaTime.ToString("yyyy-MM-dd hh:mm:ss") <br />最后编辑时间：@Model.LastEditTime.ToString("yyyy-MM-dd hh:mm:ss")</div>
 
 

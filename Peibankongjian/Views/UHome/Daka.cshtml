@@ -12,13 +12,26 @@
 <div class="container peiban-container">
 
     <div class="row">
+        <div class="col-md-4">
+
+            @Html.Action("UserInfo", "UHome")
+
+        </div>
         <div class="col-md-8">
-            <h3>打卡</h3>
+            <h3>@PeibanService.GetRenwuById(ViewBag.renwu).Title</h3>
+            <div class="well">
+                <article>
+                    <h4>打卡要求：</h4>
+                    @Html.Raw(PeibanService.GetRenwuById(ViewBag.renwu).Content)
+                </article>
+               
+            </div>
+
             @using (Html.BeginForm("Daka", "UHome", FormMethod.Post, new { @class = "form-horizontal", @name = "CreateProduct", @id = "CreateProduct" }))
             {
 
                 @Html.AntiForgeryToken()
-                 <div class="form-group">
+                <div class="form-group">
                     @Html.TextBoxFor(model => model.DakaTitle, new { @class = "form-control", @placeholder = "输入打卡文章标题" })
                     @Html.ValidationMessageFor(model => model.DakaTitle)
                 </div>
@@ -36,7 +49,7 @@
                     
                     @Html.LabelFor(model => model.Status, new { @class = "control-label" })
           
-                        @Html.CheckBoxFor(model => model.Status, new { @class = "form-control" })
+                    @Html.CheckBoxFor(model => model.Status, new { @class = "form-control" })
         
                 </div>
 
@@ -55,11 +68,7 @@
             }
 
         </div>
-        <div class="col-md-4">
-
-            @Html.Action("UserInfo", "UHome")
-
-        </div>
+        
     </div>
 
 </div>

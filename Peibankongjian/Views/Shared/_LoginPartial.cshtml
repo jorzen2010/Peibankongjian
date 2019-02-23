@@ -13,7 +13,7 @@
                 <li class="divider"></li>
                 @if (Session["Vip"] == "false")
                 {
-                    <li><a href="@Url.Action("ShenqingPeiban", "UHome", new { cid=1})">申请成为会员</a></li>
+                    <li><a href="@Url.Action("ShenqingPeiban", "UHome", new { cid=1})">开通VIP会员</a></li>
                     <li class="divider"></li>
                 }
                 @if (Session["Peibanshi"] == "false")

@@ -44,7 +44,7 @@
                         @Html.ValidationMessageFor(model => model.VipUser)
                     </div>
                 </div>
-                <div class="form-group">
+                 <div class="form-group">
                     <label class="control-label col-md-2">申请理由</label>
                     <div class="col-md-10">
                         @Html.TextAreaFor(model => model.Beizhu, new { @class = "form-control",@rows="5" })
@@ -61,9 +61,9 @@
             }
             else if (ViewBag.status == "expired")
             {
-                <div class="alert alert-warning alert-dismissible" role="alert">
+                 <div class="alert alert-warning alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
-                    <strong>Warning!</strong> @Html.Raw("你会员过期了")
+                    <strong>Warning!</strong> @Html.Raw("你会员过期了,可重新申请！")
                 </div>
                  <div class="form-group">
                     @Html.LabelFor(model => model.VipUser, new { @class = "control-label col-md-2" })
@@ -90,9 +90,9 @@
             }
             else if (ViewBag.status == "nopay")
             {
-                <div class="alert alert-warning alert-dismissible" role="alert">
+                 <div class="alert alert-warning alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
-                    <strong>Warning!</strong> @Html.Raw("你申请会员了，还未付款，请联系邀请人汇款！")
+                    <strong>Warning!</strong> @Html.Raw("你申请会员了，还未付款，请联系邀请人汇款！   <a href='/UHome/Myorder'>点击这里查看订单</a>")
                 </div>
             }
                 

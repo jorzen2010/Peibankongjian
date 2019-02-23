@@ -25,6 +25,20 @@ namespace SkyService
             return ren;
         }
 
+        public static Renwu GetRenwuById(int id)
+        {
+            UnitOfWork unitOfWork = new UnitOfWork();
+            Renwu renwu = unitOfWork.renwusRepository.GetByID(id);
+            return renwu;
+        }
+
+        public static Product GetKongjianById(int id)
+        {
+            UnitOfWork unitOfWork = new UnitOfWork();
+            Product _product = unitOfWork.productsRepository.GetByID(id);
+            return _product;
+        }
+
         public static bool GetVipByRen(int ptid,int cid,int rid)
         {
             //producttyep ：1表示 会员成品 2表示课程产品 
@@ -150,9 +164,23 @@ namespace SkyService
                     }
                     else
                     {
-                        msg.MessageStatus = "expired";
-                        msg.MessageInfo = "会员已经过期";
-                        return msg;
+                        if (olist.First().Status == "expired")
+                        {
+                            msg.MessageStatus = "expired";
+                            msg.MessageInfo = "会员已经过期";
+                            return msg;
+                        }
+                        else
+                        {
+                            ChanpinOrder _order = olist.First();
+                            _order.Status = "expired";
+                            unitOfWork.chanpinOrdersRepository.Update(_order);
+                            unitOfWork.Save();
+                            msg.MessageStatus = "expired";
+                            msg.MessageInfo = "会员已经过期";
+                            return msg;
+                        }
+                        
                     }
                 }
                 else
@@ -165,7 +193,7 @@ namespace SkyService
             else
             {
                 msg.MessageStatus = "false";
-                msg.MessageInfo = "为什么会员，无权进入";
+                msg.MessageInfo = "未申请会员，无权进入";
                 return msg;
             }
         }

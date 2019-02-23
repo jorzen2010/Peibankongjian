@@ -7,56 +7,127 @@
 <div class="container peiban-container">
 
     <div class="row">
-        <div class="col-md-8">
-            <h3>陪伴空间</h3>
-            <div class="row">
-                @Html.AntiForgeryToken()
-                <table>
-                    <tr>
-                        <td>订单号</td>
-                        <td>产品名称</td>
-                        <td>订单状态</td>
-                    </tr>
-
-
-                    @foreach (var item in Model)
-                    {
-
-                     <tr>
-                        <td>@item.OrderNumber</td>
-                        <td>@item.BuyChanpin</td>
-                        <td>@item.Status</td>
-                    </tr>
-
-                    }
-
-                </table>
-
-            </div>
-            <div class="box-footer clearfix  text-center">
-                <ul class="pagination pagination-sm no-margin">
-                    @Html.PagedListPager((IPagedList)Model, page => Url.Action("MyOrder", new {page = page }),
-                            new PagedListRenderOptions
-                            {
-                                LinkToPreviousPageFormat = "上一页",
-                                LinkToNextPageFormat = "下一页",
-                                DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded,
-                                DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded,
-                                DisplayLinkToPreviousPage = PagedListDisplayMode.IfNeeded,
-                                DisplayLinkToNextPage = PagedListDisplayMode.IfNeeded,
-                                MaximumPageNumbersToDisplay = 5,
-                                LinkToFirstPageFormat = "首页",
-                                LinkToLastPageFormat = "最后一页",
-                                PageCountAndCurrentLocationFormat = "第 {0}页 共 {1}页"
-                            })
-                </ul>
-            </div>
-        </div>
         <div class="col-md-4">
 
             @Html.Action("UserInfo", "UHome")
 
         </div>
+        <div class="col-md-8">
+            <h3>我的订单</h3>
+            <div class="row">
+                @Html.AntiForgeryToken()
+                <table class="table table-hover">
+                  
+                        <tr>
+
+                          
+                            <th class="col-sm-1">
+                                下单时间
+                            </th>
+                            <th class="col-sm-1">
+                                产品类型
+                            </th>
+                            <th class="col-sm-1">
+                                产品
+                            </th>
+                           
+
+                            <th class="col-sm-1">
+                                审核状态
+                            </th>
+                         
+                        </tr>
+                   
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                
+                                <td>
+                                    @item.CreateTime.ToString("yyyy-MM-dd hh:mm:ss")
+                                </td>
+                               
+                                <td>
+                                    @if (item.ProductType == 1)
+                                    {
+                                        @Html.Raw("会员产品")
+                                    }
+                                    else
+                                    {
+                                        @Html.Raw("课程产品")
+                                    }
+                                </td>
+                                <td>
+                                    @if (item.ProductType == 1)
+                                    {
+                                        if (item.BuyChanpin == 1)
+                                        {
+                                            @Html.Raw("VIP会员")
+                                        }
+                                        else
+                                        {
+                                            @Html.Raw("陪伴师会员")
+                                        }
+                                    }
+                                    @if (item.ProductType == 2)
+                                    {
+                                        @Html.Raw("课程产品名称")
+                                    }
+
+                                </td>
+                              
+
+
+                                <td class="col-sm-1">
+                                    <span class="label label-@(item.Status=="true" ? "success" : "danger")">
+                                        @{ ViewBag.paystatus =
+                                                       item.Status == "true" ? "已支付"
+                                                           : item.Status == "false" ? "未审核"
+                                                               : item.Status == "nopay" ? "未支付"
+                                                                   : item.Status == "close" ? "已关闭"
+                                                                       : item.Status == "expired" ? "已过期" : "";}
+                                        @ViewBag.paystatus
+
+                                    </span>
+                                </td>
+
+                             
+                               
+                            </tr>
+
+                        }
+
+                    </tbody>
+                </table>
+
+
+
+            </div>
+            @if (Model.PageCount > 1)
+            {
+                <div class="box-footer clearfix  text-center">
+                <ul class="pagination pagination-sm no-margin">
+                    @Html.PagedListPager((IPagedList)Model, page => Url.Action("MyOrder", new {page = page }),
+                        new PagedListRenderOptions
+                        {
+                            LinkToPreviousPageFormat = "上一页",
+                            LinkToNextPageFormat = "下一页",
+                            DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded,
+                            DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded,
+                            DisplayLinkToPreviousPage = PagedListDisplayMode.IfNeeded,
+                            DisplayLinkToNextPage = PagedListDisplayMode.IfNeeded,
+                            MaximumPageNumbersToDisplay = 5,
+                            LinkToFirstPageFormat = "首页",
+                            LinkToLastPageFormat = "最后一页",
+                            PageCountAndCurrentLocationFormat = "第 {0}页 共 {1}页"
+                        })
+                </ul>
+            </div>
+            }
+            
+        </div>
+        
     </div>
 
 </div>

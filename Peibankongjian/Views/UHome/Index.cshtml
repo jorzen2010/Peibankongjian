@@ -12,7 +12,7 @@
                 陪伴空间<span class="pull-right">
                     @if (Session["Peibanshi"].ToString() == "true")
                     {
-                        <button class="btn btn-warning"><i class="fa fa-plus-circle"></i> 创建</button>}
+                        <a class="btn btn-warning" href="@Url.Action("CreateProductList", "UHome")"><i class="fa fa-plus-circle"></i> 创建</a>}
                     <button class="btn btn-success"><i class="fa fa-plus-circle"></i> 发现</button>
                 </span>
             </h3>
@@ -46,7 +46,7 @@
                                     }
                                     else
                                     {
-                                        <li><a class="btn btn-success" href="@Url.Action("RenwuList","UHome",new{id=item.Id})"><i class="fa fa-qq"></i> 立即进入</a></li>
+                                        <li><a class="btn btn-success" href="@Url.Action("RenwuList","UHome",new{id=item.Id})" style="color: #ffffff"><i class="fa fa-qq"></i> 立即进入</a></li>
 
                                     }
 
