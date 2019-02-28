@@ -69,6 +69,9 @@ namespace Peibankongjian.Controllers
         [ValidateInput(false)]
         public ActionResult Register(Ren ren)
         {
+            Ren yaoqingren = new Ren();
+            yaoqingren=unitOfWork.rensRepository.GetByID(ren.Yaoqingren);
+
             if (ModelState.IsValid)
             {
                 if (string.IsNullOrEmpty(ren.RenNickName.ToString()))
@@ -76,9 +79,9 @@ namespace Peibankongjian.Controllers
                     return RedirectToAction("Register", "Ucenter");
                 }
 
-                if (string.IsNullOrEmpty(ren.Yaoqingren.ToString()))
+                if (string.IsNullOrEmpty(ren.Yaoqingren.ToString()) || string.IsNullOrEmpty(yaoqingren.RenNickName))
                 {
-                    ren.Yaoqingren = 10000;
+                    ren.Yaoqingren = 10001;
                 }
                 ren.RenPassword = CommonTools.ToMd5(ren.RenPassword);
                 unitOfWork.rensRepository.Insert(ren);

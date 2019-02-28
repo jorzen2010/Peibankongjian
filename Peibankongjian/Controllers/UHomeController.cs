@@ -9,6 +9,8 @@ using SkyCommon;
 using SkyDal;
 using SkyEntity;
 using SkyService;
+using SkyWechatService;
+using Newtonsoft.Json;
 
 namespace Peibankongjian.Controllers
 {
@@ -184,11 +186,66 @@ namespace Peibankongjian.Controllers
 
          public ActionResult Daka(RenwuDaka daka)
          {
+             Ren ren = unitOfWork.rensRepository.GetByID(daka.RenwuZhixingzhe);
+             Renwu renwu = unitOfWork.renwusRepository.GetByID(daka.RenwuName);
              if (ModelState.IsValid)
              {
 
                  unitOfWork.renwuDakasRepository.Insert(daka);
                  unitOfWork.Save();
+
+                 WechatTemplateMessage msgData = new WechatTemplateMessage
+                 {
+                     touser = ren.RenOpenid,
+                     template_id = "YfnxngfPAXv5hgSkDGKS-3bd5aScpZgwlRr1Jn85fWc",
+                     url = "http://peiban.zzd123.com/UHome/DakaContent?id="+daka.Id,
+                     data = new
+                     {
+
+                         first = new
+                         {
+                             value = "你好，完成作业通知。",
+                             color = "#173177"
+                         },
+                         keyword1 = new
+                         {
+                             value = ren.RenNickName,
+                             color = "#173177"
+                         },
+                         keyword2 = new
+                         {
+                             value = renwu.Title,
+                             color = "#173177"
+                         },
+                         keyword3 = new
+                         {
+                             value = DateTime.Now.ToString("yyyy-MM-dd hh:mm"),
+                             color = "#173177"
+                         },
+                         remark = new
+                         {
+                             value = "每一次陪伴都是人生的美好。"
+                         }
+                     }
+                 };
+
+                 string access_token = AccessTokenService.GetAccessToken();
+                 string postdata = JsonConvert.SerializeObject(msgData);
+
+                 string result = WechatMessageServices.SendTempletMessge(access_token, postdata);
+
+                 WechatResult wechatResult = JsonConvert.DeserializeObject<WechatResult>(result);
+                 if (wechatResult.errcode == 0)
+                 {
+                     ViewBag.msg = "模板消息发送成功！操作代码如下：";
+                     ViewBag.result = result;
+                 }
+                 else
+                 {
+                     ViewBag.msg = "模板消息发送失败！错误代码如下：";
+                     ViewBag.result = result;
+
+                 }
                  return RedirectToAction("DakaList", "UHome");
              }
              return View(daka);

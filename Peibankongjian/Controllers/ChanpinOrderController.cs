@@ -97,7 +97,7 @@ namespace Peibankongjian.Controllers
             {
                 unitOfWork.chanpinOrdersRepository.Update(_order);
                 unitOfWork.Save();
-                return RedirectToAction("Index", "ChanpinOrder",new{cid=_order.ProductType});
+                return RedirectToAction("Index", "ChanpinOrder",new{cid=_order.BuyChanpin});
             }
             return View(_order);
         }

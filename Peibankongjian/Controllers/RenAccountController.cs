@@ -81,6 +81,8 @@ namespace Peibankongjian.Controllers
             Response.Cookies["renid"].Expires = DateTime.Now.AddDays(-1);
             System.Web.HttpContext.Current.Session["renid"] = null;
             System.Web.HttpContext.Current.Session["renname"] = null;
+            System.Web.HttpContext.Current.Session["Vip"] = null;
+            System.Web.HttpContext.Current.Session["Peibanshi"] = null;
             return View("Login");
         }
 	}
