@@ -4549,7 +4549,7 @@
       <publishTime>02/27/2019 08:16:51</publishTime>
     </File>
     <File Include="bin/Peibankongjian.dll">
-      <publishTime>02/27/2019 15:58:17</publishTime>
+      <publishTime>03/01/2019 14:09:11</publishTime>
     </File>
     <File Include="bin/SkyCommon.dll">
       <publishTime>02/27/2019 13:49:35</publishTime>
@@ -8652,6 +8652,9 @@
     <File Include="Resource/img/picture.jpg">
       <publishTime>02/27/2019 08:16:47</publishTime>
     </File>
+    <File Include="Resource/img/qrcode_peiban.jpg">
+      <publishTime>03/01/2019 10:30:18</publishTime>
+    </File>
     <File Include="Resource/img/shu.png">
       <publishTime>02/27/2019 08:16:47</publishTime>
     </File>
@@ -8806,7 +8809,7 @@
       <publishTime>02/27/2019 08:16:47</publishTime>
     </File>
     <File Include="Views/RenAccount/Login.cshtml">
-      <publishTime>02/27/2019 08:16:47</publishTime>
+      <publishTime>03/01/2019 10:37:15</publishTime>
     </File>
     <File Include="Views/Renwu/Create.cshtml">
       <publishTime>02/27/2019 08:16:47</publishTime>
@@ -8847,6 +8850,9 @@
     <File Include="Views/Ucenter/ShengjiVIP.cshtml">
       <publishTime>02/27/2019 08:16:47</publishTime>
     </File>
+    <File Include="Views/UHome/AccountSet.cshtml">
+      <publishTime>03/01/2019 14:09:37</publishTime>
+    </File>
     <File Include="Views/UHome/CreateProduct.cshtml">
       <publishTime>02/27/2019 08:16:47</publishTime>
     </File>
@@ -8861,6 +8867,9 @@
     </File>
     <File Include="Views/UHome/DakaList.cshtml">
       <publishTime>02/27/2019 08:16:47</publishTime>
+    </File>
+    <File Include="Views/UHome/EditPassword.cshtml">
+      <publishTime>03/01/2019 14:09:20</publishTime>
     </File>
     <File Include="Views/UHome/Index.cshtml">
       <publishTime>02/27/2019 08:16:47</publishTime>
@@ -8920,7 +8929,7 @@
       <publishTime>02/27/2019 08:16:47</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/27/2019 13:49:41</publishTime>
+      <publishTime>03/01/2019 14:09:14</publishTime>
     </File>
     <File Include="WechatApi.ashx">
       <publishTime>02/27/2019 08:16:47</publishTime>

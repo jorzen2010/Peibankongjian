@@ -2128,8 +2128,10 @@
     <Content Include="Resource\img\loading.gif" />
     <Content Include="Resource\img\nophoto.png" />
     <Content Include="Resource\img\picture.jpg" />
+    <Content Include="Resource\img\qrcode_peiban.jpg" />
     <Content Include="Resource\img\shu.png" />
     <Content Include="Resource\img\avatar.jpg" />
+    <Content Include="Resource\img\csrs.jpg" />
     <Content Include="Resource\img\zz.jpg" />
     <Content Include="Resource\js\Peiban.js" />
     <Content Include="Resource\js\Article.js" />
@@ -3120,6 +3122,8 @@
     <Content Include="Views\UHome\_PartialPinglun.cshtml" />
     <Content Include="Views\UHome\Myorder.cshtml" />
     <Content Include="Views\ChanpinOrder\Edit.cshtml" />
+    <Content Include="Views\UHome\AccountSet.cshtml" />
+    <Content Include="Views\UHome\EditPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

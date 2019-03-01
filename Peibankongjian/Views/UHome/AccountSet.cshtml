@@ -1,0 +1,114 @@
+﻿@model SkyEntity.Ren
+@using SkyService;
+@using SkyEntity;
+@section Topcss {
+    <link href="~/plugins/bootstrap-validator/css/bootstrapValidator.css" rel="stylesheet" type="text/css" />
+}
+<div class="container peiban-container">
+
+    <div class="row">
+
+        <div class="col-md-8">
+            <h3>账号设置</h3>
+
+            @using (Html.BeginForm("AccountSet", "UHome", FormMethod.Post, new { @class = "form-horizontal", @name = "CreateProduct", @id = "CreateProduct" }))
+            {
+                if (!string.IsNullOrEmpty(ViewBag.msg))
+                {
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <strong>Warning!</strong> @Html.Raw(ViewBag.msg)
+                    </div>
+
+                }
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.Id, new { @Value = Model.Id })
+                
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RenName, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.RenName, new { @class = "form-control", @Value = Model.RenName, @readonly = "readonly" })
+                        @Html.ValidationMessageFor(model => model.RenName)
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RenNickName, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.RenNickName, new { @class = "form-control", @Value = Model.RenNickName })
+                        @Html.ValidationMessageFor(model => model.RenNickName)
+                    </div>
+                </div>
+
+                
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RenBirthday, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.RenBirthday, new { @class = "form-control", @Value = Model.RenBirthday })
+                        @Html.ValidationMessageFor(model => model.RenBirthday)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RenUserEmail, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(model => model.RenUserEmail, new { @class = "form-control", @Value = Model.RenUserEmail })
+                        @Html.ValidationMessageFor(model => model.RenUserEmail)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RenYijuhua, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.RenYijuhua, new { @class = "form-control", @Value = Model.RenYijuhua })
+                        @Html.ValidationMessageFor(model => model.RenYijuhua)
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.RenInfo, new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.RenInfo, new { @class = "form-control", @Value = Model.RenInfo })
+                        @Html.ValidationMessageFor(model => model.RenInfo)
+                    </div>
+                </div>
+                @Html.HiddenFor(model => model.City, new { @Value = Model.City })
+                @Html.HiddenFor(model => model.Country, new { @Value = Model.Country })
+                @Html.HiddenFor(model => model.CreateTime, new { @Value = Model.CreateTime })
+                @Html.HiddenFor(model => model.MsgStatus, new { @Value = Model.MsgStatus })
+                @Html.HiddenFor(model => model.Province, new { @Value = Model.Province })
+                @Html.HiddenFor(model => model.RenAvatar, new { @Value = Model.RenAvatar })
+                @Html.HiddenFor(model => model.RenOpenid, new { @Value = Model.RenOpenid })
+                @Html.HiddenFor(model => model.RenPassword, new { @Value = Model.RenPassword })
+                @Html.HiddenFor(model => model.RenPhone, new { @Value = Model.RenPhone })
+                @Html.HiddenFor(model => model.RenSex, new { @Value = Model.RenSex })
+                @Html.HiddenFor(model => model.RenUnionid, new { @Value = Model.RenUnionid })
+                @Html.HiddenFor(model => model.Status, new { @Value = Model.Status })
+                @Html.HiddenFor(model => model.Yaoqingren, new { @Value = Model.Yaoqingren })
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg pull-right">&nbsp;&nbsp;&nbsp;&nbsp;更新资料&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                </div>
+
+            }
+
+        </div>
+        <div class="col-md-4">
+
+            @Html.Action("UserInfo", "UHome")
+
+        </div>
+    </div>
+
+</div>
+
+
+@section BottomScripts {
+    <script type="text/javascript" src="~/plugins/bootbox.min.js"></script>
+    <script type="text/javascript" src="~/Resource/js/SkyWeb.js"></script>
+    <script type="text/javascript">
+
+    </script>
+
+}

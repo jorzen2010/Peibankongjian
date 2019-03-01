@@ -1,13 +1,15 @@
-﻿@{
+﻿@using SkyEntity;
+@{
     Layout = null;
+    Ren ren = ViewData["userinfo"] as Ren;
 }
 @if (Session["renname"] != "" && Session["renname"] != null)
 {
     <div class="row text-center">
         <div class="col-md-12">
             <img src="/Resource/img/zz.jpg" alt="..." class="img-thumbnail img-circle" style="width:30%">
-            <h3>赵征</h3>
-            <span>会写代码的心理咨询师</span>
+            <h3>@ren.RenNickName</h3>
+            <span>@ren.RenYijuhua</span>
             <table class="table">
                 <tr>
                     <td><h4>79</h4><span>打卡</span></td>
@@ -16,7 +18,7 @@
                 </tr>
             </table>
             <div class="uc-jieshao">
-                会写代码的心理咨询师会写代码的心理咨询师会写代码的心理咨询师会写代码的心理咨询师会写代码的心理咨询师会写代码的心理咨询师会写代码的心理咨询师
+                @ren.RenInfo
             </div>
             <div class="uc-menu">
                

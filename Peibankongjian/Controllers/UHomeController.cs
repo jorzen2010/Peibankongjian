@@ -33,6 +33,87 @@ namespace Peibankongjian.Controllers
             return View(PageList);
         }
 
+        public ActionResult AccountSet()
+        {
+            int rid=int.Parse(Session["renid"].ToString());
+            Ren ren = unitOfWork.rensRepository.GetByID(rid);
+            return View(ren);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult AccountSet(Ren ren)
+        {
+            if (ModelState.IsValid)
+            {
+                unitOfWork.rensRepository.Update(ren);
+                unitOfWork.Save();
+                ViewBag.msg = "个人资料已更新！";
+                return View(ren);
+            }
+            ViewBag.msg = "发生错误，个人资料未更新！";
+
+            return View(ren);
+        }
+        public ActionResult EditPassword()
+        {
+            int rid = int.Parse(Session["renid"].ToString());
+            Ren ren = unitOfWork.rensRepository.GetByID(rid);
+            ViewBag.rid = rid;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult EditPassword(FormCollection fc)
+        {
+            string old_password = fc["RenPassword"].ToString();
+            string new_password = fc["NewPassword"].ToString();
+            string re_password = fc["RePassword"].ToString();
+            int rid = int.Parse(fc["Id"].ToString());
+            Ren ren = unitOfWork.rensRepository.GetByID(rid);
+
+            if (string.IsNullOrEmpty(old_password) || string.IsNullOrEmpty(new_password) || string.IsNullOrEmpty(re_password))
+            {
+                ViewBag.msg = "密码不能为空";
+                ViewBag.rid = ren.Id;
+                return View();
+            }
+            else
+            {
+                if (ren.RenPassword == CommonTools.ToMd5(old_password))
+                {
+                    if (new_password == re_password)
+                    {
+                        ren.RenPassword = CommonTools.ToMd5(new_password);
+                        unitOfWork.rensRepository.Update(ren);
+                        unitOfWork.Save();
+                        ViewBag.msg = "个人资料已更新！";
+                        ViewBag.rid = ren.Id;
+                        return View();
+                    }
+                    else
+                    {
+                        ViewBag.msg = "两次输入密码不一致，请重新输入";
+                        ViewBag.rid = ren.Id;
+                        return View();
+                    }
+
+                }
+                else
+                {
+                    ViewBag.msg = "旧密码输入错误";
+                    ViewBag.rid = ren.Id;
+                    return View();
+                }
+ 
+            }
+
+          
+            
+        }
+
         public ActionResult DakaList(int? page)
         {
             Pager pager = new Pager();
@@ -86,6 +167,9 @@ namespace Peibankongjian.Controllers
         }
         public ActionResult UserInfo()
         {
+           int rid = int.Parse(Session["renid"].ToString());
+           Ren ren = unitOfWork.rensRepository.GetByID(rid);
+           ViewData["userinfo"] = ren;
            return View("~/Views/UHome/_PartialUserInfo.cshtml");
         }
 
