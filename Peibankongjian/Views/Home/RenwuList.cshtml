@@ -1,43 +1,72 @@
-﻿@model StaticPagedList<SkyEntity.Renwu>
-@using PagedList;
-@using PagedList.Mvc;
-@using SkyService;
+﻿@model SkyEntity.Product
+@using SkyEntity;
+@using SkyService
+@using SkyCommon;
+@{
+    Book book = ViewData["probook"] as Book;
+    List<Renwu> renwus = ViewData["proRenwus"] as List<Renwu>;
+}
+
 
 
 <div class="container peiban-container">
 
     <div class="row">
         <div class="col-md-8">
-            <h3>陪读书单</h3>
-            <div class="row">
-                <ol>
-
-                    @foreach (var item in Model)
+            <h3>@Model.Title</h3>
+            <h5 style="height: 25px;line-height: 25px;">
+                陪伴项目：@PeibanService.GetBookById(Model.ProductBook).Title &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                空间陪伴师：@PeibanService.GetRenById(Model.Peibanshi).RenNickName
+            </h5>
+            <div class="well" style="line-height: 30px;">
+                <article>
+                    @Html.Raw(book.Content)
+                    @if (Session["renname"] != "" && Session["renname"] != null)
                     {
-                        <li>@item.Title</li>
-                      
+                         if (PeibanService.GetStatusBySpaceRen(int.Parse(Session["renid"].ToString()), Model.Id).MessageStatus == "false")
+                                    {
+                                        <button class="btn btn-success" onclick="JinruKongjian('@Model.Id','@Session["renid"].ToString()','@Model.ProductBook','@Model.Peibanshi','/UHome/EntrySpace/','/UHome/RenwuList?id=@Model.Id')"><i class="fa fa-qq"></i> 申请进入</button>
 
+                                    }
+                                    else
+                                    {
+                                       <a class="btn btn-success" href="@Url.Action("RenwuList", "UHome", new { id = Model.Id })" style="color: #ffffff"><i class="fa fa-qq"></i> 立即进入</a>
+
+                                    }
+                   
                     }
-                </ol>
+                    else
+                    {
+  
+                        <a class="btn btn-success" href="@Url.Action("Login","RenAccount")">登陆</a>
+                    }
+                </article>
             </div>
-            <div class="box-footer clearfix  text-center">
-                <ul class="pagination pagination-sm no-margin">
-                    @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { type = Request.QueryString["type"], page = page }),
-                            new PagedListRenderOptions
-                            {
-                                LinkToPreviousPageFormat = "上一页",
-                                LinkToNextPageFormat = "下一页",
-                                DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded,
-                                DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded,
-                                DisplayLinkToPreviousPage = PagedListDisplayMode.IfNeeded,
-                                DisplayLinkToNextPage = PagedListDisplayMode.IfNeeded,
-                                MaximumPageNumbersToDisplay = 5,
-                                LinkToFirstPageFormat = "首页",
-                                LinkToLastPageFormat = "最后一页",
-                                PageCountAndCurrentLocationFormat = "第 {0}页 共 {1}页"
-                            })
-                </ul>
-            </div>
+            <table class="table table-hover">
+
+                @foreach (Renwu renwu in renwus)
+                {
+                    <tr>
+                        <td>@renwu.Id 、 @renwu.Title</td>
+
+                       
+                            <td><button class="btn btn-default pull-right btn-sm"><i class="fa fa-lock"></i> 解锁</button></td>
+                      
+                    </tr>
+
+                    @*<h4 style="vertical-align:middle">
+                            @renwu.Title
+                        <small><button class="btn btn-danger pull-right"><i class="fa fa-lock"></i> 解锁</button></small>
+                    </h4>
+
+                        <span>
+                            @CommonTools.ReplaceHtmlTag(renwu.Content, 90)
+                        </span>*@
+
+
+                }
+            </table>
+
         </div>
         <div class="col-md-4">
             <h3>创始人说</h3>
@@ -51,19 +80,71 @@
 
 </div>
 
-
 @section BottomScripts {
+    <script type="text/javascript" src="~/plugins/readmore/readmore.js"></script>
     <script type="text/javascript">
-        $('.shudan').on("mouseover", function () {
-            $(this).addClass("shudan-active");
-            // alert("asdf");
-        }).on("mouseout", function () {
-            $(this).removeClass("shudan-active");
 
+        $('article').readmore({
+            speed: 75,
+            moreLink: '<br><a href="#">展开</a>',
+            lessLink: '<br><a href="#">收起</a>',
         });
-        function ToUrl(id) {
-            var tourl = "/Home/Shu?bid=" + id
-            window.location.href = tourl;
+        function JinruKongjian(kid, rid, bid, pid, url, tourl) {
+            bootbox.confirm({
+                buttons: {
+                    confirm: {
+                        label: '进入空间',
+                        className: 'btn-danger'
+                    },
+                    cancel: {
+                        label: '取消',
+                        className: 'btn-default'
+                    }
+                },
+                message: '你确定要进入本空间吗？<br><br> 非常高兴与您在本空间相遇，让我们一起陪伴成长。<br><br>一生那么长，有些路要一起走！',
+                callback: function (result) {
+                    if (result) {
+                        var token = $('[name=__RequestVerificationToken]').val();
+                        var headers = {};
+                        //防伪标记放入headers
+                        //也可以将防伪标记放入data
+                        headers["__RequestVerificationToken"] = token;
+                        $.ajax({
+                            url: url,
+                            headers: headers,
+                            type: 'post',
+                            timeout: 3000,
+                            data: {
+                                rid: rid,
+                                kid: kid,
+                                bid: bid,
+                                pid: pid,
+                                __RequestVerificationToken: token,
+                                status: 'true',
+                            },
+                            success: function (msg) {
+                                if (msg.MessageStatus == 'true') {
+                                    window.location.href = tourl;
+                                }
+                                else {
+                                    alertconfirm('抱歉你没有权限进入本空间');
+                                }
+                            },
+                            error: function (e) {
+                                alertconfirm('出现意外错误，进入空间失败！');
+                            }
+                        });
+                    }
+                    else {
+                        // alertconfirm('您已经取消删除了');
+                    }
+                },
+                title: "进入空间通行证",
+            });
         }
+
+
     </script>
+
 }
+

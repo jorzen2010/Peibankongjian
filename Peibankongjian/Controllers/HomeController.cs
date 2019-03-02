@@ -13,7 +13,7 @@ namespace Peibankongjian.Controllers
 {
     public class HomeController : Controller
     {
-        private UnitOfWork unitOfwork=new UnitOfWork();
+        private UnitOfWork unitOfWork = new UnitOfWork();
         public ActionResult Index()
         {
             return View();
@@ -26,9 +26,20 @@ namespace Peibankongjian.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult ChengzhangList(int? page)
         {
-            ViewBag.Message = "Your contact page.";
+            Pager pager = new Pager();
+            pager.table = "RenwuDaka";
+            pager.strwhere = "Status='false'";
+            pager.PageSize = 12;
+            pager.PageNo = page ?? 1;
+            pager.FieldKey = "Id";
+            pager.FiledOrder = "Id desc";
+
+            pager = CommonDal.GetPager(pager);
+            IList<RenwuDaka> dataList = DataConvertHelper<RenwuDaka>.ConvertToModel(pager.EntityDataTable);
+            var PageList = new StaticPagedList<RenwuDaka>(dataList, pager.PageNo, pager.PageSize, pager.Amount);
+            return View(PageList);
 
             return View();
         }
@@ -68,26 +79,17 @@ namespace Peibankongjian.Controllers
             return View(PageList);
         }
 
-        public ActionResult RenwuList(int? page,int bid,int pid)
-        {
-            Pager pager = new Pager();
-            pager.table = "Renwu";
-            pager.strwhere = "RenwuBook="+bid;
-            pager.PageSize = 12;
-            pager.PageNo = page ?? 1;
-            pager.FieldKey = "Id";
-            pager.FiledOrder = "Id asc";
+        public ActionResult RenwuList(int id)
+        { 
+            Product product = unitOfWork.productsRepository.GetByID(id);
+            Book book = unitOfWork.booksRepository.GetByID(product.ProductBook);
+            var renwus = unitOfWork.renwusRepository.Get(filter: r => r.RenwuBook == book.Id);
+            ViewData["probook"] = book;
+            ViewData["proRenwus"] = renwus;
 
-            pager = CommonDal.GetPager(pager);
-            IList<Renwu> dataList = DataConvertHelper<Renwu>.ConvertToModel(pager.EntityDataTable);
-            var PageList = new StaticPagedList<Renwu>(dataList, pager.PageNo, pager.PageSize, pager.Amount);
-            ViewBag.product = pid;
-            return View(PageList);
+            return View(product);
         }
 
-        public ActionResult CreateProduct()
-        {
-            return View();
-        }
+
     }
 }

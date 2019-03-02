@@ -1,6 +1,7 @@
 ﻿@model StaticPagedList<SkyEntity.Product>
 @using PagedList;
 @using PagedList.Mvc;
+@using SkyCommon;
 @using SkyService;
 
 
@@ -13,13 +14,32 @@
 
                 @foreach (var item in Model)
                 {
-                    <div class="col-xs-3" onclick="ToUrl(@item.Id,@item.ProductBook)">
+                    <div class="col-md-4 col-sm-6">
+                        <div class="probox">
+                            <div class="probox-img">
+                                <img src="@PeibanService.GetBookById(item.ProductBook).Cover" alt="" class="img-thumbnail">
+                                <h4 class="text-center">@item.Title</h4>
+                            </div>
+                            <div class="probox-content">
+                                <h4 class="title">@item.Title</h4>
 
-                        <img src="@PeibanService.GetBookById(item.ProductBook).Cover" alt="..." class="img-thumbnail" style="width:100%">
-                        <h4>@item.Title</h4>
-                        <span>陪伴项目：@PeibanService.GetBookById(item.ProductBook).Title <br>陪伴师： @PeibanService.GetRenById(item.Peibanshi).RenNickName</span>
+                                <p class="description" style="text-align: left">
+                                    陪伴项目：@PeibanService.GetBookById(item.ProductBook).Title<br>
+                                    @CommonTools.ReplaceHtmlTag(PeibanService.GetBookById(item.ProductBook).Content, 60)
+                                </p>
+                                <p style="text-align: center;color: #fff">
+                                    <b style="text-align: center">空间陪伴师：@PeibanService.GetRenById(item.Peibanshi).RenNickName</b><br>
+                                </p>
+
+                                <ul class="social-links">
+                                   
+                                        <li><a class="btn btn-success btn-sm" href="@Url.Action("RenwuList","Home",new{id=item.Id})" style="color: #ffffff"><i class="fa fa-discover"></i> 查看</a></li>
+
+                                 
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-
                 }
             </div>
             <div class="box-footer clearfix  text-center">
@@ -56,15 +76,15 @@
 
 @section BottomScripts {
     <script type="text/javascript">
-        $('.shudan').on("mouseover", function () {
-            $(this).addClass("shudan-active");
-            // alert("asdf");
-        }).on("mouseout", function () {
-            $(this).removeClass("shudan-active");
+        //$('.shudan').on("mouseover", function () {
+        //    $(this).addClass("shudan-active");
+        //    // alert("asdf");
+        //}).on("mouseout", function () {
+        //    $(this).removeClass("shudan-active");
 
-        });
-        function ToUrl(pid,bid) {
-            var tourl = "/Home/RenwuList?bid=" + bid+"&pid="+pid;
+        //});
+        function ToUrl(id) {
+            var tourl = "/Home/RenwuList?id=" + id;
             window.location.href = tourl;
         }
     </script>
