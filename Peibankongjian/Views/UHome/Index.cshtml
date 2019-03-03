@@ -1,6 +1,7 @@
-﻿@model StaticPagedList<SkyEntity.Product>
+﻿@model StaticPagedList<SkyEntity.RenKongList>
 @using PagedList;
 @using PagedList.Mvc;
+@using SkyEntity
 @using SkyService;
 @using SkyCommon;
 
@@ -13,42 +14,45 @@
                     @if (Session["Peibanshi"].ToString() == "true")
                     {
                         <a class="btn btn-warning" href="@Url.Action("CreateProductList", "UHome")"><i class="fa fa-plus-circle"></i> 创建</a>}
-                    <button class="btn btn-success"><i class="fa fa-plus-circle"></i> 发现</button>
+                    <a class="btn btn-success" href="@Url.Action("Product","Home")"><i class="fa fa-plus-circle"></i> 发现</a>
                 </span>
             </h3>
             <div class="row">
                 @Html.AntiForgeryToken()
                 @foreach (var item in Model)
                 {
-
+                    Product product = PeibanService.GetProductById(item.Kongjian);
                     <div class="col-md-4 col-sm-6">
                         <div class="probox">
                             <div class="probox-img">
-                                <img src="@PeibanService.GetBookById(item.ProductBook).Cover" alt="" class="img-thumbnail">
-                                <h4 class="text-center">@item.Title</h4>
+                                <img src="@PeibanService.GetBookById(product.ProductBook).Cover" alt="" class="img-thumbnail">
+                                <h4 class="text-center">@product.Title</h4>
                             </div>
                             <div class="probox-content">
-                                <h4 class="title">@item.Title</h4>
+                                <h4 class="title">@product.Title</h4>
 
                                 <p class="description" style="text-align: left">
-                                    陪伴项目：@PeibanService.GetBookById(item.ProductBook).Title<br>
-                                    @CommonTools.ReplaceHtmlTag(PeibanService.GetBookById(item.ProductBook).Content, 60)
+                                    陪伴项目：@PeibanService.GetBookById(product.ProductBook).Title<br>
+                                    @CommonTools.ReplaceHtmlTag(PeibanService.GetBookById(product.ProductBook).Content, 60)
                                 </p>
                                 <p style="text-align: center;color: #fff">
-                                    <b style="text-align: center">空间陪伴师：@PeibanService.GetRenById(item.Peibanshi).RenNickName</b><br>
+                                    <b style="text-align: center">空间陪伴师：@PeibanService.GetRenById(product.Peibanshi).RenNickName</b><br>
                                 </p>
 
                                 <ul class="social-links">
-                                    @if (PeibanService.GetStatusBySpaceRen(int.Parse(Session["renid"].ToString()), item.Id).MessageStatus == "false")
+                                    @if (PeibanService.GetStatusBySpaceRen(int.Parse(Session["renid"].ToString()), product.Id).MessageStatus == "false")
                                     {
-                                        <li><button class="btn btn-success" onclick="JinruKongjian('@item.Id','@Session["renid"].ToString()','@item.ProductBook','@item.Peibanshi','/UHome/EntrySpace/','/UHome/RenwuList?id=@item.Id')"><i class="fa fa-qq"></i> 申请进入</button></li>
+                                        <li><button class="btn btn-success" onclick="JinruKongjian('@product.Id','@Session["renid"].ToString()','@product.ProductBook','@product.Peibanshi','/UHome/EntrySpace/','/UHome/RenwuList?id=@product.Id')"><i class="fa fa-chevron-circle-right"></i> 申请进入</button></li>
 
                                     }
                                     else
                                     {
-                                        <li><a class="btn btn-success" href="@Url.Action("RenwuList","UHome",new{id=item.Id})" style="color: #ffffff"><i class="fa fa-qq"></i> 立即进入</a></li>
-
-                                    }
+                                        <li>
+                                            
+                                            <a class="btn btn-success" href="@Url.Action("RenwuList", "UHome", new { id = product.Id })" style="color: #ffffff"><i class="fa fa-chevron-circle-right"></i> 进入</a>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                            <button class="btn btn-danger" onclick="TuichuKongjian('@item.Kongjian','@Session["renid"].ToString()','@item.ProductBook','@item.Peibanshi','/UHome/QuitSpace/','/Home/RenwuList?id=@product.Id')"><i class="fa fa-power-off"></i> 退出</button>
+                                        </li>  }
 
                                 </ul>
                             </div>
@@ -143,6 +147,59 @@
             });
         }
 
+        function TuichuKongjian(kid, rid, bid, pid, url, tourl) {
+            bootbox.confirm({
+                buttons: {
+                    confirm: {
+                        label: '退出空间',
+                        className: 'btn-danger'
+                    },
+                    cancel: {
+                        label: '取消',
+                        className: 'btn-default'
+                    }
+                },
+                message: '你确定要退出本空间吗？<br><br> 退出后你将不能接受到本空间的成长打卡信息，不能正常打卡。<br><br>你真的要退出吗？',
+                callback: function (result) {
+                    if (result) {
+                        var token = $('[name=__RequestVerificationToken]').val();
+                        var headers = {};
+                        //防伪标记放入headers
+                        //也可以将防伪标记放入data
+                        headers["__RequestVerificationToken"] = token;
+                        $.ajax({
+                            url: url,
+                            headers: headers,
+                            type: 'post',
+                            timeout: 3000,
+                            data: {
+                                rid: rid,
+                                kid: kid,
+                                bid: bid,
+                                pid: pid,
+                                __RequestVerificationToken: token,
+                                status: 'false',
+                            },
+                            success: function (msg) {
+                                if (msg.MessageStatus == 'true') {
+                                    window.location.href = tourl;
+                                }
+                                else {
+                                    alertconfirm('抱歉你没有权限进入本空间');
+                                }
+                            },
+                            error: function (e) {
+                                alertconfirm('出现意外错误，退出空间失败！');
+                            }
+                        });
+                    }
+                    else {
+                        // alertconfirm('您已经取消删除了');
+                    }
+                },
+                title: "退出空间验证",
+            });
+        }
 
 
     </script>

@@ -40,8 +40,6 @@ namespace Peibankongjian.Controllers
             IList<RenwuDaka> dataList = DataConvertHelper<RenwuDaka>.ConvertToModel(pager.EntityDataTable);
             var PageList = new StaticPagedList<RenwuDaka>(dataList, pager.PageNo, pager.PageSize, pager.Amount);
             return View(PageList);
-
-            return View();
         }
 
       

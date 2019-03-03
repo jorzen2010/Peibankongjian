@@ -25,6 +25,13 @@ namespace SkyService
             return ren;
         }
 
+        public static Product GetProductById(int id)
+        {
+            UnitOfWork unitOfWork = new UnitOfWork();
+            Product _product = unitOfWork.productsRepository.GetByID(id);
+            return _product;
+        }
+
         public static Renwu GetRenwuById(int id)
         {
             UnitOfWork unitOfWork = new UnitOfWork();

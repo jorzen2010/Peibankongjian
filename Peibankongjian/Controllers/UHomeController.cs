@@ -19,17 +19,30 @@ namespace Peibankongjian.Controllers
         private UnitOfWork unitOfWork = new UnitOfWork();
         public ActionResult Index(int? page)
         {
+            //Pager pager = new Pager();
+            //pager.table = "Product";
+            //pager.strwhere = "1=1";
+            //pager.PageSize = 12;
+            //pager.PageNo = page ?? 1;
+            //pager.FieldKey = "Id";
+            //pager.FiledOrder = "Id desc";
+
+            //pager = CommonDal.GetPager(pager);
+            //IList<Product> dataList = DataConvertHelper<Product>.ConvertToModel(pager.EntityDataTable);
+            //var PageList = new StaticPagedList<Product>(dataList, pager.PageNo, pager.PageSize, pager.Amount);
+            //return View(PageList);
+            int rid = int.Parse(Session["renid"].ToString());
             Pager pager = new Pager();
-            pager.table = "Product";
-            pager.strwhere = "1=1";
+            pager.table = "RenkongList";
+            pager.strwhere = "Shenqingren="+rid+" and Status='true'";
             pager.PageSize = 12;
             pager.PageNo = page ?? 1;
             pager.FieldKey = "Id";
             pager.FiledOrder = "Id desc";
 
             pager = CommonDal.GetPager(pager);
-            IList<Product> dataList = DataConvertHelper<Product>.ConvertToModel(pager.EntityDataTable);
-            var PageList = new StaticPagedList<Product>(dataList, pager.PageNo, pager.PageSize, pager.Amount);
+            IList<RenKongList> dataList = DataConvertHelper<RenKongList>.ConvertToModel(pager.EntityDataTable);
+            var PageList = new StaticPagedList<RenKongList>(dataList, pager.PageNo, pager.PageSize, pager.Amount);
             return View(PageList);
         }
 
@@ -179,20 +192,76 @@ namespace Peibankongjian.Controllers
         {
             Message msg = new Message();
 
-            RenKongList rklist=new RenKongList();
-            rklist.Kongjian = kid;
-            rklist.Shenqingren = rid;
-            rklist.Peibanshi = pid;
-            rklist.ProductBook = bid;
+            var rks = unitOfWork.renKongListsRepository.Get(
+                filter: u => u.Kongjian == kid && u.Shenqingren == rid && u.Peibanshi == pid && u.ProductBook == bid);
+
+            if (rks.Count() > 0)
+            {
+                RenKongList _renKongList = rks.First();
+                _renKongList.Status = status;
+                unitOfWork.renKongListsRepository.Update(_renKongList);
+                unitOfWork.Save();
+                msg.MessageStatus = "true";
+                msg.MessageInfo = "重新申请进入成功";
+            }
+            else
+            {
+                RenKongList rklist = new RenKongList();
+                rklist.Kongjian = kid;
+                rklist.Shenqingren = rid;
+                rklist.Peibanshi = pid;
+                rklist.ProductBook = bid;
+                rklist.Status = status;
+
+
+                unitOfWork.renKongListsRepository.Insert(rklist);
+                unitOfWork.Save();
+
+                msg.MessageStatus = "true";
+                msg.MessageInfo = "申请进入成功";
+
+            }
+
+            //  ChanpinOrder _chanpinOrder = unitOfWork.chanpinOrdersRepository.Get();
+
+            
+
+            return Json(msg, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult QuitSpace(int rid, int kid, int bid, int pid, bool status)
+        {
+            Message msg = new Message();
+
+            ////  ChanpinOrder _chanpinOrder = unitOfWork.chanpinOrdersRepository.Get();
+
+            //RenKongList rklist = new RenKongList();
+            //rklist.Kongjian = kid;
+            //rklist.Shenqingren = rid;
+            //rklist.Peibanshi = pid;
+            //rklist.ProductBook = bid;
+            //rklist.Status = status;
+
+            var rks=unitOfWork.renKongListsRepository.Get(
+                filter: u => u.Kongjian == kid && u.Shenqingren == rid && u.Peibanshi == pid && u.ProductBook == bid);
+            RenKongList rklist = rks.First();
             rklist.Status = status;
-
-
-            unitOfWork.renKongListsRepository.Insert(rklist);
-            unitOfWork.Save();
-
-            msg.MessageStatus = "true";
-            msg.MessageInfo = "申请进入成功";
-
+            try
+            {
+                unitOfWork.renKongListsRepository.Update(rklist);
+                unitOfWork.Save();
+                msg.MessageStatus = "true";
+                msg.MessageInfo = "退出成功";
+            }
+            catch (Exception)
+            {
+                msg.MessageStatus = "true";
+                msg.MessageInfo = "退出失败";
+                
+                throw;
+            }
             return Json(msg, JsonRequestBehavior.AllowGet);
         }
 

@@ -46,13 +46,13 @@ else
                     @if (PeibanService.GetDianzanById(pinglun.Id, int.Parse(Session["renid"].ToString())))
                     {
                         <span class="comment-zan" onclick="dainzanPinglun(this)" data-status="false">
-                            <a href="javascript:void(0);" style="color:#ff0000"><span class="glyphicon glyphicon-thumbs-up"></span> 赞</a>
+                            <a href="javascript:void(0);" style="color:#ff0000"><span class="fa fa-thumbs-up"></span> 赞</a>
                         </span>
                     }
                     else
                     {
                         <span class="comment-zan" onclick="dainzanPinglun(this)" data-status="true">
-                            <a href="javascript:void(0);"><span class="glyphicon glyphicon-thumbs-up"></span> 赞</a>
+                            <a href="javascript:void(0);"><span class="fa fa-thumbs-up"></span> 赞</a>
                         </span>
 
                     }

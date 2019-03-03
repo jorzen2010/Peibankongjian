@@ -29,9 +29,9 @@
 .probox .description{font-size:14px;line-height:24px;color:#fff}
 .probox .title:after,.probox .description:after{content:"";width:90%;display:block;border-bottom:1px solid #fff;margin:15px auto}
 .probox .social-links{margin:0;padding:0;list-style:none}
-.probox .social-links li{display:inline-block;margin:0 10px}
+/*.probox .social-links li{display:inline-block;margin:0 10px}
 .probox .social-links li a{font-size:20px;color:#a6a6a6}
-.probox .social-links li a:hover{text-decoration:none;color:#fff}
+.probox .social-links li a:hover{text-decoration:none;color:#fff}*/
 @media only screen and (max-width:990px){.probox{margin-bottom:20px}}@media only screen and (max-width:479px){.probox .probox-content{padding:20px}}          
                                                                      
                                                                      
