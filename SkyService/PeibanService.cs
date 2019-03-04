@@ -75,7 +75,6 @@ namespace SkyService
         {
             Message msg=new Message();
             UnitOfWork unitOfWork = new UnitOfWork();
-            bool status = false;
             var rklist = unitOfWork.renKongListsRepository.Get(filter: u => u.Kongjian == kid && u.Shenqingren == rid && u.Status == true);
             if (rklist.Count() > 0)
             {
@@ -205,5 +204,71 @@ namespace SkyService
             }
         }
 
+
+        public static int GetViewCountByDakaId(int did)
+        {
+            UnitOfWork unitOfWork = new UnitOfWork();
+            var _viewTimes = unitOfWork._viewHistorysRepository.Get(filter: u => u.DakaBiji == did);
+
+            return _viewTimes.Count();
+
+        }
+        public static int GetSpaceCountByRenId(int rid)
+        {
+            UnitOfWork unitOfWork = new UnitOfWork();
+            var _renkongList = unitOfWork.renKongListsRepository.Get(filter: u => u.Shenqingren == rid && u.Status == true);
+
+            return _renkongList.Count();
+
+        }
+
+        public static int GetDakaCountByRenId(int rid)
+        {
+            UnitOfWork unitOfWork = new UnitOfWork();
+            var _daka = unitOfWork.renwuDakasRepository.Get(filter: u => u.RenwuZhixingzhe == rid);
+
+            return _daka.Count();
+
+        }
+
+        public static int GetHudongCountByRenId(int rid,string type)
+        {
+            UnitOfWork unitOfWork = new UnitOfWork();
+            var _pingluns = unitOfWork._bijiPinglunsRepository.Get(filter: u => u.PinglunRen == rid);
+            int bijipinglun_count = _pingluns.Count();
+
+            var _pinglunReplys = unitOfWork._pinglunReplysRepository.Get(filter: u => u.PinglunReplyren == rid);
+            int pinglunReply_count = _pinglunReplys.Count();
+
+            var _dianzanBijis = unitOfWork._bijiDianzansRepository.Get(filter: u => u.DianzanRen == rid);
+            int bijidianzan_count = _dianzanBijis.Count();
+
+            var _dianzanPingluns = unitOfWork._dianzanPinglunsRepository.Get(filter: u => u.DianzanRen == rid);
+            int pinglundianzan_count = _dianzanPingluns.Count();
+
+
+            if (type == "bijipinglun")
+            {
+                return bijipinglun_count;
+            }else if (type == "pinglunreply")
+            {
+                return pinglunReply_count;
+            }else if (type == "bijidianzan")
+            {
+                return bijidianzan_count;
+            }else if (type == "pinglundianzan")
+            {
+                return pinglundianzan_count;
+            }else if (type == "all")
+            {
+                return bijipinglun_count + pinglunReply_count + bijidianzan_count + pinglundianzan_count;
+            }
+            else
+            {
+
+                return bijipinglun_count + pinglunReply_count + bijidianzan_count + pinglundianzan_count;
+            }
+
+        }
     }
 }

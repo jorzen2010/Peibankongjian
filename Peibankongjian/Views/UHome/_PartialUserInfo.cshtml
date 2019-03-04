@@ -1,4 +1,5 @@
 ﻿@using SkyEntity;
+@using SkyService;
 @{
     Layout = null;
     Ren ren = ViewData["userinfo"] as Ren;
@@ -7,14 +8,14 @@
 {
     <div class="row text-center">
         <div class="col-md-12">
-            <img src="/Resource/img/zz.jpg" alt="..." class="img-thumbnail img-circle" style="width:30%">
+            <img src="@ren.RenAvatar" alt="..." class="img-thumbnail img-circle" style="width:30%">
             <h3>@ren.RenNickName</h3>
             <span>@ren.RenYijuhua</span>
             <table class="table">
                 <tr>
-                    <td><h4>79</h4><span>空间</span></td>
-                    <td style="border-right: 2px solid #eeeeee; border-left: 2px solid #eeeeee"><h4>79</h4><span>打卡</span></td>
-                    <td><h4>79</h4><span>互动</span></td>
+                    <td><h4>@PeibanService.GetSpaceCountByRenId(ren.Id)</h4><span>空间</span></td>
+                    <td style="border-right: 2px solid #eeeeee; border-left: 2px solid #eeeeee"><h4>@PeibanService.GetDakaCountByRenId(ren.Id)</h4><span>打卡</span></td>
+                    <td><h4>@PeibanService.GetHudongCountByRenId(ren.Id,"all")</h4><span>互动</span></td>
                 </tr>
             </table>
             <div class="uc-jieshao">

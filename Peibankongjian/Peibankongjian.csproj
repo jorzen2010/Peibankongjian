@@ -3124,6 +3124,7 @@
     <Content Include="Views\ChanpinOrder\Edit.cshtml" />
     <Content Include="Views\UHome\AccountSet.cshtml" />
     <Content Include="Views\UHome\EditPassword.cshtml" />
+    <Content Include="Views\UHome\DakaEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

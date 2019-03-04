@@ -321,7 +321,32 @@ namespace Peibankongjian.Controllers
             return View(PageList);
         }
 
+        public ActionResult DakaEdit(int id)
+        {
+            RenwuDaka _renwuDaka = unitOfWork.renwuDakasRepository.GetByID(id);
 
+            Book book = unitOfWork.booksRepository.GetByID(id);
+
+            if (_renwuDaka == null ||  Request.UrlReferrer==null || int.Parse(Session["renid"].ToString())!=_renwuDaka.RenwuZhixingzhe)
+            {
+                return HttpNotFound();
+            }
+            return View(_renwuDaka);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
+        public ActionResult DakaEdit(RenwuDaka _renwuDaka)
+        {
+            if (ModelState.IsValid)
+            {
+                unitOfWork.renwuDakasRepository.Update(_renwuDaka);
+                unitOfWork.Save();
+                return RedirectToAction("DakaContent", "UHome",new{id=_renwuDaka.Id});
+            }
+
+            return View(_renwuDaka);
+        }
          public ActionResult Daka(int renwu,int book,int peibanshi ,int kongjian,int dakaren)
          {
              ViewBag.peibanshi = peibanshi;
@@ -406,7 +431,20 @@ namespace Peibankongjian.Controllers
 
          public ActionResult DakaContent(int id)
          {
+            
+
              RenwuDaka daka = unitOfWork.renwuDakasRepository.GetByID(id);
+
+              ViewHistory _viewHistory=new ViewHistory();
+             _viewHistory.DakaBiji = id;
+             _viewHistory.DakaRen = daka.RenwuZhixingzhe;
+             _viewHistory.Peibanshi = daka.Peibanshi;
+             _viewHistory.Kongjian = daka.Kongjian;
+             _viewHistory.ProductBook = daka.ProductBook;
+             _viewHistory.ViewRen = int.Parse(Session["renid"].ToString());
+             _viewHistory.ViewTime = DateTime.Now;
+             unitOfWork._viewHistorysRepository.Insert(_viewHistory);
+             unitOfWork.Save();
 
              int dianzanren = int.Parse(Session["renid"].ToString());
 

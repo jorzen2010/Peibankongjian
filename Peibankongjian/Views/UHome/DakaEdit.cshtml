@@ -1,0 +1,115 @@
+﻿@model SkyEntity.RenwuDaka
+@using SkyService;
+@using SkyEntity;
+@section Topcss {
+    <link href="~/plugins/bootstrap-validator/css/bootstrapValidator.css" rel="stylesheet" type="text/css" />
+    <link href="~/plugins/iCheck/square/green.css" rel="stylesheet" type="text/css" />
+    <link href="~/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css" rel="stylesheet">
+
+
+
+}
+<div class="container peiban-container">
+
+    <div class="row">
+        <div class="col-md-4">
+
+            @Html.Action("UserInfo", "UHome")
+
+        </div>
+        <div class="col-md-8">
+            <h3>@PeibanService.GetRenwuById(Model.RenwuName).Title</h3>
+            <div class="well">
+                <article>
+                    <h4>打卡要求：</h4>
+                    @Html.Raw(PeibanService.GetRenwuById(Model.RenwuName).Content)
+                </article>
+               
+            </div>
+
+            @using (Html.BeginForm("DakaEdit", "UHome", FormMethod.Post, new { @class = "form-horizontal", @name = "CreateProduct", @id = "CreateProduct" }))
+            {
+
+                @Html.AntiForgeryToken()
+                 @Html.HiddenFor(model=>model.Id,new{Value=Model.Id})
+                <div class="form-group">
+                    @Html.TextBoxFor(model => model.DakaTitle, new { @class = "form-control", @placeholder = "输入打卡文章标题",@Value=Model.DakaTitle })
+                    @Html.ValidationMessageFor(model => model.DakaTitle)
+                </div>
+                <div class="form-group">
+                    <textarea id="DakaContent" name="DakaContent" style="height:500px;">@Html.Raw(Model.DakaContent)</textarea>
+                    @Html.ValidationMessageFor(model => model.DakaContent)
+                </div>
+                
+                <div class="form-group">
+                    
+                    @Html.TextBoxFor(model => model.Tags, new { @class = "form-control", @data_role = "tagsinput", @Value = Model.Tags })
+                </div>
+                
+                <div class="form-group">
+                    
+                    @Html.LabelFor(model => model.Status, new { @class = "control-label" })
+          
+                    @Html.CheckBoxFor(model => model.Status, new { @class = "form-control", @Value = Model.Status })
+        
+                </div>
+
+                @Html.HiddenFor(model => model.ProductBook, new { @Value = Model.ProductBook })
+                @Html.HiddenFor(model => model.RenwuName, new { @Value = Model.RenwuName })
+                @Html.HiddenFor(model => model.Kongjian, new { @Value = Model.Kongjian })
+                @Html.HiddenFor(model => model.Peibanshi, new { @Value = Model.Peibanshi })
+                @Html.HiddenFor(model => model.RenwuZhixingzhe, new { @Value = Model.RenwuZhixingzhe })
+                @Html.HiddenFor(model => model.DakaTime, new { @Value = Model.DakaTime })
+                @Html.HiddenFor(model => model.LastEditTime, new { @Value = DateTime.Now })
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-lg pull-right">&nbsp;&nbsp;&nbsp;&nbsp;发布更新&nbsp;&nbsp;&nbsp;&nbsp;</button>         
+                </div>
+
+            }
+
+        </div>
+        
+    </div>
+
+</div>
+
+
+@section BottomScripts {
+    <script type="text/javascript" src="~/plugins/bootbox.min.js"></script>
+    <script type="text/javascript" src="~/plugins/iCheck/icheck.js"></script>
+    <script type="text/javascript" charset="gbk" src="~/plugins/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="gbk" src="~/plugins/ueditor/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="gbk" src="~/plugins/ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" src="~/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.min.js"></script>
+    <script type="text/javascript" src="~/Resource/js/SkyWeb.js"></script>
+    <script type="text/javascript" src="~/Resource/js/SkyInit.js"></script>
+    <script type="text/javascript">
+
+        var ue = UE.getEditor('DakaContent', {
+            toolbars: [
+                ['fullscreen',//全屏
+                     'undo', //撤销
+                     'redo', //重做
+                     'indent', //首行缩进
+                     'bold', //加粗
+                     'italic',//斜体
+                     'forecolor', //字体颜色
+                     'fontfamily', //字体
+                     'fontsize', //字号
+                     'justifyleft', //居左对齐
+                     'justifyright', //居右对齐
+                     'justifycenter', //居中对齐
+                     'justifyjustify', //两端对齐
+                     'blockquote',//引用
+                     'link', //超链接
+                     'emotion', //表情
+                ]
+            ],
+            autoHeightEnabled: true,
+            autoFloatEnabled: true,
+            elementPathEnabled: false,
+        });
+    </script>
+
+}
