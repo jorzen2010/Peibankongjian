@@ -25,6 +25,9 @@
                                 下单时间
                             </th>
                             <th class="col-sm-1">
+                                到期时间
+                            </th>
+                            <th class="col-sm-1">
                                 产品类型
                             </th>
                             <th class="col-sm-1">
@@ -45,7 +48,10 @@
 
                                 
                                 <td>
-                                    @item.CreateTime.ToString("yyyy-MM-dd hh:mm:ss")
+                                    @item.CreateTime.ToString("yyyy-MM-dd")
+                                </td>
+                                <td>
+                                    @DateTime.Parse(item.ExpiredTime).ToString("yyyy-MM-dd")
                                 </td>
                                
                                 <td>

@@ -160,7 +160,7 @@ namespace SkyService
             var olist = unitOfWork.chanpinOrdersRepository.Get(filter: u => u.VipUser == rid && u.BuyChanpin == cid &&u.ProductType==ptid);
             if (olist.Count() > 0)
             {
-                if (olist.First().Status=="ture")
+                if (olist.First().Status=="true")
                 {
                     if (DateTime.Parse(olist.First().ExpiredTime) > DateTime.Now)
                     {
@@ -189,7 +189,13 @@ namespace SkyService
                         
                     }
                 }
-                else
+                else if (olist.First().Status == "expired")
+                {
+                    msg.MessageStatus = "expired";
+                    msg.MessageInfo = "会员已经过期";
+                    return msg;
+                }
+            else
                 {
                     msg.MessageStatus = "nopay";
                     msg.MessageInfo = "已申请，未付款";
