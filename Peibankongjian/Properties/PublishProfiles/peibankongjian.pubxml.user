@@ -4549,7 +4549,7 @@
       <publishTime>02/27/2019 08:16:51</publishTime>
     </File>
     <File Include="bin/Peibankongjian.dll">
-      <publishTime>03/01/2019 14:09:11</publishTime>
+      <publishTime>03/27/2019 13:42:41</publishTime>
     </File>
     <File Include="bin/SkyCommon.dll">
       <publishTime>02/27/2019 13:49:35</publishTime>
@@ -4561,10 +4561,10 @@
       <publishTime>02/27/2019 13:49:35</publishTime>
     </File>
     <File Include="bin/SkyService.dll">
-      <publishTime>02/27/2019 13:49:36</publishTime>
+      <publishTime>03/26/2019 14:04:32</publishTime>
     </File>
     <File Include="bin/SkyWechatService.dll">
-      <publishTime>02/27/2019 13:49:37</publishTime>
+      <publishTime>03/26/2019 14:04:32</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
       <publishTime>02/27/2019 08:16:51</publishTime>
@@ -8611,7 +8611,7 @@
       <publishTime>02/27/2019 08:16:47</publishTime>
     </File>
     <File Include="Resource/css/Peiban.css">
-      <publishTime>02/27/2019 08:16:47</publishTime>
+      <publishTime>03/15/2019 14:04:57</publishTime>
     </File>
     <File Include="Resource/css/SkyWap.css">
       <publishTime>02/27/2019 08:16:47</publishTime>
@@ -8636,6 +8636,9 @@
     </File>
     <File Include="Resource/img/avatarno.jpg">
       <publishTime>02/27/2019 08:16:47</publishTime>
+    </File>
+    <File Include="Resource/img/csrs.jpg">
+      <publishTime>03/01/2019 16:09:37</publishTime>
     </File>
     <File Include="Resource/img/hesu - 副本.jpg">
       <publishTime>02/27/2019 08:16:47</publishTime>
@@ -8776,7 +8779,7 @@
       <publishTime>02/27/2019 08:16:47</publishTime>
     </File>
     <File Include="Views/ChanpinOrder/Edit.cshtml">
-      <publishTime>02/27/2019 15:57:58</publishTime>
+      <publishTime>02/27/2019 16:09:58</publishTime>
     </File>
     <File Include="Views/ChanpinOrder/Index.cshtml">
       <publishTime>02/27/2019 08:16:47</publishTime>
@@ -8784,17 +8787,20 @@
     <File Include="Views/Home/About.cshtml">
       <publishTime>02/27/2019 08:16:47</publishTime>
     </File>
+    <File Include="Views/Home/ChengzhangList.cshtml">
+      <publishTime>03/15/2019 14:04:57</publishTime>
+    </File>
     <File Include="Views/Home/Contact.cshtml">
       <publishTime>02/27/2019 08:16:47</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>02/27/2019 08:16:47</publishTime>
+      <publishTime>03/15/2019 14:04:57</publishTime>
     </File>
     <File Include="Views/Home/Product.cshtml">
-      <publishTime>02/27/2019 08:16:47</publishTime>
+      <publishTime>03/15/2019 14:04:57</publishTime>
     </File>
     <File Include="Views/Home/RenwuList.cshtml">
-      <publishTime>02/27/2019 08:16:47</publishTime>
+      <publishTime>03/15/2019 14:04:57</publishTime>
     </File>
     <File Include="Views/Home/Shudan.cshtml">
       <publishTime>02/27/2019 08:16:47</publishTime>
@@ -8809,7 +8815,7 @@
       <publishTime>02/27/2019 08:16:47</publishTime>
     </File>
     <File Include="Views/RenAccount/Login.cshtml">
-      <publishTime>03/01/2019 10:37:15</publishTime>
+      <publishTime>03/01/2019 14:39:12</publishTime>
     </File>
     <File Include="Views/Renwu/Create.cshtml">
       <publishTime>02/27/2019 08:16:47</publishTime>
@@ -8827,7 +8833,7 @@
       <publishTime>02/27/2019 08:16:47</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>02/27/2019 08:16:47</publishTime>
+      <publishTime>03/15/2019 14:04:57</publishTime>
     </File>
     <File Include="Views/Shared/_LayoutAdmin.cshtml">
       <publishTime>02/27/2019 08:16:47</publishTime>
@@ -8836,7 +8842,7 @@
       <publishTime>02/27/2019 08:16:47</publishTime>
     </File>
     <File Include="Views/Shared/_LoginPartial.cshtml">
-      <publishTime>02/27/2019 08:16:47</publishTime>
+      <publishTime>03/01/2019 14:16:15</publishTime>
     </File>
     <File Include="Views/Ucenter/Register.cshtml">
       <publishTime>02/27/2019 08:16:47</publishTime>
@@ -8851,7 +8857,7 @@
       <publishTime>02/27/2019 08:16:47</publishTime>
     </File>
     <File Include="Views/UHome/AccountSet.cshtml">
-      <publishTime>03/01/2019 14:09:37</publishTime>
+      <publishTime>03/01/2019 14:14:56</publishTime>
     </File>
     <File Include="Views/UHome/CreateProduct.cshtml">
       <publishTime>02/27/2019 08:16:47</publishTime>
@@ -8863,34 +8869,40 @@
       <publishTime>02/27/2019 08:16:47</publishTime>
     </File>
     <File Include="Views/UHome/DakaContent.cshtml">
-      <publishTime>02/27/2019 08:16:47</publishTime>
+      <publishTime>03/15/2019 14:04:57</publishTime>
+    </File>
+    <File Include="Views/UHome/DakaEdit.cshtml">
+      <publishTime>03/15/2019 14:04:57</publishTime>
     </File>
     <File Include="Views/UHome/DakaList.cshtml">
       <publishTime>02/27/2019 08:16:47</publishTime>
     </File>
     <File Include="Views/UHome/EditPassword.cshtml">
-      <publishTime>03/01/2019 14:09:20</publishTime>
+      <publishTime>03/01/2019 14:22:07</publishTime>
     </File>
     <File Include="Views/UHome/Index.cshtml">
-      <publishTime>02/27/2019 08:16:47</publishTime>
+      <publishTime>03/15/2019 14:04:57</publishTime>
     </File>
     <File Include="Views/UHome/Myorder.cshtml">
-      <publishTime>02/27/2019 08:16:47</publishTime>
+      <publishTime>03/15/2019 14:04:57</publishTime>
     </File>
     <File Include="Views/UHome/RenwuList.cshtml">
       <publishTime>02/27/2019 08:16:47</publishTime>
     </File>
     <File Include="Views/UHome/ShenqingPeiban.cshtml">
-      <publishTime>02/27/2019 08:16:47</publishTime>
+      <publishTime>03/15/2019 14:04:57</publishTime>
     </File>
     <File Include="Views/UHome/_PartialPinglun.cshtml">
-      <publishTime>02/27/2019 08:16:47</publishTime>
+      <publishTime>03/15/2019 14:04:57</publishTime>
     </File>
     <File Include="Views/UHome/_PartialUserInfo.cshtml">
-      <publishTime>02/27/2019 08:16:47</publishTime>
+      <publishTime>03/15/2019 14:04:57</publishTime>
     </File>
     <File Include="Views/Wap/Index.cshtml">
       <publishTime>02/27/2019 08:16:47</publishTime>
+    </File>
+    <File Include="Views/Wap/Test.cshtml">
+      <publishTime>03/15/2019 14:04:57</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>02/27/2019 08:16:47</publishTime>
@@ -8929,7 +8941,7 @@
       <publishTime>02/27/2019 08:16:47</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/01/2019 14:09:14</publishTime>
+      <publishTime>03/27/2019 12:04:08</publishTime>
     </File>
     <File Include="WechatApi.ashx">
       <publishTime>02/27/2019 08:16:47</publishTime>

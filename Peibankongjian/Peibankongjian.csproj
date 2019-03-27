@@ -187,6 +187,7 @@
     <Compile Include="Controllers\NoticeController.cs" />
     <Compile Include="Controllers\WapController.cs" />
     <Compile Include="Controllers\WechatMenuController.cs" />
+    <Compile Include="Controllers\XiaochengxuController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -3130,6 +3131,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="plugins\sweetalert2\" />
+    <Folder Include="Views\Xiaochengxu\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
