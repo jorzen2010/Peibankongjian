@@ -34,6 +34,26 @@ namespace Peibankongjian.Controllers
 
         }
 
+        public ActionResult GetAllBiji(int? page)
+        {
+            Pager pager = new Pager();
+            pager.table = "RenwuDaka";
+            pager.strwhere = "1=1";
+            pager.PageSize = 2;
+            pager.PageNo = page ?? 1;
+            pager.FieldKey = "Id";
+            pager.FiledOrder = "Id desc";
+
+
+            pager = CommonDal.GetPager(pager);
+            IList<RenwuDaka> List = DataConvertHelper<RenwuDaka>.ConvertToModel(pager.EntityDataTable);
+
+            System.Web.Script.Serialization.JavaScriptSerializer js = new System.Web.Script.Serialization.JavaScriptSerializer();
+            string json = js.Serialize(new { pagecount = pager.PageCount, dakas = List });//将对象序列化成JSON字符串。匿名类。向浏览器返回多个JSON对象。 
+            return Content(json);
+
+        }
+
         public ActionResult GetBijis(int count)
         {
             string sql = "select top " + count + " * from RenwuDaka where status=0";
@@ -74,6 +94,44 @@ namespace Peibankongjian.Controllers
             string json = js.Serialize(new { pingluns = List });//将对象序列化成JSON字符串。匿名类。向浏览器返回多个JSON对象。 
 
             return Content(json);
+        }
+
+        public ActionResult GetAllSpace(int? page)
+        {
+            Pager pager = new Pager();
+            pager.table = "Product";
+            pager.strwhere = "1=1";
+            pager.PageSize = 2;
+            pager.PageNo = page ?? 1;
+            pager.FieldKey = "Id";
+            pager.FiledOrder = "Id desc";
+
+
+            pager = CommonDal.GetPager(pager);
+            IList<Product> List = DataConvertHelper<Product>.ConvertToModel(pager.EntityDataTable);
+            System.Web.Script.Serialization.JavaScriptSerializer js = new System.Web.Script.Serialization.JavaScriptSerializer();
+            string json = js.Serialize(new { pagecount = pager.PageCount, dakas = List });//将对象序列化成JSON字符串。匿名类。向浏览器返回多个JSON对象。 
+            return Content(json);
+
+        }
+
+        public ActionResult GetSpaceByPeibanshi(int? page ,int pid)
+        {
+            Pager pager = new Pager();
+            pager.table = "Product";
+            pager.strwhere = "1=1";
+            pager.PageSize = 2;
+            pager.PageNo = page ?? 1;
+            pager.FieldKey = "Id";
+            pager.FiledOrder = "Id desc";
+
+
+            pager = CommonDal.GetPager(pager);
+            IList<Product> List = DataConvertHelper<Product>.ConvertToModel(pager.EntityDataTable);
+            System.Web.Script.Serialization.JavaScriptSerializer js = new System.Web.Script.Serialization.JavaScriptSerializer();
+            string json = js.Serialize(new { pagecount = pager.PageCount, dakas = List });//将对象序列化成JSON字符串。匿名类。向浏览器返回多个JSON对象。 
+            return Content(json);
+
         }
 
     }
