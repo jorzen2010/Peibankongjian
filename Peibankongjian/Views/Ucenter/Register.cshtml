@@ -48,6 +48,8 @@
                         @Html.HiddenFor(model => model.CreateTime, new { @Value = DateTime.Now })
                         @Html.HiddenFor(model => model.RenInfo, new { @Value = "这个人很懒，什么也没有留下" })
                         @Html.HiddenFor(model => model.RenYijuhua, new { @Value = "这个人很懒，什么也没有留下" })
+                         @Html.HiddenFor(model => model.Status, new { @Value = true })
+                         @Html.HiddenFor(model => model.MsgStatus, new { @Value = true })
                        
                          @Html.ValidationMessageFor(model => model.RenPhone)
                          @Html.ValidationMessageFor(model => model.RenPassword)

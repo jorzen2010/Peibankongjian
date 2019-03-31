@@ -173,6 +173,18 @@ namespace Peibankongjian.Controllers
             {
                 unitOfWork.productsRepository.Insert(product);
                 unitOfWork.Save();
+
+
+                RenKongList rklist = new RenKongList();
+                rklist.Kongjian = product.Id;
+                rklist.Shenqingren = int.Parse(Session["renid"].ToString());
+                rklist.Peibanshi = product.Peibanshi;
+                rklist.ProductBook = product.ProductBook;
+                rklist.Status = true;
+                unitOfWork.renKongListsRepository.Insert(rklist);
+                unitOfWork.Save();
+
+
                 return RedirectToAction("Index", "UHome");
             }
             ViewBag.pid = product.ProductBook;

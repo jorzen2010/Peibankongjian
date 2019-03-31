@@ -66,33 +66,44 @@ namespace Peibankongjian.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ValidateInput(false)]
         public ActionResult Register(Ren ren)
         {
             Ren yaoqingren = new Ren();
             yaoqingren=unitOfWork.rensRepository.GetByID(ren.Yaoqingren);
 
-            if (ModelState.IsValid)
-            {
-                if (string.IsNullOrEmpty(ren.RenNickName.ToString()))
-                {
-                    return RedirectToAction("Register", "Ucenter");
-                }
+           
+            var regrens = unitOfWork.rensRepository.Get(filter: u => u.RenOpenid == ren.RenOpenid);
 
-                if (string.IsNullOrEmpty(ren.Yaoqingren.ToString()) || string.IsNullOrEmpty(yaoqingren.RenNickName))
-                {
-                    ren.Yaoqingren = 10001;
-                }
-                ren.RenPassword = CommonTools.ToMd5(ren.RenPassword);
-                unitOfWork.rensRepository.Insert(ren);
-                unitOfWork.Save();
-                return RedirectToAction("Index", "Home");
+            if (regrens.Count() > 0)
+            {
+                return RedirectToAction("ShengjiVIP", "Ucenter");
             }
             else
             {
+                if (ModelState.IsValid)
+                {
+                    if (string.IsNullOrEmpty(ren.RenNickName.ToString()))
+                    {
+                        return RedirectToAction("Register", "Ucenter");
+                    }
 
-                return RedirectToAction("Register", "Ucenter");
+                    //if (string.IsNullOrEmpty(ren.Yaoqingren.ToString()) || string.IsNullOrEmpty(yaoqingren.RenNickName))
+                    if (string.IsNullOrEmpty(ren.Yaoqingren.ToString()) || yaoqingren == null)
+                    {
+                        ren.Yaoqingren = 10001;
+                    }
+                    ren.RenPassword = CommonTools.ToMd5(ren.RenPassword);
+                    unitOfWork.rensRepository.Insert(ren);
+                    unitOfWork.Save();
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+
+                    return RedirectToAction("Register", "Ucenter");
+                }
             }
+           
 
             
         }

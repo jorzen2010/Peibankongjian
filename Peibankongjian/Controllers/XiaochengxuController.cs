@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using SkyCommon;
 using SkyDal;
 using SkyEntity;
+using SkyWechatService;
+using WechatXiaochengxu;
 
 namespace Peibankongjian.Controllers
 {
@@ -13,6 +15,28 @@ namespace Peibankongjian.Controllers
     {
         private UnitOfWork unitOfWork = new UnitOfWork();
 
+        public ActionResult xcxLogin(string js_code)
+        {
+            string appid = XcxConfig.APPID;
+            string secret = XcxConfig.SECRET;
+            string grant_type = "authorization_code";
+            string jsonstr= XiaochengxuApi.GetOpenidByWxlogin(appid, secret, js_code, grant_type);
+            return Content(jsonstr);
+        }
+        
+
+        public ActionResult GetuserinfoByunionid(string unionid)
+        {
+            Ren ren=new Ren();
+            var userlist = unitOfWork.rensRepository.Get(filter: u => u.RenUnionid == unionid);
+            if (userlist.Count() > 0)
+            {
+                ren = userlist.First();
+            }
+            string json = JsonHelper.JsonSerializerBySingleData(ren);
+            return Content(json);
+
+        }
 
         public ActionResult GetBijiByPid(int? page,int pid)
         {

@@ -99,8 +99,8 @@ namespace SkyWechatService
                             break;
                         default:
                             //这是非常好用的一个地方，打开公众号，我就会和你打招呼。
-                           string defaultreplycontent = WechatReplyService.GetWechatReplyByKey("默认回复").ReplyContent;
-                           WechatMessageServices.ResponseTextMessage(FromUserName.InnerText, WechatId, defaultreplycontent);
+                         //  string defaultreplycontent = WechatReplyService.GetWechatReplyByKey("默认回复").ReplyContent;
+                          // WechatMessageServices.ResponseTextMessage(FromUserName.InnerText, WechatId, defaultreplycontent);
                            break;
                     }                
                 }
