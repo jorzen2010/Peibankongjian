@@ -157,6 +157,61 @@ namespace Peibankongjian.Controllers
             return Content(json);
 
         }
+        public ActionResult GetSpaceListByCount(int count)
+        {
+            string sql = "select top  " + count + " * from Product where Shangxian='true'";
+            var spaces = unitOfWork.productsRepository.GetWithRawSql(sql);
+            IList<Product> List = spaces as IList<Product>;
+            System.Web.Script.Serialization.JavaScriptSerializer js = new System.Web.Script.Serialization.JavaScriptSerializer();
+            string json = js.Serialize(new { spaces = List });//将对象序列化成JSON字符串。匿名类。向浏览器返回多个JSON对象。 
 
+            return Content(json);
+        }
+        public ActionResult GetSpaceByUserId(int uid, int count)
+        {
+            string sql = string.Empty;
+            if (count == 0)
+            {
+                sql = "select * from RenKongList where Shenqingren=" + uid + " and status='true'";
+            }
+            else
+            {
+                sql = "select top  " + count + " * from RenKongList where Shenqingren=" + uid + " and status='true'";
+            }
+          
+            var spaces = unitOfWork.renKongListsRepository.GetWithRawSql(sql);
+            IList<RenKongList> List = spaces as IList<RenKongList>;
+            System.Web.Script.Serialization.JavaScriptSerializer js = new System.Web.Script.Serialization.JavaScriptSerializer();
+            string json = js.Serialize(new { spaces = List });//将对象序列化成JSON字符串。匿名类。向浏览器返回多个JSON对象。 
+
+            return Content(json);
+        }
+
+        public ActionResult GetSpaceById(int id)
+        {
+            Product _product = unitOfWork.productsRepository.GetByID(id);
+            string json = JsonHelper.JsonSerializerBySingleData(_product);
+            return Content(json);
+            
+        }
+
+        public ActionResult GetBookById(int id)
+        {
+            Book _book = unitOfWork.booksRepository.GetByID(id);
+            string json = JsonHelper.JsonSerializerBySingleData(_book);
+            return Content(json);
+
+        }
+
+        public ActionResult GetRenwuListByBookId(int bid)
+        {
+            string sql = "select * from Renwu where RenwuBook=" + bid+" order by Paixu";
+            var renwus = unitOfWork.renwusRepository.GetWithRawSql(sql);
+            IList<Renwu> List = renwus as IList<Renwu>;
+            System.Web.Script.Serialization.JavaScriptSerializer js = new System.Web.Script.Serialization.JavaScriptSerializer();
+            string json = js.Serialize(new { renwus = List });//将对象序列化成JSON字符串。匿名类。向浏览器返回多个JSON对象。 
+
+            return Content(json);
+        }
     }
 }
