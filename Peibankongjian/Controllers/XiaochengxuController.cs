@@ -20,29 +20,41 @@ namespace Peibankongjian.Controllers
             string appid = XcxConfig.APPID;
             string secret = XcxConfig.SECRET;
             string grant_type = "authorization_code";
-            string jsonstr= XiaochengxuApi.GetOpenidByWxlogin(appid, secret, js_code, grant_type);
+            string jsonstr = XiaochengxuApi.GetOpenidByWxlogin(appid, secret, js_code, grant_type);
             return Content(jsonstr);
         }
-        
+
 
         public ActionResult GetuserinfoByunionid(string unionid)
         {
-            Ren ren=new Ren();
+            string json = string.Empty;
+            Ren ren = new Ren();
+
             var userlist = unitOfWork.rensRepository.Get(filter: u => u.RenUnionid == unionid);
             if (userlist.Count() > 0)
             {
                 ren = userlist.First();
+                json = JsonHelper.JsonSerializerBySingleData(ren);
             }
-            string json = JsonHelper.JsonSerializerBySingleData(ren);
+            else
+            {
+                Message msg = new Message();
+                msg.MessageInfo = "此用户尚未注册";
+                msg.MessageStatus = "false";
+                msg.MessageUrl = "";
+                json = JsonHelper.JsonSerializerBySingleData(msg);
+            }
             return Content(json);
 
         }
 
-        public ActionResult GetBijiByPid(int? page,int pid)
+
+      
+        public ActionResult GetBijiByPid(int? page, int pid)
         {
             Pager pager = new Pager();
             pager.table = "RenwuDaka";
-            pager.strwhere = "RenwuZhixingzhe="+pid;
+            pager.strwhere = "RenwuZhixingzhe=" + pid;
             pager.PageSize = 2;
             pager.PageNo = page ?? 1;
             pager.FieldKey = "Id";
@@ -90,7 +102,7 @@ namespace Peibankongjian.Controllers
 
         }
 
-        
+
         public ActionResult GetBijiById(int id)
         {
             RenwuDaka biji = unitOfWork.renwuDakasRepository.GetByID(id);
@@ -98,7 +110,7 @@ namespace Peibankongjian.Controllers
             return Content(json);
         }
 
-        public ActionResult GetDianzanByDakaId(int id,int count)
+        public ActionResult GetDianzanByDakaId(int id, int count)
         {
             string sql = "select top  " + count + " * from BijiDianzan where DakaBiji=" + id;
             var dianzans = unitOfWork._bijiDianzansRepository.GetWithRawSql(sql);
@@ -109,7 +121,7 @@ namespace Peibankongjian.Controllers
             return Content(json);
         }
 
-        public ActionResult GetPinglunByDakaId(int id,int count)
+        public ActionResult GetPinglunByDakaId(int id, int count)
         {
             string sql = "select top  " + count + " * from BijiPinglun where DakaBiji=" + id;
             var pingluns = unitOfWork._bijiPinglunsRepository.GetWithRawSql(sql);
@@ -119,6 +131,22 @@ namespace Peibankongjian.Controllers
 
             return Content(json);
         }
+
+        //public ActionResult GetHudongByPid(int pid)
+        //{
+        //    string sql = "select count(*) from BijiDianzan where Kongjian=" + pid;
+        //    var   pingluns = unitOfWork._bijiDianzansRepository.GetWithRawSql(sql);
+        //    int dianzancount= pingluns.First();
+        //    System.Web.Script.Serialization.JavaScriptSerializer js = new System.Web.Script.Serialization.JavaScriptSerializer();
+        //    string json = js.Serialize(new { pingluns = List });//将对象序列化成JSON字符串。匿名类。向浏览器返回多个JSON对象。 
+
+        //    return Content(json);
+
+
+
+        //}
+
+
 
         public ActionResult GetAllSpace(int? page)
         {
@@ -139,7 +167,7 @@ namespace Peibankongjian.Controllers
 
         }
 
-        public ActionResult GetSpaceByPeibanshi(int? page ,int pid)
+        public ActionResult GetSpaceByPeibanshi(int? page, int pid)
         {
             Pager pager = new Pager();
             pager.table = "Product";
@@ -178,7 +206,7 @@ namespace Peibankongjian.Controllers
             {
                 sql = "select top  " + count + " * from RenKongList where Shenqingren=" + uid + " and status='true'";
             }
-          
+
             var spaces = unitOfWork.renKongListsRepository.GetWithRawSql(sql);
             IList<RenKongList> List = spaces as IList<RenKongList>;
             System.Web.Script.Serialization.JavaScriptSerializer js = new System.Web.Script.Serialization.JavaScriptSerializer();
@@ -192,7 +220,7 @@ namespace Peibankongjian.Controllers
             Product _product = unitOfWork.productsRepository.GetByID(id);
             string json = JsonHelper.JsonSerializerBySingleData(_product);
             return Content(json);
-            
+
         }
 
         public ActionResult GetBookById(int id)
@@ -205,7 +233,7 @@ namespace Peibankongjian.Controllers
 
         public ActionResult GetRenwuListByBookId(int bid)
         {
-            string sql = "select * from Renwu where RenwuBook=" + bid+" order by Paixu";
+            string sql = "select * from Renwu where RenwuBook=" + bid + " order by Paixu";
             var renwus = unitOfWork.renwusRepository.GetWithRawSql(sql);
             IList<Renwu> List = renwus as IList<Renwu>;
             System.Web.Script.Serialization.JavaScriptSerializer js = new System.Web.Script.Serialization.JavaScriptSerializer();

@@ -87,6 +87,9 @@ namespace SkyEntity
         [Display(Name = "陪伴空间名称")]
         public string Title { get; set; }
 
+        [Display(Name = "空间介绍")]
+        public string Info { get; set; }
+
         [Display(Name = "陪伴项目")]
         public int ProductBook { get; set; }
 
