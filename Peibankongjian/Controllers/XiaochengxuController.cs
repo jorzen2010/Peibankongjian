@@ -70,6 +70,26 @@ namespace Peibankongjian.Controllers
 
         }
 
+        public ActionResult GetBijiBySid(int? page, int sid)
+        {
+            Pager pager = new Pager();
+            pager.table = "RenwuDaka";
+            pager.strwhere = "Kongjian=" + sid+" and Status='false'";
+            pager.PageSize = 2;
+            pager.PageNo = page ?? 1;
+            pager.FieldKey = "Id";
+            pager.FiledOrder = "Id desc";
+
+
+            pager = CommonDal.GetPager(pager);
+            IList<RenwuDaka> List = DataConvertHelper<RenwuDaka>.ConvertToModel(pager.EntityDataTable);
+
+            System.Web.Script.Serialization.JavaScriptSerializer js = new System.Web.Script.Serialization.JavaScriptSerializer();
+            string json = js.Serialize(new { pagecount = pager.PageCount, dakas = List });//将对象序列化成JSON字符串。匿名类。向浏览器返回多个JSON对象。 
+            return Content(json);
+
+        }
+
         public ActionResult GetAllBiji(int? page)
         {
             Pager pager = new Pager();
@@ -131,20 +151,6 @@ namespace Peibankongjian.Controllers
 
             return Content(json);
         }
-
-        //public ActionResult GetHudongByPid(int pid)
-        //{
-        //    string sql = "select count(*) from BijiDianzan where Kongjian=" + pid;
-        //    var   pingluns = unitOfWork._bijiDianzansRepository.GetWithRawSql(sql);
-        //    int dianzancount= pingluns.First();
-        //    System.Web.Script.Serialization.JavaScriptSerializer js = new System.Web.Script.Serialization.JavaScriptSerializer();
-        //    string json = js.Serialize(new { pingluns = List });//将对象序列化成JSON字符串。匿名类。向浏览器返回多个JSON对象。 
-
-        //    return Content(json);
-
-
-
-        //}
 
 
 
@@ -241,5 +247,7 @@ namespace Peibankongjian.Controllers
 
             return Content(json);
         }
+
+
     }
 }
