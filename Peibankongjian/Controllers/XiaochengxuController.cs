@@ -132,11 +132,20 @@ namespace Peibankongjian.Controllers
 
         public ActionResult GetDianzanByDakaId(int id, int count)
         {
-            string sql = "select top  " + count + " * from BijiDianzan where DakaBiji=" + id;
+            string sql = string.Empty;
+            if (count == 0)
+            {
+                sql = "select  * from BijiDianzan where DakaBiji=" + id;
+            }
+            else
+            {
+               sql = "select top  " + count + " * from BijiDianzan where DakaBiji=" + id;
+            }
             var dianzans = unitOfWork._bijiDianzansRepository.GetWithRawSql(sql);
             IList<BijiDianzan> List = dianzans as IList<BijiDianzan>;
             System.Web.Script.Serialization.JavaScriptSerializer js = new System.Web.Script.Serialization.JavaScriptSerializer();
-            string json = js.Serialize(new { dianzans = List });//将对象序列化成JSON字符串。匿名类。向浏览器返回多个JSON对象。 
+
+            string json = js.Serialize(new { dianzans = List,dianzansCount=List.Count });//将对象序列化成JSON字符串。匿名类。向浏览器返回多个JSON对象。 
 
             return Content(json);
         }
@@ -147,10 +156,53 @@ namespace Peibankongjian.Controllers
             var pingluns = unitOfWork._bijiPinglunsRepository.GetWithRawSql(sql);
             IList<BijiPinglun> List = pingluns as IList<BijiPinglun>;
             System.Web.Script.Serialization.JavaScriptSerializer js = new System.Web.Script.Serialization.JavaScriptSerializer();
-            string json = js.Serialize(new { pingluns = List });//将对象序列化成JSON字符串。匿名类。向浏览器返回多个JSON对象。 
+            string json = js.Serialize(new { pingluns = List,pinglunsCount=List.Count });//将对象序列化成JSON字符串。匿名类。向浏览器返回多个JSON对象。 
 
             return Content(json);
         }
+
+        //public ActionResult GetPinglunBy(int peibanshi, int pinglunren,int dakaren,int kongjian,int book,int biji,int dakaren ,int count)
+        //{
+        //    string sql = string.Empty;
+        //    if (count == 0)
+        //    {
+        //        sql = "select  * from BijiDianzan where 1=1";
+        //        if (pid != 0)
+        //        {
+        //            sql = sql + " and PinglunRen=" + pid;
+ 
+        //        }
+        //        if (bid != 0)
+        //        {
+        //            sql = sql + " and ProductBook=" + bid;
+
+        //        }
+        //        if (kid != 0)
+        //        {
+        //            sql = sql + " and Kongjian=" + kid;
+
+        //        }
+        //        if (did != 0)
+        //        {
+        //            sql = sql + " and pid=" + did;
+
+        //        }
+        //    }
+        //    else
+        //    {
+        //        sql = "select top  " + count + " * from BijiDianzan where DakaBiji=" + did;
+        //    }
+
+        //    string sql = "select top  " + count + " * from BijiPinglun where DakaBiji=" + did;
+        //    var pingluns = unitOfWork._bijiPinglunsRepository.GetWithRawSql(sql);
+        //    IList<BijiPinglun> List = pingluns as IList<BijiPinglun>;
+        //    System.Web.Script.Serialization.JavaScriptSerializer js = new System.Web.Script.Serialization.JavaScriptSerializer();
+        //    string json = js.Serialize(new { pingluns = List, pinglunsCount = List.Count });//将对象序列化成JSON字符串。匿名类。向浏览器返回多个JSON对象。 
+
+        //    return Content(json);
+        //}
+
+
 
 
 
@@ -183,7 +235,6 @@ namespace Peibankongjian.Controllers
             pager.FieldKey = "Id";
             pager.FiledOrder = "Id desc";
 
-
             pager = CommonDal.GetPager(pager);
             IList<Product> List = DataConvertHelper<Product>.ConvertToModel(pager.EntityDataTable);
             System.Web.Script.Serialization.JavaScriptSerializer js = new System.Web.Script.Serialization.JavaScriptSerializer();
@@ -191,6 +242,8 @@ namespace Peibankongjian.Controllers
             return Content(json);
 
         }
+
+
         public ActionResult GetSpaceListByCount(int count)
         {
             string sql = "select top  " + count + " * from Product where Shangxian='true'";
