@@ -18,3 +18,8 @@ E:\2019\Peibankongjian\SkyEntity\bin\Debug\SkyEntity.pdb
 E:\2019\Peibankongjian\SkyEntity\obj\Debug\SkyEntity.dll
 E:\2019\Peibankongjian\SkyEntity\obj\Debug\SkyEntity.pdb
 E:\2019\Peibankongjian\SkyEntity\obj\Debug\SkyEntity.csprojResolveAssemblyReference.cache
+D:\mypro\Peibankongjian\SkyEntity\bin\Debug\SkyEntity.dll
+D:\mypro\Peibankongjian\SkyEntity\bin\Debug\SkyEntity.pdb
+D:\mypro\Peibankongjian\SkyEntity\obj\Debug\SkyEntity.csprojResolveAssemblyReference.cache
+D:\mypro\Peibankongjian\SkyEntity\obj\Debug\SkyEntity.dll
+D:\mypro\Peibankongjian\SkyEntity\obj\Debug\SkyEntity.pdb
