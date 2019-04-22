@@ -8,3 +8,8 @@ D:\MyPro\2019\Peibankongjian\SkyEntity\bin\Release\SkyEntity.pdb
 D:\MyPro\2019\Peibankongjian\SkyEntity\obj\Release\SkyEntity.csprojResolveAssemblyReference.cache
 D:\MyPro\2019\Peibankongjian\SkyEntity\obj\Release\SkyEntity.dll
 D:\MyPro\2019\Peibankongjian\SkyEntity\obj\Release\SkyEntity.pdb
+D:\mypro\Peibankongjian\SkyEntity\bin\Release\SkyEntity.dll
+D:\mypro\Peibankongjian\SkyEntity\bin\Release\SkyEntity.pdb
+D:\mypro\Peibankongjian\SkyEntity\obj\Release\SkyEntity.csprojResolveAssemblyReference.cache
+D:\mypro\Peibankongjian\SkyEntity\obj\Release\SkyEntity.dll
+D:\mypro\Peibankongjian\SkyEntity\obj\Release\SkyEntity.pdb

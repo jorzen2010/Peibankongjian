@@ -3035,6 +3035,7 @@
     <Content Include="plugins\sky_ali_icon\iconfont.woff2" />
     <Content Include="plugins\swiper\js\swiper.min.js.map" />
     <None Include="Properties\PublishProfiles\peibankongjian.pubxml" />
+    <None Include="Properties\PublishProfiles\peibankongjianmac.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

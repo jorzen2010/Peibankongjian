@@ -282,6 +282,14 @@ namespace Peibankongjian.Controllers
 
         }
 
+        public ActionResult GetUserInfoById(int id)
+        {
+            Ren _ren = unitOfWork.rensRepository.GetByID(id);
+            string json = JsonHelper.JsonSerializerBySingleData(_ren);
+            return Content(json);
+
+        }
+
         public ActionResult GetBookById(int id)
         {
             Book _book = unitOfWork.booksRepository.GetByID(id);
