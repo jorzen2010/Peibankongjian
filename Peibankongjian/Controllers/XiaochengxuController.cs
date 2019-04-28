@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SkyCommon;
+using SkyService;
 using SkyDal;
 using SkyEntity;
 using SkyWechatService;
@@ -298,6 +299,14 @@ namespace Peibankongjian.Controllers
 
         }
 
+        public ActionResult GetRenwuById(int id)
+        {
+            Renwu _renwu = unitOfWork.renwusRepository.GetByID(id);
+            string json = JsonHelper.JsonSerializerBySingleData(_renwu);
+            return Content(json);
+
+        }
+
         public ActionResult GetRenwuListByBookId(int bid)
         {
             string sql = "select * from Renwu where RenwuBook=" + bid + " order by Paixu";
@@ -308,6 +317,44 @@ namespace Peibankongjian.Controllers
 
             return Content(json);
         }
+
+        public ActionResult GetBVipByPid(int id)
+        {
+            bool status = PeibanService.GetVipByRen(1, 1, id);
+            string json = JsonHelper.JsonSerializerBySingleData(status);
+            return Content(json);
+
+        }
+
+        public ActionResult GetSpaceByDakaId(int rid,int kid)
+        {
+            int next_id = 0;
+            string sql = "select * from RenwuDaka where RenwuZhixingzhe=" + rid + " and Kongjian=" + kid+" order by Id desc";
+            var renwudakas = unitOfWork.renwuDakasRepository.GetWithRawSql(sql);
+            if (renwudakas.Count() == 0)
+            {
+                next_id=0;
+            }
+            else
+            {
+                RenwuDaka daka = renwudakas.First();
+                int last_id = daka.RenwuName;
+                string next_sql = "select top 1 * from Renwu where Id>"+last_id +" order by Paixu";
+                var renwus = unitOfWork.renwusRepository.GetWithRawSql(next_sql);
+                if (renwus.Count() == 0)
+                {
+                    next_id= last_id;
+                }
+                else
+                {
+                    Renwu renwu = renwus.First();
+                    next_id = renwu.Id;
+                }
+            }
+            string json = JsonHelper.JsonSerializerBySingleData(next_id);
+            return Content(json);
+        }
+            
 
 
     }
