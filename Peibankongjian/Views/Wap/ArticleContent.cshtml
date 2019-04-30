@@ -1,0 +1,27 @@
+﻿@model SkyEntity.RenwuDaka
+@using SkyService;
+@using SkyCommon;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/AdminLTE/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/AdminLTE/font-awesome/css/font-awesome.min.css">
+
+
+    <title>@Model.DakaTitle</title>
+    
+</head>
+<body>
+    <h3>@Model.DakaTitle</h3>
+    <article>
+        @Model.DakaContent
+    </article>
+
+</body>
+</html>

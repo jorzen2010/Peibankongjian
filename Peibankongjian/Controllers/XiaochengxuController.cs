@@ -91,6 +91,23 @@ namespace Peibankongjian.Controllers
 
         }
 
+        public ActionResult GetBijiByRenwuId(int? page, int rid)
+        {
+            Pager pager = new Pager();
+            pager.table = "RenwuDaka";
+            pager.strwhere = "RenwuName=" + rid + " and Status='false'";
+            pager.PageSize = 2;
+            pager.PageNo = page ?? 1;
+            pager.FieldKey = "Id";
+            pager.FiledOrder = "Id desc";
+            pager = CommonDal.GetPager(pager);
+            IList<RenwuDaka> List = DataConvertHelper<RenwuDaka>.ConvertToModel(pager.EntityDataTable);
+            System.Web.Script.Serialization.JavaScriptSerializer js = new System.Web.Script.Serialization.JavaScriptSerializer();
+            string json = js.Serialize(new { pagecount = pager.PageCount, dakas = List });//将对象序列化成JSON字符串。匿名类。向浏览器返回多个JSON对象。 
+            return Content(json);
+
+        }
+
         public ActionResult GetAllBiji(int? page)
         {
             Pager pager = new Pager();

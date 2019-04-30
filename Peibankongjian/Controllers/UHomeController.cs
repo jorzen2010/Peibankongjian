@@ -388,7 +388,7 @@ namespace Peibankongjian.Controllers
                  {
                      touser = ren.RenOpenid,
                      template_id = "YfnxngfPAXv5hgSkDGKS-3bd5aScpZgwlRr1Jn85fWc",
-                     url = "http://peiban.zzd123.com/UHome/DakaContent?id="+daka.Id,
+                     url = "http://peiban.zzd123.com/Wap/ArticleContent?id="+daka.Id,
                      data = new
                      {
 

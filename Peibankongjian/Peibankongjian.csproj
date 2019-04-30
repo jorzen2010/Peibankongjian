@@ -3128,6 +3128,7 @@
     <Content Include="Views\UHome\EditPassword.cshtml" />
     <Content Include="Views\UHome\DakaEdit.cshtml" />
     <Content Include="Views\Wap\Test.cshtml" />
+    <Content Include="Views\Wap\ArticleContent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
