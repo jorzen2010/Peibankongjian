@@ -371,7 +371,40 @@ namespace Peibankongjian.Controllers
             string json = JsonHelper.JsonSerializerBySingleData(next_id);
             return Content(json);
         }
-            
+
+        public ActionResult MakeDaka(int rid,int bid,int kid,int peibanshi,int zhixingzhe,string title,string  dakacontent)
+        {
+            Message msg = new Message();
+            RenwuDaka daka = new RenwuDaka();
+            daka.RenwuName = rid;
+            daka.ProductBook = bid;
+            daka.Kongjian = kid;
+            daka.Peibanshi = peibanshi;
+            daka.RenwuZhixingzhe = zhixingzhe;
+            daka.Status = false;
+            daka.DakaTitle = title;
+            daka.DakaContent = dakacontent;
+            daka.DakaTime = DateTime.Now;
+            daka.LastEditTime = DateTime.Now;
+            try
+            {
+                unitOfWork.renwuDakasRepository.Insert(daka);
+                unitOfWork.Save();
+                msg.MessageStatus = "true";
+                msg.MessageInfo = "打卡成功";
+
+            }
+            catch (Exception)
+            {
+                msg.MessageStatus = "false";
+                msg.MessageInfo = "打卡失败";
+                throw;
+            }
+           
+            string json = JsonHelper.JsonSerializerBySingleData(msg);
+            return Content(json);
+
+        }
 
 
     }
