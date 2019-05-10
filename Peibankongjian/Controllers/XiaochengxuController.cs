@@ -392,7 +392,6 @@ namespace Peibankongjian.Controllers
                 unitOfWork.Save();
                 msg.MessageStatus = "true";
                 msg.MessageInfo = "打卡成功";
-
             }
             catch (Exception)
             {
@@ -403,9 +402,7 @@ namespace Peibankongjian.Controllers
            
             string json = JsonHelper.JsonSerializerBySingleData(msg);
             return Content(json);
-
         }
-
 
     }
 }
