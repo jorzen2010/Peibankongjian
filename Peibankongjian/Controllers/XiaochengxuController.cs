@@ -404,5 +404,35 @@ namespace Peibankongjian.Controllers
             return Content(json);
         }
 
+        public ActionResult DakaPinglun(int bijiid, int dakarenid, int peibanshi, int kongjianid, int bookid, int pinglunren, string pingluncontent)
+        {
+            Message msg = new Message();
+            BijiPinglun pinglun = new BijiPinglun();
+            pinglun.DakaBiji = bijiid;
+            pinglun.DakaRen = dakarenid;
+            pinglun.Peibanshi = peibanshi;
+            pinglun.Kongjian = kongjianid;
+            pinglun.ProductBook = bookid;
+            pinglun.PinglunRen = pinglunren;
+            pinglun.PinglunContent = pingluncontent;
+            pinglun.CreateTime = DateTime.Now;
+            try
+            {
+                unitOfWork._bijiPinglunsRepository.Insert(pinglun);
+                unitOfWork.Save();
+                msg.MessageStatus = "true";
+                msg.MessageInfo = "评论成功";
+            }
+            catch (Exception)
+            {
+                msg.MessageStatus = "false";
+                msg.MessageInfo = "评论失败";
+                throw;
+            }
+
+            string json = JsonHelper.JsonSerializerBySingleData(msg);
+            return Content(json);
+        }
+
     }
 }
