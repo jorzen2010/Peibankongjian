@@ -56,7 +56,7 @@ namespace Peibankongjian.Controllers
             Pager pager = new Pager();
             pager.table = "RenwuDaka";
             pager.strwhere = "RenwuZhixingzhe=" + pid;
-            pager.PageSize = 2;
+            pager.PageSize = 10;
             pager.PageNo = page ?? 1;
             pager.FieldKey = "Id";
             pager.FiledOrder = "Id desc";
@@ -76,7 +76,7 @@ namespace Peibankongjian.Controllers
             Pager pager = new Pager();
             pager.table = "RenwuDaka";
             pager.strwhere = "Kongjian=" + sid+" and Status='false'";
-            pager.PageSize = 2;
+            pager.PageSize = 10;
             pager.PageNo = page ?? 1;
             pager.FieldKey = "Id";
             pager.FiledOrder = "Id desc";
@@ -96,7 +96,7 @@ namespace Peibankongjian.Controllers
             Pager pager = new Pager();
             pager.table = "RenwuDaka";
             pager.strwhere = "RenwuName=" + rid + " and Status='false'";
-            pager.PageSize = 2;
+            pager.PageSize = 10;
             pager.PageNo = page ?? 1;
             pager.FieldKey = "Id";
             pager.FiledOrder = "Id desc";
@@ -113,7 +113,7 @@ namespace Peibankongjian.Controllers
             Pager pager = new Pager();
             pager.table = "RenwuDaka";
             pager.strwhere = "1=1";
-            pager.PageSize = 2;
+            pager.PageSize = 10;
             pager.PageNo = page ?? 1;
             pager.FieldKey = "Id";
             pager.FiledOrder = "Id desc";
@@ -248,7 +248,7 @@ namespace Peibankongjian.Controllers
             Pager pager = new Pager();
             pager.table = "Product";
             pager.strwhere = "1=1";
-            pager.PageSize = 2;
+            pager.PageSize = 10;
             pager.PageNo = page ?? 1;
             pager.FieldKey = "Id";
             pager.FiledOrder = "Id desc";
