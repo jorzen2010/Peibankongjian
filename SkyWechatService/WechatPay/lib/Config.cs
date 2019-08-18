@@ -18,14 +18,14 @@ namespace SkyWechatPay
         */
         public const string APPID = "wx3aa8a3f52b34fee8";
         public const string MCHID = "1483377272";
-        public const string KEY = "2cd2f38673ed75542f93b61f6fe65fc0";
-        public const string APPSECRET = "1a093060a41730f603cbc35abaa0434f";
+        public const string KEY = "";
+        public const string APPSECRET = "";
 
         //=======【证书路径设置】===================================== 
         /* 证书路径,注意应该填写绝对路径（仅退款、撤销订单时需要）
         */
-        public const string SSLCERT_PATH = "cert/apiclient_cert.p12";
-        public const string SSLCERT_PASSWORD = "1483377272";
+        public const string SSLCERT_PATH = "";
+        public const string SSLCERT_PASSWORD = "";
 
 
 
